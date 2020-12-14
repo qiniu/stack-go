@@ -369,3 +369,14 @@ const (
 	DiskReIniting     DiskStatusType = "ReIniting"
 	AllDiskStatusType DiskStatusType = "All"
 )
+
+// Keypair 钥匙对
+type Keypair struct {
+	ID                 string    `json:"id"`
+	UID                uint32    `json:"-"`
+	KeyPairName        string    `json:"key_pair_name"`
+	KeyPairFingerPrint string    `json:"key_pair_finger_print"`
+	PrivateKeyBody     string    `json:"private_key_body"`
+	PublicKeyBody      string    `json:"public_key_body"`
+	CreatedAt          time.Time `json:"created_at"`
+}

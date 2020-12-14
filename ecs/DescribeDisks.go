@@ -8,6 +8,8 @@ import (
 
 // DescribeDisksParams 磁盘列表参数
 type DescribeDisksParams struct {
+	Page       *int      `json:"page"`
+	Size       *int      `json:"size"`
 	DiskID     *string   `json:"disk_id"`
 	DiskName   *string   `json:"disk_name"`
 	InstanceID *string   `json:"instance_id"`

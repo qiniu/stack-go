@@ -8,18 +8,17 @@ import (
 
 // DeleteKeypairParams 密钥对删除参数
 type DeleteKeypairParams struct {
-	// TODO
+	KeypairNames []string `json:"key_pair_names"`
 }
 
 // DeleteKeypairResponse 密钥对删除返回数据
 type DeleteKeypairResponse struct {
-	// TODO
+	RequestID string `json:"request_id"`
 }
 
 // DeleteKeypair 密钥对删除
 func (s *ECS) DeleteKeypair(p *DeleteKeypairParams) (resp *DeleteKeypairResponse, err error) {
-	req := client.NewRequest(http.MethodDelete, "/v1/vm/keypair")
-	// .WithQueries(p).WithRegionID(p.RegionID)
+	req := client.NewRequest(http.MethodDelete, "/v1/vm/keypair").WithJSONBody(p)
 	err = s.client.Call(req, &resp)
 	return
 }
