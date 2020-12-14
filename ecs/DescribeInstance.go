@@ -1,6 +1,7 @@
 package ecs
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/qiniu/stack-go/components/client"
@@ -8,18 +9,19 @@ import (
 
 // DescribeInstanceParams 主机详情参数
 type DescribeInstanceParams struct {
-	// TODO
+	RegionID   string `json:"region_id"`
+	InstanceID string `json:"instance_id"`
 }
 
 // DescribeInstanceResponse 主机详情返回数据
 type DescribeInstanceResponse struct {
-	// TODO
+	RequestID string   `json:"request_id"`
+	Data      Instance `json:"data"`
 }
 
 // DescribeInstance 主机详情
 func (s *ECS) DescribeInstance(p *DescribeInstanceParams) (resp *DescribeInstanceResponse, err error) {
-	req := client.NewRequest(http.MethodGet, "/v1/vm/instance/:id")
-	// .WithQueries(p).WithRegionID(p.RegionID)
+	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/v1/vm/instance/%s", p.InstanceID)).WithRegionID(&p.RegionID)
 	err = s.client.Call(req, &resp)
 	return
 }

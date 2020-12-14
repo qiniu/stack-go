@@ -224,3 +224,148 @@ const (
 	AvailableResourceStatusType ResourceStatusType = "Available"
 	SoldOutResourceStatusType   ResourceStatusType = "SoldOut"
 )
+
+type CreateInstanceEip struct {
+	EipID        *string `json:"eip_id"`
+	EipBandwidth *string `json:"eip_bandwidth"`
+	EipName      string  `json:"eip_name"`
+	EipAutoPay   string  `json:"eip_auto_pay"`
+
+	*params.CostParams
+}
+
+type SecurityEnhancementStrategy string
+
+const (
+	ActiveSecurityEnhancementStrategy   SecurityEnhancementStrategy = "Active"
+	DeactiveSecurityEnhancementStrategy SecurityEnhancementStrategy = "Deactive"
+)
+
+type DiskInfo struct {
+	Size               int                   `json:"size,omitempty"`
+	Category           *DiskCategory         `json:"category,omitempty"`
+	Encrypted          *bool                 `json:"encrypted,omitempty"`
+	SnapshotId         *string               `json:"snapshot_id,omitempty"`
+	DiskName           *string               `json:"disk_name,omitempty"`
+	Description        *string               `json:"description,omitempty"`
+	DeleteWithInstance *bool                 `json:"delete_with_instance,omitempty"`
+	PerformanceLevel   *ESSDPerformanceLevel `json:"performance_level,omitempty"`
+}
+
+// ESSDPerformanceLevel ESSD云盘性能等级
+type ESSDPerformanceLevel string
+
+const (
+	PL1 ESSDPerformanceLevel = "PL1"
+	PL2 ESSDPerformanceLevel = "PL2"
+	PL3 ESSDPerformanceLevel = "PL3"
+)
+
+// InstanceStoppedMode 主机停机状态
+type InstanceStoppedMode string
+
+/**
+ * KeepChargingInstanceStoppedMode 停机继续收费
+ * StopChargingInstanceStoppedMode 停机不收费
+ * NotApplicableInstanceStoppedMode 开机
+ */
+const (
+	KeepChargingInstanceStoppedMode  InstanceStoppedMode = "KeepCharging"
+	StopChargingInstanceStoppedMode  InstanceStoppedMode = "StopCharging"
+	NotApplicableInstanceStoppedMode InstanceStoppedMode = "Not-applicable"
+)
+
+// InstanceType 实例类型
+type InstanceType struct {
+	ID string `json:"_id"`
+
+	NamespaceName          string  `json:"namespace_name"`
+	Type                   string  `json:"type"`
+	Family                 string  `json:"family"`
+	FamilyName             string  `json:"family_name"`
+	CPU                    uint    `json:"cpu"`    // 个
+	Memory                 float32 `json:"memory"` // GB
+	GpuSpec                string  `json:"gpu_spec"`
+	GpuAmount              uint    `json:"gpu_amount"`           // 个
+	LocalStorageAmount     uint    `json:"local_storage_amount"` // 个
+	LocalStorageCategory   string  `json:"local_storage_category"`
+	LocalStorageCapacity   float32 `json:"local_storage_capacity"` // GB
+	PrivatePPS             float32 `json:"private_pps"`            // 内网收发包 万
+	IntranetBandwidth      float32 `json:"intranet_bandwidth"`     // 内网带宽 Gbps
+	ClockSpeed             string  `json:"clock_speed"`
+	PhysicalProcessor      string  `json:"physical_processor"`
+	EniIPv6AddressQuantity uint32  `json:"eni_ipv6_address_quantity"` // 单块弹性网卡的IPv6地址上限
+
+	Architecture string `json:"architecture"`
+
+	UpdatedAt time.Time `json:"updated_at"`
+	CreatedAt time.Time `json:"created_at"`
+
+	isNewRecord bool
+	isUpdated   bool
+}
+
+// Disk 磁盘
+type Disk struct {
+	ID                            string               `json:"_id"`
+	UID                           uint32               `json:"uid"`
+	ZoneID                        string               `json:"zone_id"`
+	RegionID                      string               `json:"region_id"`
+	DiskID                        string               `json:"disk_id"`
+	DiskName                      string               `json:"disk_name"`
+	Type                          DiskType             `json:"type"`
+	Size                          int64                `json:"size"`
+	Status                        DiskStatusType       `json:"status"`
+	Device                        string               `json:"device"`
+	IsBind                        bool                 `json:"is_bind"`
+	Category                      DiskCategory         `json:"category"`
+	Portable                      bool                 `json:"portable"`
+	Encrypted                     bool                 `json:"encrypted"`
+	ProductCode                   string               `json:"product_code"`
+	Description                   string               `json:"description"`
+	ExpiredTime                   time.Time            `json:"expired_time"`
+	AttachedTime                  time.Time            `json:"attached_time"`
+	DetachedTime                  time.Time            `json:"detached_time"`
+	DiskChargeType                string               `json:"disk_charge_type"`
+	EnableAutoSnapshot            bool                 `json:"enable_auto_snapshot"`
+	DeleteAutoSnapshot            bool                 `json:"delete_auto_snapshot"`
+	EnableAutomatedSnapshotPolicy bool                 `json:"enable_automated_snapshot_policy"`
+	DeleteWithInstance            bool                 `json:"delete_with_instance"`
+	ImageID                       string               `json:"image_id"`
+	InstanceID                    string               `json:"instance_id"`
+	InstanceName                  string               `json:"instance_name"`
+	ResourceGroupID               string               `json:"resource_group_id"`
+	SourceSnapshotID              string               `json:"source_snapshot_id"`
+	AutoSnapshotPolicyID          string               `json:"auto_snapshot_policy_id"`
+	PerformanceLevel              ESSDPerformanceLevel `json:"performance_level"`
+	IOPS                          int64                `json:"iops"`
+	IOPSRead                      int64                `json:"iops_read"`
+	IOPSWrite                     int64                `json:"iops_write"`
+	CreatedAt                     time.Time            `json:"created_at"`
+	UpdatedAt                     time.Time            `json:"updated_at"`
+
+	*params.CostInfo
+}
+
+// DiskType 磁盘类型
+type DiskType string
+
+const (
+	AllDiskType    DiskType = "all"
+	SystemDiskType DiskType = "system"
+	DataDiskType   DiskType = "data"
+)
+
+// DiskStatusType 磁盘状态类型
+type DiskStatusType string
+
+const (
+	DiskInUse         DiskStatusType = "In_use"
+	DiskAvailable     DiskStatusType = "Available"
+	DiskAttaching     DiskStatusType = "Attaching"
+	DiskDetaching     DiskStatusType = "Detaching"
+	DiskCreating      DiskStatusType = "Creating"
+	DiskInitializing  DiskStatusType = "Initializing"
+	DiskReIniting     DiskStatusType = "ReIniting"
+	AllDiskStatusType DiskStatusType = "All"
+)
