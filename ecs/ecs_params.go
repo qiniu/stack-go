@@ -154,3 +154,73 @@ type DiskDeviceMapping struct {
 	ImportOSSBucket string `json:"import_oss_bucket"`
 	Size            string `json:"size"`
 }
+
+// DiskCategory 云盘种类
+type DiskCategory string
+
+const (
+	AllDiskCategory             DiskCategory = "all"              // 所有云盘以及本地盘
+	CloudDiskCategory           DiskCategory = "cloud"            // 普通云盘
+	CloudEfficiencyDiskCategory DiskCategory = "cloud_efficiency" // 高效云盘
+	CloudSSDiskCategory         DiskCategory = "cloud_ssd"        // SSD云盘
+	CloudESSDiskCategory        DiskCategory = "cloud_essd"       // 增强型SSD云盘
+
+	CloudLocalSSDiskCategory DiskCategory = "cloud_local_ssd" // 本地SSD云盘
+	CloudLocalDiskCategory   DiskCategory = "cloud_local"     // 本地云盘
+	EphemeralSSDiskCategory  DiskCategory = "ephemeral_ssd"   // 本地SSD盘
+	LocalSSDProDiskCategory  DiskCategory = "local_ssd_pro"   // 本地SSD
+
+	// DiskCategoryHWESSD 极速型 SSD
+	DiskCategoryHWESSD DiskCategory = "H_ESSD"
+	// DiskCategoryHWSSD 超高 IO
+	DiskCategoryHWSSD DiskCategory = "H_SSD"
+	// DiskCategoryHWGPSSD 通用型 SSD
+	DiskCategoryHWGPSSD DiskCategory = "H_GPSSD"
+	// DiskCategoryHWSAS 高 IO
+	DiskCategoryHWSAS DiskCategory = "H_SAS"
+	// DiskCategoryHWSata 普通 IO
+	DiskCategoryHWSata DiskCategory = "H_SATA"
+)
+
+type NetworkType string
+
+const (
+	ClassicNetworkType  NetworkType = "Classic"
+	VpcNetworkType      NetworkType = "Vpc"
+	RedisVpcNetworkType NetworkType = "VPC" // redis 和 rds 的网络类型都使用该参数
+)
+
+type AvailableZoneType struct {
+	RegionId           string              `json:"region_id"`                     // 地域ID。
+	ZoneId             string              `json:"zone_id"`                       // 可用区ID。
+	Status             ResourceStatusType  `json:"status"`                        // 资源状态。可能值：`Available`：资源充足 `SoldOut`：资源已售罄
+	AvailableResources *AvailableResources `json:"available_resources,omitempty"` // 可供创建的具体资源组成的数组。
+}
+
+type AvailableResources struct {
+	AvailableResource []*AvailableResource `json:"available_resources,omitempty"`
+}
+
+type AvailableResource struct {
+	Type               params.ResourceType `json:"type"`
+	SupportedResources *SupportedResources `json:"supported_resources,omitempty"` // 支持的可供创建的具体资源组成的数组。
+}
+
+type SupportedResources struct {
+	SupportedResource []*SupportedResource `json:"supported_resource,omitempty"`
+}
+
+type SupportedResource struct {
+	Value  string             `json:"value"`          // 资源值。
+	Status ResourceStatusType `json:"status"`         // 资源状态。可能值：`Available`：资源充足 `SoldOut`：资源已售罄
+	Min    *int64             `json:"min,omitempty"`  // 资源规格的最小值，该参数值为空时将不返回。
+	Max    *int64             `json:"max,omitempty"`  // 资源规格的最大值，该参数值为空时将不返回。
+	Unit   *string            `json:"unit,omitempty"` // 资源规格单位，该参数值为空时将不返回。
+}
+
+type ResourceStatusType string
+
+const (
+	AvailableResourceStatusType ResourceStatusType = "Available"
+	SoldOutResourceStatusType   ResourceStatusType = "SoldOut"
+)
