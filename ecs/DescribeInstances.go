@@ -3,11 +3,13 @@ package ecs
 import (
 	"net/http"
 
+	"github.com/qiniu/stack-go/components/client"
+
 	"github.com/qiniu/stack-go/params"
 )
 
-// ListInstancesParams 查询主机列表参数
-type ListInstancesParams struct {
+// DescribeInstancesParams 查询主机列表参数
+type DescribeInstancesParams struct {
 	Page             *int               `json:"page"`
 	Size             *int               `json:"size"`
 	InstanceID       *string            `json:"instance_id"`
@@ -25,8 +27,8 @@ type ListInstancesParams struct {
 	Status           *string            `json:"status"`
 }
 
-// ListInstancesResponse 查询主机列表返回数据
-type ListInstancesResponse struct {
+// DescribeInstancesResponse 查询主机列表返回数据
+type DescribeInstancesResponse struct {
 	Page      int        `json:"page"`
 	Size      int        `json:"size"`
 	Total     int        `json:"total"`
@@ -34,8 +36,9 @@ type ListInstancesResponse struct {
 	Data      []Instance `json:"data"`
 }
 
-// ListInstances 查询主机列表
-func (s *ECS) ListInstances(p *ListInstancesParams) (r *ListInstancesResponse, err error) {
-	err = s.client.Call(http.MethodGet, "/v1/vm/instance", p, nil, &r)
+// DescribeInstances 查询主机列表
+func (s *ECS) DescribeInstances(p *DescribeInstancesParams) (resp *DescribeInstancesResponse, err error) {
+	req := client.NewRequest(http.MethodGet, "/v1/vm/instance").WithQueries(p).WithRegionID(p.RegionID)
+	err = s.client.Call(req, &resp)
 	return
 }

@@ -10,8 +10,8 @@ import (
 	"github.com/qiniu/stack-go/vpc"
 )
 
-// StackVersion 版本
-const StackVersion = "0.0.1"
+// SDK 版本
+const version = "0.0.1"
 
 // Stack 七牛云主机服务 SDK
 type Stack struct {
@@ -31,7 +31,7 @@ func New(log log.Logger, endpoint string, credential *auth.Credential) *Stack {
 
 // Version 获取当前 SDK 版本
 func (*Stack) Version() string {
-	return StackVersion
+	return version
 }
 
 // ECS 获取 ECS 管理对象
