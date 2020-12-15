@@ -154,3 +154,368 @@ type DiskDeviceMapping struct {
 	ImportOSSBucket string `json:"import_oss_bucket"`
 	Size            string `json:"size"`
 }
+
+// DiskCategory 云盘种类
+type DiskCategory string
+
+const (
+	AllDiskCategory             DiskCategory = "all"              // 所有云盘以及本地盘
+	CloudDiskCategory           DiskCategory = "cloud"            // 普通云盘
+	CloudEfficiencyDiskCategory DiskCategory = "cloud_efficiency" // 高效云盘
+	CloudSSDiskCategory         DiskCategory = "cloud_ssd"        // SSD云盘
+	CloudESSDiskCategory        DiskCategory = "cloud_essd"       // 增强型SSD云盘
+
+	CloudLocalSSDiskCategory DiskCategory = "cloud_local_ssd" // 本地SSD云盘
+	CloudLocalDiskCategory   DiskCategory = "cloud_local"     // 本地云盘
+	EphemeralSSDiskCategory  DiskCategory = "ephemeral_ssd"   // 本地SSD盘
+	LocalSSDProDiskCategory  DiskCategory = "local_ssd_pro"   // 本地SSD
+
+	// DiskCategoryHWESSD 极速型 SSD
+	DiskCategoryHWESSD DiskCategory = "H_ESSD"
+	// DiskCategoryHWSSD 超高 IO
+	DiskCategoryHWSSD DiskCategory = "H_SSD"
+	// DiskCategoryHWGPSSD 通用型 SSD
+	DiskCategoryHWGPSSD DiskCategory = "H_GPSSD"
+	// DiskCategoryHWSAS 高 IO
+	DiskCategoryHWSAS DiskCategory = "H_SAS"
+	// DiskCategoryHWSata 普通 IO
+	DiskCategoryHWSata DiskCategory = "H_SATA"
+)
+
+type NetworkType string
+
+const (
+	ClassicNetworkType  NetworkType = "Classic"
+	VpcNetworkType      NetworkType = "Vpc"
+	RedisVpcNetworkType NetworkType = "VPC" // redis 和 rds 的网络类型都使用该参数
+)
+
+type AvailableZoneType struct {
+	RegionId           string              `json:"region_id"`                     // 地域ID。
+	ZoneId             string              `json:"zone_id"`                       // 可用区ID。
+	Status             ResourceStatusType  `json:"status"`                        // 资源状态。可能值：`Available`：资源充足 `SoldOut`：资源已售罄
+	AvailableResources *AvailableResources `json:"available_resources,omitempty"` // 可供创建的具体资源组成的数组。
+}
+
+type AvailableResources struct {
+	AvailableResource []*AvailableResource `json:"available_resources,omitempty"`
+}
+
+type AvailableResource struct {
+	Type               params.ResourceType `json:"type"`
+	SupportedResources *SupportedResources `json:"supported_resources,omitempty"` // 支持的可供创建的具体资源组成的数组。
+}
+
+type SupportedResources struct {
+	SupportedResource []*SupportedResource `json:"supported_resource,omitempty"`
+}
+
+type SupportedResource struct {
+	Value  string             `json:"value"`          // 资源值。
+	Status ResourceStatusType `json:"status"`         // 资源状态。可能值：`Available`：资源充足 `SoldOut`：资源已售罄
+	Min    *int64             `json:"min,omitempty"`  // 资源规格的最小值，该参数值为空时将不返回。
+	Max    *int64             `json:"max,omitempty"`  // 资源规格的最大值，该参数值为空时将不返回。
+	Unit   *string            `json:"unit,omitempty"` // 资源规格单位，该参数值为空时将不返回。
+}
+
+type ResourceStatusType string
+
+const (
+	AvailableResourceStatusType ResourceStatusType = "Available"
+	SoldOutResourceStatusType   ResourceStatusType = "SoldOut"
+)
+
+type CreateInstanceEip struct {
+	EipID        *string `json:"eip_id"`
+	EipBandwidth *string `json:"eip_bandwidth"`
+	EipName      string  `json:"eip_name"`
+	EipAutoPay   string  `json:"eip_auto_pay"`
+
+	*params.CostParams
+}
+
+type SecurityEnhancementStrategy string
+
+const (
+	ActiveSecurityEnhancementStrategy   SecurityEnhancementStrategy = "Active"
+	DeactiveSecurityEnhancementStrategy SecurityEnhancementStrategy = "Deactive"
+)
+
+type DiskInfo struct {
+	Size               int                   `json:"size,omitempty"`
+	Category           *DiskCategory         `json:"category,omitempty"`
+	Encrypted          *bool                 `json:"encrypted,omitempty"`
+	SnapshotId         *string               `json:"snapshot_id,omitempty"`
+	DiskName           *string               `json:"disk_name,omitempty"`
+	Description        *string               `json:"description,omitempty"`
+	DeleteWithInstance *bool                 `json:"delete_with_instance,omitempty"`
+	PerformanceLevel   *ESSDPerformanceLevel `json:"performance_level,omitempty"`
+}
+
+// ESSDPerformanceLevel ESSD云盘性能等级
+type ESSDPerformanceLevel string
+
+const (
+	PL1 ESSDPerformanceLevel = "PL1"
+	PL2 ESSDPerformanceLevel = "PL2"
+	PL3 ESSDPerformanceLevel = "PL3"
+)
+
+// InstanceStoppedMode 主机停机状态
+type InstanceStoppedMode string
+
+/**
+ * KeepChargingInstanceStoppedMode 停机继续收费
+ * StopChargingInstanceStoppedMode 停机不收费
+ * NotApplicableInstanceStoppedMode 开机
+ */
+const (
+	KeepChargingInstanceStoppedMode  InstanceStoppedMode = "KeepCharging"
+	StopChargingInstanceStoppedMode  InstanceStoppedMode = "StopCharging"
+	NotApplicableInstanceStoppedMode InstanceStoppedMode = "Not-applicable"
+)
+
+// InstanceType 实例类型
+type InstanceType struct {
+	ID string `json:"_id"`
+
+	NamespaceName          string  `json:"namespace_name"`
+	Type                   string  `json:"type"`
+	Family                 string  `json:"family"`
+	FamilyName             string  `json:"family_name"`
+	CPU                    uint    `json:"cpu"`    // 个
+	Memory                 float32 `json:"memory"` // GB
+	GpuSpec                string  `json:"gpu_spec"`
+	GpuAmount              uint    `json:"gpu_amount"`           // 个
+	LocalStorageAmount     uint    `json:"local_storage_amount"` // 个
+	LocalStorageCategory   string  `json:"local_storage_category"`
+	LocalStorageCapacity   float32 `json:"local_storage_capacity"` // GB
+	PrivatePPS             float32 `json:"private_pps"`            // 内网收发包 万
+	IntranetBandwidth      float32 `json:"intranet_bandwidth"`     // 内网带宽 Gbps
+	ClockSpeed             string  `json:"clock_speed"`
+	PhysicalProcessor      string  `json:"physical_processor"`
+	EniIPv6AddressQuantity uint32  `json:"eni_ipv6_address_quantity"` // 单块弹性网卡的IPv6地址上限
+
+	Architecture string `json:"architecture"`
+
+	UpdatedAt time.Time `json:"updated_at"`
+	CreatedAt time.Time `json:"created_at"`
+
+	isNewRecord bool
+	isUpdated   bool
+}
+
+// Disk 磁盘
+type Disk struct {
+	ID                            string               `json:"_id"`
+	UID                           uint32               `json:"uid"`
+	ZoneID                        string               `json:"zone_id"`
+	RegionID                      string               `json:"region_id"`
+	DiskID                        string               `json:"disk_id"`
+	DiskName                      string               `json:"disk_name"`
+	Type                          DiskType             `json:"type"`
+	Size                          int64                `json:"size"`
+	Status                        DiskStatusType       `json:"status"`
+	Device                        string               `json:"device"`
+	IsBind                        bool                 `json:"is_bind"`
+	Category                      DiskCategory         `json:"category"`
+	Portable                      bool                 `json:"portable"`
+	Encrypted                     bool                 `json:"encrypted"`
+	ProductCode                   string               `json:"product_code"`
+	Description                   string               `json:"description"`
+	ExpiredTime                   time.Time            `json:"expired_time"`
+	AttachedTime                  time.Time            `json:"attached_time"`
+	DetachedTime                  time.Time            `json:"detached_time"`
+	DiskChargeType                string               `json:"disk_charge_type"`
+	EnableAutoSnapshot            bool                 `json:"enable_auto_snapshot"`
+	DeleteAutoSnapshot            bool                 `json:"delete_auto_snapshot"`
+	EnableAutomatedSnapshotPolicy bool                 `json:"enable_automated_snapshot_policy"`
+	DeleteWithInstance            bool                 `json:"delete_with_instance"`
+	ImageID                       string               `json:"image_id"`
+	InstanceID                    string               `json:"instance_id"`
+	InstanceName                  string               `json:"instance_name"`
+	ResourceGroupID               string               `json:"resource_group_id"`
+	SourceSnapshotID              string               `json:"source_snapshot_id"`
+	AutoSnapshotPolicyID          string               `json:"auto_snapshot_policy_id"`
+	PerformanceLevel              ESSDPerformanceLevel `json:"performance_level"`
+	IOPS                          int64                `json:"iops"`
+	IOPSRead                      int64                `json:"iops_read"`
+	IOPSWrite                     int64                `json:"iops_write"`
+	CreatedAt                     time.Time            `json:"created_at"`
+	UpdatedAt                     time.Time            `json:"updated_at"`
+
+	*params.CostInfo
+}
+
+// DiskType 磁盘类型
+type DiskType string
+
+// 磁盘类型
+const (
+	AllDiskType    DiskType = "all"
+	SystemDiskType DiskType = "system"
+	DataDiskType   DiskType = "data"
+)
+
+// DiskStatusType 磁盘状态类型
+type DiskStatusType string
+
+// 磁盘状态
+const (
+	DiskInUse         DiskStatusType = "In_use"
+	DiskAvailable     DiskStatusType = "Available"
+	DiskAttaching     DiskStatusType = "Attaching"
+	DiskDetaching     DiskStatusType = "Detaching"
+	DiskCreating      DiskStatusType = "Creating"
+	DiskInitializing  DiskStatusType = "Initializing"
+	DiskReIniting     DiskStatusType = "ReIniting"
+	AllDiskStatusType DiskStatusType = "All"
+)
+
+// Keypair 钥匙对
+type Keypair struct {
+	ID                 string    `json:"id"`
+	UID                uint32    `json:"-"`
+	KeyPairName        string    `json:"key_pair_name"`
+	KeyPairFingerPrint string    `json:"key_pair_finger_print"`
+	PrivateKeyBody     string    `json:"private_key_body"`
+	PublicKeyBody      string    `json:"public_key_body"`
+	CreatedAt          time.Time `json:"created_at"`
+}
+
+// ImageOwnerAlias 镜像来源
+type ImageOwnerAlias string
+
+// 镜像来源
+const (
+	SystemImageOwnerAlias      ImageOwnerAlias = "system"
+	SelfImageOwnerAlias        ImageOwnerAlias = "self"
+	OthersImageOwnerAlias      ImageOwnerAlias = "others"
+	MarketplaceImageOwnerAlias ImageOwnerAlias = "marketplace"
+)
+
+// Image 镜像
+type Image struct {
+	*params.CostInfo
+
+	ID        string    `json:"_id"`
+	RegionID  string    `json:"region_id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+
+	InstanceID   *string `json:"instance_id"`
+	InstanceName *string `json:"instance_name"`
+	RootImageID  *string `json:"root_image_id"`
+
+	ImageInfo ImageInfo `json:"image_info"`
+}
+
+// SecurityGroup 安全组
+type SecurityGroup struct {
+	ID                        string                   `json:"_id"`
+	UID                       uint32                   `json:"uid"`
+	RegionID                  string                   `json:"region_id"`
+	SecurityGroupName         string                   `json:"security_group_name"`
+	Description               string                   `json:"description"`
+	VpcID                     string                   `json:"vpc_id"`
+	VpcName                   string                   `json:"vpc_name"`
+	ClientToken               string                   `json:"client_token"`
+	SecurityGroupID           string                   `json:"security_group_id"`
+	IsDefault                 bool                     `json:"is_default"` // 是否为默认安全组，只在新建的时候插入该字段
+	InnerAccessPolicy         InnerAccessPolicy        `json:"inner_access_policy"`
+	ReferencingSecurityGroups ReferencingSecurityGroup `json:"referencing_security_groups"`
+	UpdatedAt                 time.Time                `json:"updated_at"`
+	CreatedAt                 time.Time                `json:"created_at"`
+}
+
+type NicType string
+
+const (
+	InternetNicType NicType = "internet"
+	IntranetNicType NicType = "intranet"
+)
+
+type IPProtocol string
+
+const (
+	AllIPProtocol  IPProtocol = "all"
+	TCPIPProtocol  IPProtocol = "tcp"
+	UDPIPProtocol  IPProtocol = "udp"
+	ICMPIPProtocol IPProtocol = "icmp"
+	GREIPProtocol  IPProtocol = "gre"
+)
+
+type PermissionPolicy string
+
+const (
+	AcceptPermissionPolicy PermissionPolicy = "accept"
+	DropPermissionPolicy   PermissionPolicy = "drop"
+)
+
+type InnerAccessPolicy string
+
+const (
+	AcceptInnerAccessPolicy InnerAccessPolicy = "Accept"
+	DropInnerAccessPolicy   InnerAccessPolicy = "Drop"
+)
+
+type SecurityGroupPriority int
+
+func (p SecurityGroupPriority) IsValid() bool {
+	if p >= 1 && p <= 100 {
+		return true
+	}
+	return false
+}
+
+type Direction string
+
+const (
+	IngressDirection Direction = "ingress"
+	EgressDirection  Direction = "egress"
+	AllDirection     Direction = "all"
+)
+
+// ReferencingSecurityGroup 正在授权给这个安全组的其他安全组信息列表
+type ReferencingSecurityGroup struct {
+	ReferencingSecurityGroup []ReferencingSecurityGroupType `json:"referencing_security_group"`
+}
+
+// ReferencingSecurityGroupType 正在授权给这个安全组的其他安全组信息
+type ReferencingSecurityGroupType struct {
+	SecurityGroupID string `json:"security_group_id"` // 安全组ID
+	AliUID          int    `json:"ali_uid"`           // 这个安全组所属用户ID
+}
+
+// PermissionType 安全组权限规则
+type PermissionType struct {
+	SecurityGroupRuleID     string                `json:"security_group_rule_id"`
+	IPProtocol              IPProtocol            `json:"ip_protocol"`
+	PortRange               string                `json:"port_range"`
+	SourceCidrIP            string                `json:"source_cidr_ip"`
+	SourceGroupID           string                `json:"source_group_id"`
+	SourceGroupName         string                `json:"source_group_name"`
+	SourceGroupOwnerAccount string                `json:"source_group_owner_account"`
+	DestCidrIP              string                `json:"dest_cidr_ip"`
+	DestGroupID             string                `json:"dest_group_id"`
+	DestGroupName           string                `json:"dest_group_name"`
+	DestGroupOwnerAccount   string                `json:"dest_group_owner_account"`
+	Policy                  PermissionPolicy      `json:"policy"`
+	NicType                 NicType               `json:"nic_type"`
+	Priority                SecurityGroupPriority `json:"priority"`
+	Direction               Direction             `json:"direction"`
+	Description             string                `json:"description"`
+	CreateTime              string                `json:"create_time"`
+	IPv6SourceCidrIP        string                `json:"ipv6_source_cidr_ip"`
+	IPv6DestCidrIP          string                `json:"ipv6_dest_cidr_ip"`
+	SourcePortRange         string                `json:"source_port_range"`
+}
+
+// AuthType 源类型
+type AuthType string
+
+// ip段和安全组id的源类型
+const (
+	AuthIPCidr          AuthType = "ip_cidr"
+	AuthSecurityGroupID AuthType = "security_group_id"
+)
