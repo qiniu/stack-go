@@ -350,6 +350,7 @@ type Disk struct {
 // DiskType 磁盘类型
 type DiskType string
 
+// 磁盘类型
 const (
 	AllDiskType    DiskType = "all"
 	SystemDiskType DiskType = "system"
@@ -359,6 +360,7 @@ const (
 // DiskStatusType 磁盘状态类型
 type DiskStatusType string
 
+// 磁盘状态
 const (
 	DiskInUse         DiskStatusType = "In_use"
 	DiskAvailable     DiskStatusType = "Available"
@@ -379,4 +381,31 @@ type Keypair struct {
 	PrivateKeyBody     string    `json:"private_key_body"`
 	PublicKeyBody      string    `json:"public_key_body"`
 	CreatedAt          time.Time `json:"created_at"`
+}
+
+// ImageOwnerAlias 镜像来源
+type ImageOwnerAlias string
+
+// 镜像来源
+const (
+	SystemImageOwnerAlias      ImageOwnerAlias = "system"
+	SelfImageOwnerAlias        ImageOwnerAlias = "self"
+	OthersImageOwnerAlias      ImageOwnerAlias = "others"
+	MarketplaceImageOwnerAlias ImageOwnerAlias = "marketplace"
+)
+
+// Image 镜像
+type Image struct {
+	*params.CostInfo
+
+	ID        string    `json:"_id"`
+	RegionID  string    `json:"region_id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+
+	InstanceID   *string `json:"instance_id"`
+	InstanceName *string `json:"instance_name"`
+	RootImageID  *string `json:"root_image_id"`
+
+	ImageInfo ImageInfo `json:"image_info"`
 }
