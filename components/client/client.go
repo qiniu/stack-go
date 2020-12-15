@@ -87,7 +87,7 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 		if ret != nil && resp.ContentLength != 0 {
 			err = json.NewDecoder(resp.Body).Decode(ret)
 			if err != nil {
-				return
+				return err
 			}
 		}
 		return nil
@@ -105,8 +105,29 @@ func responseError(resp *http.Response) (err error) {
 	}
 
 	if resp.ContentLength != 0 {
+
+		decodeErr := &struct {
+			RequestID string `json:"request_id"`
+			Error Error `json:"error"`
+		}{}
+
 		if ct := resp.Header.Get("Content-Type"); strings.TrimSpace(strings.SplitN(ct, ";", 2)[0]) == "application/json" {
-			_ = json.NewDecoder(resp.Body).Decode(err)
+			bts, err2 := ioutil.ReadAll(resp.Body)
+			if err2 != nil {
+				return err
+			}
+
+			err2 = json.Unmarshal(bts, decodeErr)
+			if err2 != nil {
+				return err
+			}
+
+			return &Error{
+				Code:      decodeErr.Error.Code,
+				Name:      decodeErr.Error.Name,
+				Message:   decodeErr.Error.Message,
+				RequestID: decodeErr.RequestID,
+			}
 		}
 	}
 
