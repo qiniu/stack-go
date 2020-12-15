@@ -9,7 +9,8 @@ import (
 
 // DescribeRegionsResponse 查询地域列表返回数据
 type DescribeRegionsResponse struct {
-	Data []params.Region `json:"data"`
+	RequestID string          `json:"request_id"`
+	Data      []params.Region `json:"data"`
 }
 
 // DescribeRegions 查询地域列表

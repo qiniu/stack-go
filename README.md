@@ -1,6 +1,6 @@
 # github.com/qiniu/stack-go (七牛云主机服务 Go SDK)
 
-[![LICENSE](https://img.shields.io/github/license/qiniu/api.v7.svg)](https://github.com/qiniu/stack-go/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/qiniu/stack-go/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/qiniu/stack-go.svg?branch=master)](https://travis-ci.org/qiniu/stack-go)
 
 [![Qiniu Logo](http://open.qiniudn.com/logo.png)](http://qiniu.com/)
