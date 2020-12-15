@@ -108,7 +108,7 @@ func responseError(resp *http.Response) (err error) {
 
 		decodeErr := &struct {
 			RequestID string `json:"request_id"`
-			Error Error `json:"error"`
+			Error     Error  `json:"error"`
 		}{}
 
 		if ct := resp.Header.Get("Content-Type"); strings.TrimSpace(strings.SplitN(ct, ";", 2)[0]) == "application/json" {
