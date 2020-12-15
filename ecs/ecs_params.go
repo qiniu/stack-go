@@ -409,3 +409,113 @@ type Image struct {
 
 	ImageInfo ImageInfo `json:"image_info"`
 }
+
+// SecurityGroup 安全组
+type SecurityGroup struct {
+	ID                        string                   `json:"_id"`
+	UID                       uint32                   `json:"uid"`
+	RegionID                  string                   `json:"region_id"`
+	SecurityGroupName         string                   `json:"security_group_name"`
+	Description               string                   `json:"description"`
+	VpcID                     string                   `json:"vpc_id"`
+	VpcName                   string                   `json:"vpc_name"`
+	ClientToken               string                   `json:"client_token"`
+	SecurityGroupID           string                   `json:"security_group_id"`
+	IsDefault                 bool                     `json:"is_default"` // 是否为默认安全组，只在新建的时候插入该字段
+	InnerAccessPolicy         InnerAccessPolicy        `json:"inner_access_policy"`
+	ReferencingSecurityGroups ReferencingSecurityGroup `json:"referencing_security_groups"`
+	UpdatedAt                 time.Time                `json:"updated_at"`
+	CreatedAt                 time.Time                `json:"created_at"`
+}
+
+type NicType string
+
+const (
+	InternetNicType NicType = "internet"
+	IntranetNicType NicType = "intranet"
+)
+
+type IPProtocol string
+
+const (
+	AllIPProtocol  IPProtocol = "all"
+	TCPIPProtocol  IPProtocol = "tcp"
+	UDPIPProtocol  IPProtocol = "udp"
+	ICMPIPProtocol IPProtocol = "icmp"
+	GREIPProtocol  IPProtocol = "gre"
+)
+
+type PermissionPolicy string
+
+const (
+	AcceptPermissionPolicy PermissionPolicy = "accept"
+	DropPermissionPolicy   PermissionPolicy = "drop"
+)
+
+type InnerAccessPolicy string
+
+const (
+	AcceptInnerAccessPolicy InnerAccessPolicy = "Accept"
+	DropInnerAccessPolicy   InnerAccessPolicy = "Drop"
+)
+
+type SecurityGroupPriority int
+
+func (p SecurityGroupPriority) IsValid() bool {
+	if p >= 1 && p <= 100 {
+		return true
+	}
+	return false
+}
+
+type Direction string
+
+const (
+	IngressDirection Direction = "ingress"
+	EgressDirection  Direction = "egress"
+	AllDirection     Direction = "all"
+)
+
+// ReferencingSecurityGroup 正在授权给这个安全组的其他安全组信息列表
+type ReferencingSecurityGroup struct {
+	ReferencingSecurityGroup []ReferencingSecurityGroupType `json:"referencing_security_group"`
+}
+
+// ReferencingSecurityGroupType 正在授权给这个安全组的其他安全组信息
+type ReferencingSecurityGroupType struct {
+	SecurityGroupID string `json:"security_group_id"` // 安全组ID
+	AliUID          int    `json:"ali_uid"`           // 这个安全组所属用户ID
+}
+
+// PermissionType 安全组权限规则
+type PermissionType struct {
+	SecurityGroupRuleID     string                `json:"security_group_rule_id"`
+	IPProtocol              IPProtocol            `json:"ip_protocol"`
+	PortRange               string                `json:"port_range"`
+	SourceCidrIP            string                `json:"source_cidr_ip"`
+	SourceGroupID           string                `json:"source_group_id"`
+	SourceGroupName         string                `json:"source_group_name"`
+	SourceGroupOwnerAccount string                `json:"source_group_owner_account"`
+	DestCidrIP              string                `json:"dest_cidr_ip"`
+	DestGroupID             string                `json:"dest_group_id"`
+	DestGroupName           string                `json:"dest_group_name"`
+	DestGroupOwnerAccount   string                `json:"dest_group_owner_account"`
+	Policy                  PermissionPolicy      `json:"policy"`
+	NicType                 NicType               `json:"nic_type"`
+	Priority                SecurityGroupPriority `json:"priority"`
+	Direction               Direction             `json:"direction"`
+	Description             string                `json:"description"`
+	CreateTime              string                `json:"create_time"`
+	IPv6SourceCidrIP        string                `json:"ipv6_source_cidr_ip"`
+	IPv6DestCidrIP          string                `json:"ipv6_dest_cidr_ip"`
+	SourcePortRange         string                `json:"source_port_range"`
+}
+
+// AuthType 源类型
+type AuthType string
+
+// ip段和安全组id的源类型
+const (
+	AuthIPCidr          AuthType = "ip_cidr"
+	AuthSecurityGroupID AuthType = "security_group_id"
+)
