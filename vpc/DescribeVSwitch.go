@@ -1,6 +1,7 @@
 package vpc
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/qiniu/stack-go/components/client"
@@ -8,18 +9,19 @@ import (
 
 // DescribeVSwitchParams 虚拟交换机详情参数
 type DescribeVSwitchParams struct {
-	// TODO
+	VSwitchID string `json:"vswitch_id"`
+	RegionID  string `json:"region_id"`
 }
 
 // DescribeVSwitchResponse 虚拟交换机详情返回数据
 type DescribeVSwitchResponse struct {
-	// TODO
+	RequestID string      `json:"request_id"`
+	Data      VSwitchInfo `json:"data"`
 }
 
 // DescribeVSwitch 虚拟交换机详情
 func (s *VPC) DescribeVSwitch(p *DescribeVSwitchParams) (resp *DescribeVSwitchResponse, err error) {
-	req := client.NewRequest(http.MethodGet, "/v1/vm/vswitch/:id")
-	// .WithQueries(p).WithRegionID(p.RegionID)
+	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/v1/vm/vswitch/%s", p.VSwitchID)).WithRegionID(&p.RegionID)
 	err = s.client.Call(req, &resp)
 	return
 }

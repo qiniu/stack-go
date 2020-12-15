@@ -54,11 +54,11 @@ func (r *Request) WithQueries(rawQueries interface{}) *Request {
 		return r
 	}
 
-	switch rawQueries.(type) {
+	switch q := rawQueries.(type) {
 	case url.Values:
-		r.Queries = rawQueries.(url.Values)
+		r.Queries = q
 	case map[string][]string:
-		r.Queries = url.Values(rawQueries.(map[string][]string))
+		r.Queries = url.Values(q)
 	default:
 		transQ, err := transObject2Queries(rawQueries)
 		if err == nil {

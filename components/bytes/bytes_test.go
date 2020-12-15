@@ -75,6 +75,9 @@ func TestReader(t *testing.T) {
 	}
 
 	ret, err := r.Seek(9, 0)
+	if err != nil {
+		t.Fatal("err invalid", err)
+	}
 	if ret != 9 {
 		t.Fatal("ret invalid, (9 is required)", ret)
 	}
@@ -83,6 +86,9 @@ func TestReader(t *testing.T) {
 
 	b := make([]byte, 100)
 	cnt, err := r.Read(b)
+	if err != nil {
+		t.Fatal("err invalid", err)
+	}
 	if cnt != 11 {
 		t.Fatal("read cnt invalid (11 is required)", cnt)
 	}

@@ -1,1 +1,5 @@
 .idea
+lint.log
+coverage.html
+*.test
+*.pprof

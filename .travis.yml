@@ -1,0 +1,26 @@
+matrix:
+  include:
+    - language: go
+
+      cache:
+        directories:
+          - $(go env GOCACHE)
+
+      go:
+        - "1.15"
+
+      install:
+
+      before_script:
+
+      script:
+        - cd $TRAVIS_BUILD_DIR
+        - cat /etc/resolv.conf
+        - echo "$TRAVIS_BRANCH"@"$TRAVIS_COMMIT"
+        - echo $TRAVIS_BUILD_DIR
+        - go list ./... |grep -Ev $DEFAULT_EXCEPT_PKGS | wc -l
+        - make
+
+      after_success:
+
+      after_script:

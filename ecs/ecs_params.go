@@ -158,6 +158,7 @@ type DiskDeviceMapping struct {
 // DiskCategory 云盘种类
 type DiskCategory string
 
+// 云盘种类
 const (
 	AllDiskCategory             DiskCategory = "all"              // 所有云盘以及本地盘
 	CloudDiskCategory           DiskCategory = "cloud"            // 普通云盘
@@ -182,34 +183,41 @@ const (
 	DiskCategoryHWSata DiskCategory = "H_SATA"
 )
 
+// NetworkType 网络类型
 type NetworkType string
 
+// NetworkType 网络类型
 const (
 	ClassicNetworkType  NetworkType = "Classic"
 	VpcNetworkType      NetworkType = "Vpc"
 	RedisVpcNetworkType NetworkType = "VPC" // redis 和 rds 的网络类型都使用该参数
 )
 
+// AvailableZoneType 可用区信息
 type AvailableZoneType struct {
-	RegionId           string              `json:"region_id"`                     // 地域ID。
-	ZoneId             string              `json:"zone_id"`                       // 可用区ID。
+	RegionID           string              `json:"region_id"`                     // 地域ID。
+	ZoneID             string              `json:"zone_id"`                       // 可用区ID。
 	Status             ResourceStatusType  `json:"status"`                        // 资源状态。可能值：`Available`：资源充足 `SoldOut`：资源已售罄
 	AvailableResources *AvailableResources `json:"available_resources,omitempty"` // 可供创建的具体资源组成的数组。
 }
 
+// AvailableResources 可用资源信息
 type AvailableResources struct {
 	AvailableResource []*AvailableResource `json:"available_resources,omitempty"`
 }
 
+// AvailableResource 可用资源信息
 type AvailableResource struct {
 	Type               params.ResourceType `json:"type"`
 	SupportedResources *SupportedResources `json:"supported_resources,omitempty"` // 支持的可供创建的具体资源组成的数组。
 }
 
+// SupportedResources 支持的资源信息
 type SupportedResources struct {
 	SupportedResource []*SupportedResource `json:"supported_resource,omitempty"`
 }
 
+// SupportedResource 支持的资源信息
 type SupportedResource struct {
 	Value  string             `json:"value"`          // 资源值。
 	Status ResourceStatusType `json:"status"`         // 资源状态。可能值：`Available`：资源充足 `SoldOut`：资源已售罄
@@ -218,13 +226,16 @@ type SupportedResource struct {
 	Unit   *string            `json:"unit,omitempty"` // 资源规格单位，该参数值为空时将不返回。
 }
 
+// ResourceStatusType 资源状态
 type ResourceStatusType string
 
+// ResourceStatusType 资源状态
 const (
 	AvailableResourceStatusType ResourceStatusType = "Available"
 	SoldOutResourceStatusType   ResourceStatusType = "SoldOut"
 )
 
+// CreateInstanceEip 创建主机时附带创建EIP信息
 type CreateInstanceEip struct {
 	EipID        *string `json:"eip_id"`
 	EipBandwidth *string `json:"eip_bandwidth"`
@@ -234,18 +245,21 @@ type CreateInstanceEip struct {
 	*params.CostParams
 }
 
+// SecurityEnhancementStrategy 安全加固
 type SecurityEnhancementStrategy string
 
+// SecurityEnhancementStrategy 安全加固
 const (
 	ActiveSecurityEnhancementStrategy   SecurityEnhancementStrategy = "Active"
 	DeactiveSecurityEnhancementStrategy SecurityEnhancementStrategy = "Deactive"
 )
 
+// DiskInfo 磁盘信息
 type DiskInfo struct {
 	Size               int                   `json:"size,omitempty"`
 	Category           *DiskCategory         `json:"category,omitempty"`
 	Encrypted          *bool                 `json:"encrypted,omitempty"`
-	SnapshotId         *string               `json:"snapshot_id,omitempty"`
+	SnapshotID         *string               `json:"snapshot_id,omitempty"`
 	DiskName           *string               `json:"disk_name,omitempty"`
 	Description        *string               `json:"description,omitempty"`
 	DeleteWithInstance *bool                 `json:"delete_with_instance,omitempty"`
@@ -255,6 +269,7 @@ type DiskInfo struct {
 // ESSDPerformanceLevel ESSD云盘性能等级
 type ESSDPerformanceLevel string
 
+// ESSDPerformanceLevel ESSD云盘性能等级
 const (
 	PL1 ESSDPerformanceLevel = "PL1"
 	PL2 ESSDPerformanceLevel = "PL2"
@@ -277,32 +292,26 @@ const (
 
 // InstanceType 实例类型
 type InstanceType struct {
-	ID string `json:"_id"`
-
-	NamespaceName          string  `json:"namespace_name"`
-	Type                   string  `json:"type"`
-	Family                 string  `json:"family"`
-	FamilyName             string  `json:"family_name"`
-	CPU                    uint    `json:"cpu"`    // 个
-	Memory                 float32 `json:"memory"` // GB
-	GpuSpec                string  `json:"gpu_spec"`
-	GpuAmount              uint    `json:"gpu_amount"`           // 个
-	LocalStorageAmount     uint    `json:"local_storage_amount"` // 个
-	LocalStorageCategory   string  `json:"local_storage_category"`
-	LocalStorageCapacity   float32 `json:"local_storage_capacity"` // GB
-	PrivatePPS             float32 `json:"private_pps"`            // 内网收发包 万
-	IntranetBandwidth      float32 `json:"intranet_bandwidth"`     // 内网带宽 Gbps
-	ClockSpeed             string  `json:"clock_speed"`
-	PhysicalProcessor      string  `json:"physical_processor"`
-	EniIPv6AddressQuantity uint32  `json:"eni_ipv6_address_quantity"` // 单块弹性网卡的IPv6地址上限
-
-	Architecture string `json:"architecture"`
-
-	UpdatedAt time.Time `json:"updated_at"`
-	CreatedAt time.Time `json:"created_at"`
-
-	isNewRecord bool
-	isUpdated   bool
+	ID                     string    `json:"_id"`
+	NamespaceName          string    `json:"namespace_name"`
+	Type                   string    `json:"type"`
+	Family                 string    `json:"family"`
+	FamilyName             string    `json:"family_name"`
+	CPU                    uint      `json:"cpu"`    // 个
+	Memory                 float32   `json:"memory"` // GB
+	GpuSpec                string    `json:"gpu_spec"`
+	GpuAmount              uint      `json:"gpu_amount"`           // 个
+	LocalStorageAmount     uint      `json:"local_storage_amount"` // 个
+	LocalStorageCategory   string    `json:"local_storage_category"`
+	LocalStorageCapacity   float32   `json:"local_storage_capacity"` // GB
+	PrivatePPS             float32   `json:"private_pps"`            // 内网收发包 万
+	IntranetBandwidth      float32   `json:"intranet_bandwidth"`     // 内网带宽 Gbps
+	ClockSpeed             string    `json:"clock_speed"`
+	PhysicalProcessor      string    `json:"physical_processor"`
+	EniIPv6AddressQuantity uint32    `json:"eni_ipv6_address_quantity"` // 单块弹性网卡的IPv6地址上限
+	Architecture           string    `json:"architecture"`
+	UpdatedAt              time.Time `json:"updated_at"`
+	CreatedAt              time.Time `json:"created_at"`
 }
 
 // Disk 磁盘
@@ -428,15 +437,19 @@ type SecurityGroup struct {
 	CreatedAt                 time.Time                `json:"created_at"`
 }
 
+// NicType 网络类型
 type NicType string
 
+// NicType 网络类型
 const (
 	InternetNicType NicType = "internet"
 	IntranetNicType NicType = "intranet"
 )
 
+// IPProtocol 协议
 type IPProtocol string
 
+// IPProtocol 协议
 const (
 	AllIPProtocol  IPProtocol = "all"
 	TCPIPProtocol  IPProtocol = "tcp"
@@ -445,22 +458,28 @@ const (
 	GREIPProtocol  IPProtocol = "gre"
 )
 
+// PermissionPolicy 授权策略
 type PermissionPolicy string
 
+// PermissionPolicy 授权策略
 const (
 	AcceptPermissionPolicy PermissionPolicy = "accept"
 	DropPermissionPolicy   PermissionPolicy = "drop"
 )
 
+// InnerAccessPolicy 内部访问策略
 type InnerAccessPolicy string
 
+// InnerAccessPolicy 内部访问策略
 const (
 	AcceptInnerAccessPolicy InnerAccessPolicy = "Accept"
 	DropInnerAccessPolicy   InnerAccessPolicy = "Drop"
 )
 
+// SecurityGroupPriority 安全组优先级
 type SecurityGroupPriority int
 
+// IsValid .
 func (p SecurityGroupPriority) IsValid() bool {
 	if p >= 1 && p <= 100 {
 		return true
@@ -468,8 +487,10 @@ func (p SecurityGroupPriority) IsValid() bool {
 	return false
 }
 
+// Direction 策略方向
 type Direction string
 
+// Direction 策略方向
 const (
 	IngressDirection Direction = "ingress"
 	EgressDirection  Direction = "egress"

@@ -21,6 +21,10 @@ type RenewInstanceParams struct {
 // RenewInstanceResponse 主机续费返回数据
 type RenewInstanceResponse struct {
 	RequestID string `json:"request_id"`
+	Data      struct {
+		OrderHash string  `json:"order_hash"`
+		CFee      float64 `json:"c_fee"`
+	} `json:"data"`
 }
 
 // RenewInstance 主机续费
