@@ -2,37 +2,41 @@ package vpc
 
 import (
 	"time"
+
+	"github.com/qiniu/stack-go/params"
 )
 
 // VPCInfo 专有网络
 type VPCInfo struct {
-	ID              string                    `json:"_id"`
-	UID             uint32                    `json:"uid"`
-	VpcID           string                    `json:"vpc_id"`
-	RegionID        string                    `json:"region_id"`
-	Status          VPCPendingAvailableStatus `json:"status"` // enum Pending | Available
-	VpcName         string                    `json:"vpc_name"`
-	VSwitchIDs      VSwitchIdsType            `json:"v_switch_ids"`
-	CidrBlock       string                    `json:"cidr_block"`
-	VRouterID       string                    `json:"v_router_id"`
-	Description     string                    `json:"description"`
-	IsDefault       bool                      `json:"is_default"`        // 是否为默认vpc，只能在创建的时候插入该字段
-	IPv6CidrBlock   string                    `json:"ipv6_cidr_block"`   // 交换机的IPv6网段
-	BindIPv6Gateway bool                      `json:"bind_ipv6_gateway"` // 是否绑定ipv6网关
-	CenStatus       CenStatusType             `json:"cen_status"`
-	CreateUserCidr  string                    `json:"user_cidr"`
-	UserCidrs       UserCidrsType             `json:"user_cidrs"`
-	RouteTableID    string                    `json:"route_table_id"`
-	ClientToken     string                    `json:"client_token"`
-	UpdatedAt       time.Time                 `json:"updated_at"`
-	CreatedAt       time.Time                 `json:"created_at"`
+	ID              string         `json:"_id"`
+	UID             uint32         `json:"uid"`
+	VpcID           string         `json:"vpc_id"`
+	RegionID        string         `json:"region_id"`
+	Status          VPCStatus      `json:"status"` // enum Pending | Available
+	VpcName         string         `json:"vpc_name"`
+	VSwitchIDs      VSwitchIdsType `json:"v_switch_ids"`
+	CidrBlock       string         `json:"cidr_block"`
+	VRouterID       string         `json:"v_router_id"`
+	Description     string         `json:"description"`
+	IsDefault       bool           `json:"is_default"`        // 是否为默认vpc，只能在创建的时候插入该字段
+	IPv6CidrBlock   string         `json:"ipv6_cidr_block"`   // 交换机的IPv6网段
+	BindIPv6Gateway bool           `json:"bind_ipv6_gateway"` // 是否绑定ipv6网关
+	CenStatus       CenStatusType  `json:"cen_status"`
+	CreateUserCidr  string         `json:"user_cidr"`
+	UserCidrs       UserCidrsType  `json:"user_cidrs"`
+	RouteTableID    string         `json:"route_table_id"`
+	ClientToken     string         `json:"client_token"`
+	UpdatedAt       time.Time      `json:"updated_at"`
+	CreatedAt       time.Time      `json:"created_at"`
 }
 
-type VPCPendingAvailableStatus string //enum Pending | Available
+// VPCStatus VPC状态
+type VPCStatus string //enum Pending | Available
 
+// VPC 状态
 const (
-	PendingVPCPendingAvailableStatus   VPCPendingAvailableStatus = "Pending"
-	AvailableVPCPendingAvailableStatus VPCPendingAvailableStatus = "Available"
+	PendingVPCPendingAvailableStatus   VPCStatus = "Pending"
+	AvailableVPCPendingAvailableStatus VPCStatus = "Available"
 )
 
 // CenStatusType VPC绑定云企业网的状态
@@ -44,80 +48,18 @@ const (
 	AvailableCenStatus CenStatusType = "Available"
 )
 
+// VSwitchStatus VSwitch 状态
 type VSwitchStatus string //enum Pending | Available
 
+// VSwitchStatus VSwitch 状态
 const (
 	PendingVSwitchStatus   VSwitchStatus = "Pending"
 	AvailableVSwitchStatus VSwitchStatus = "Available"
 )
 
-type VPNStatus string
-
-const (
-	InitVPN         = VPNStatus("init")
-	ProvisioningVPN = VPNStatus("provisioning")
-	ActiveVPN       = VPNStatus("active")
-	UpdatingVPN     = VPNStatus("updating")
-	DeletingVPN     = VPNStatus("deleting")
-)
-
-type VPNBusinessStatus string
-
-const (
-	VPNNormalBusiness          = VPNBusinessStatus("Normal")
-	VPNFinancialLockedBusiness = VPNBusinessStatus("FinancialLocked")
-)
-
-type IpsecVPNStatus string
-
-const (
-	IkeSaNotEstablished   = IpsecVPNStatus("ike_sa_not_established")
-	IkeSaEstablished      = IpsecVPNStatus("ike_sa_established")
-	IpsecSaNotEstablished = IpsecVPNStatus("ipsec_sa_not_established")
-	IpsecSaEstablished    = IpsecVPNStatus("ipsec_sa_established")
-)
-
-type SSLProto string
-
-const (
-	UDPSSLProto = SSLProto("UDP")
-	TCPSSLProto = SSLProto("TCP")
-)
-
-type Cipher string
-
-const (
-	AES128CBC = Cipher("AES-128-CBC")
-	AES192CBC = Cipher("AES-192-CBC")
-	AES256CBC = Cipher("AES-256-CBC")
-	NoneEncry = Cipher("none")
-)
-
-type SslVpnClientCertStatus string
-
-const (
-	ExpiringSslVpnClientCert      = SslVpnClientCertStatus("expiring-soon")
-	NormalSslVpnClientCertStatus  = SslVpnClientCertStatus("normal")
-	ExpiredSslVpnClientCertStatus = SslVpnClientCertStatus("expired")
-)
-
-type VpnInstanceChargeType string
-
-const (
-	VpnPREPAY  = VpnInstanceChargeType("PREPAY")
-	VpnPOSTPAY = VpnInstanceChargeType("POSTPAY")
-)
-
-type VpnSwitch string
-
-const (
-	DisableVpnSwitch = VpnSwitch("disable")
-	EnableVpnSwitch  = VpnSwitch("enable")
-)
-
 // VSwitchIdsType 交换机id列表
 type VSwitchIdsType struct {
-	VSwitchId []string `json:"v_switch_id"`
+	VSwitchID []string `json:"v_switch_id"`
 }
 
 // UserCidrsType 用户侧网段的列表
@@ -208,3 +150,95 @@ type VSwitchInfo struct {
 	UpdatedAt               time.Time     `json:"updated_at"`
 	CreatedAt               time.Time     `json:"created_at"`
 }
+
+// EIPInfo eip
+type EIPInfo struct {
+	ID             string    `json:"_id"`
+	UID            uint32    `json:"uid"`
+	AllocationID   string    `json:"allocation_id"`
+	AllocationName string    `json:"allocation_name"`
+	ChargeType     string    `json:"charge_type"` // enum PrePaid | PostPaid    defulat-PostPaid
+	Status         EIPStatus `json:"status"`      // enum Associating | Unassociating | InUse | Available
+	InstanceID     string    `json:"instance_id"`
+	InstanceName   string    `json:"instance_name"`
+	RegionID       string    `json:"region_id"`
+	IPAddress      string    `json:"ip_address"`
+	ISP            EIPISP    `json:"isp"`
+
+	InternetChargeType string       `json:"internet_charge_type"` // enum PayByBandwidth|PayByTraffic  default-PayByBandwidth
+	InstanceType       InstanceType `json:"instance_type"`        // enum EcsInstance | SlbInstance | Nat | HaVip
+	Bandwidth          string       `json:"bandwidth"`            // 带宽值，如果加入带宽包，则为被分配的带宽大小
+	PricingCycle       string       `json:"pricing_cycle"`
+	Period             string       `json:"period"`
+	AutoPay            string       `json:"auto_pay"`
+
+	// 带宽包信息，目前只有共享带宽
+	BandwidthPackageBandwidth string        `json:"bandwidth_package_bandwidth"` // 带宽包大小
+	BandwidthPackageID        string        `json:"bandwidth_package_id"`        // 带宽包id
+	BandwidthPackageType      BandwidthType `json:"bandwidth_package_type"`      // 带宽包类型
+	EipBandwidth              string        `json:"eip_bandwidth"`               // 当eip加入共享带宽时，该值为加入前的带宽值
+
+	ExpiredTime time.Time `json:"expired_time"`
+	UpdatedAt   time.Time `json:"updated_at"`
+	CreatedAt   time.Time `json:"created_at"`
+
+	// autoRenewInfo
+	AutoRenewInfo        *params.AutoRenew `json:"auto_renew_info"`
+	CustomizedExpireTime *time.Time        `json:"customized_expire_time"`
+
+	*params.CostInfo
+}
+
+// EIPStatus EIP 状态
+type EIPStatus string // enum Associating | Unassociating | InUse | Available
+
+// EIPStatus EIP 状态
+const (
+	CreatingEIPStatus      EIPStatus = "Creating"
+	AssociatingEIPStatus   EIPStatus = "Associating"
+	UnassociatingEIPStatus EIPStatus = "Unassociating"
+	InUseEIPStatus         EIPStatus = "InUse"
+	AvailableEIPStatus     EIPStatus = "Available"
+)
+
+// EIPISP 线路类型
+type EIPISP string
+
+// EIPISP 线路类型
+const (
+	// 资源池 1
+	// BGPProEIPISP BGP（多线）精品线路
+	BGPProEIPISP EIPISP = "BGP_PRO"
+	// BGPEIPISP BGP（多线）线路
+	BGPEIPISP EIPISP = "BGP"
+
+	// 资源池 2
+	// TelcomEIPISP2 电信
+	TelcomEIPISP2 EIPISP = "5_telcom"
+	// UnionEIPISP2 联通
+	UnionEIPISP2 EIPISP = "5_union"
+	// BGPEIPISP2 全动态BGP
+	BGPEIPISP2 EIPISP = "5_bgp"
+	// SBGPEIPISP2 静态BGP
+	SBGPEIPISP2 EIPISP = "5_sbgp"
+)
+
+// InstanceType 实例类型
+type InstanceType string // enum EcsInstance | SlbInstance | Nat | HaVip
+
+// InstanceType 实例类型
+const (
+	EcsInstanceInstanceType InstanceType = "EcsInstance"
+	SlbInstanceInstanceType InstanceType = "SlbInstance"
+	NatInstanceType         InstanceType = "Nat"
+	HaVipInstanceType       InstanceType = "HaVip"
+	NullInstanceType        InstanceType = ""
+)
+
+// BandwidthType eip带宽类型
+type BandwidthType string
+
+// 带宽类型常量
+const (
+	CommonBandwidthPackage BandwidthType = "CommonBandwidthPackage"
+)
