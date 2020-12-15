@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
@@ -64,6 +65,7 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 	req.ContentLength = int64(len(r.Body))
 
 	req.URL.RawQuery = r.Queries.Encode()
+	fmt.Println(req.URL.String())
 
 	// 读取结果
 	resp, err := c.tr.RoundTrip(req)

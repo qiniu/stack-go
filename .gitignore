@@ -3,3 +3,4 @@ lint.log
 coverage.html
 *.test
 *.pprof
+gen.js
