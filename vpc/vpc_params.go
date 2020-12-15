@@ -1,6 +1,8 @@
 package vpc
 
-import "time"
+import (
+	"time"
+)
 
 // VPCInfo 专有网络
 type VPCInfo struct {
@@ -185,4 +187,24 @@ type CreateVSwitch struct {
 
 	// 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。
 	ClientToken *string `json:"client_token"`
+}
+
+// VSwitchInfo 交换机
+type VSwitchInfo struct {
+	ID                      string        `json:"-"`
+	UID                     uint32        `json:"uid"`
+	VSwitchID               string        `json:"v_switch_id"`
+	VPCID                   string        `json:"vpc_id"`
+	Status                  VSwitchStatus `json:"status"` // enum Pending | Available
+	CidrBlock               string        `json:"cidr_block"`
+	ZoneID                  string        `json:"zone_id"`
+	RegionID                string        `json:"region_id"`
+	AvailableIPAddressCount int           `json:"available_ip_address_count"`
+	Description             string        `json:"description"`
+	VSwitchName             string        `json:"v_switch_name"`
+	IsDefault               bool          `json:"is_default"` // 是否为默认交换机，只能在创建的时候插入该字段
+	ClientToken             string        `json:"client_token"`
+	IPv6CidrBlock           string        `json:"ipv6_cidr_block"` // 交换机的IPv6网段
+	UpdatedAt               time.Time     `json:"updated_at"`
+	CreatedAt               time.Time     `json:"created_at"`
 }
