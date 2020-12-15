@@ -18,7 +18,7 @@ type CreateEIPParams struct {
 	ClientToken *string `json:"client_token"`
 
 	EnableAutoRenew       *bool   `json:"enable_auto_renew,omitempty"`       // 是否打开自动续费
-	CustomizedReleaseTime *string `json:"customized_release_time，omitempty"` //后付费定时删除的时间
+	CustomizedReleaseTime *string `json:"customized_release_time,omitempty"` //后付费定时删除的时间
 	*params.CostParams
 }
 

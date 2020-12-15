@@ -20,8 +20,8 @@ type Seekabler interface {
 	SeekToBegin() error
 }
 
-// SeekableCloser seekable closer
-type SeekableCloser interface {
+// ReadCloser seekable closer
+type ReadCloser interface {
 	Seekabler
 	io.Closer
 }
@@ -42,13 +42,13 @@ var ErrTooLargeBody = errors.New("too large body")
 // MaxBodyLength max body length
 var MaxBodyLength int64 = 16 * 1024 * 1024
 
-// New new seekablecloser from http request
-func New(req *http.Request) (r SeekableCloser, err error) {
+// New new ReadCloser from http request
+func New(req *http.Request) (r ReadCloser, err error) {
 	if req.Body == nil {
 		return nil, ErrNoBody
 	}
 	var ok bool
-	if r, ok = req.Body.(SeekableCloser); ok {
+	if r, ok = req.Body.(ReadCloser); ok {
 		return
 	}
 	b, err2 := ReadAll(req)
