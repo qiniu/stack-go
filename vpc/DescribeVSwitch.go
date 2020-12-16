@@ -21,7 +21,7 @@ type DescribeVSwitchResponse struct {
 
 // DescribeVSwitch 虚拟交换机详情
 func (s *VPC) DescribeVSwitch(p *DescribeVSwitchParams) (resp *DescribeVSwitchResponse, err error) {
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/v1/vm/vswitch/%s", p.VSwitchID)).WithRegionID(&p.RegionID)
+	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/v1/vm/switch/%s", p.VSwitchID)).WithRegionID(&p.RegionID)
 	err = s.client.Call(req, &resp)
 	return
 }

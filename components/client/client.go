@@ -65,6 +65,12 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 
 	req.URL.RawQuery = r.Queries.Encode()
 
+	c.log.Infof("[%s] [STACK_GO] [START] %s %s",
+		start.Format(defaultTimestampFormat),
+		r.Method,
+		req.URL.String(),
+	)
+
 	// 读取结果
 	resp, err := c.tr.RoundTrip(req)
 	if err != nil {
@@ -76,10 +82,11 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 		_ = resp.Body.Close()
 
 		end := time.Now()
-		c.log.Debugf("[%v] [STACK_GO] %13v\t%s\n",
+		c.log.Infof("[%s] [STACK_GO] [END] [%8v] %s %s",
 			end.Format(defaultTimestampFormat),
 			end.Sub(start),
-			resp.Request.URL.String(),
+			r.Method,
+			req.URL.String(),
 		)
 	}()
 
@@ -100,7 +107,7 @@ func responseError(resp *http.Response) (err error) {
 	err = &Error{
 		Code:      resp.StatusCode,
 		Name:      resp.Status,
-		Message:   "UNKNOWN",
+		Message:   "",
 		RequestID: resp.Header.Get(requestIDKey),
 	}
 

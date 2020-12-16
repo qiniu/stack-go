@@ -145,7 +145,6 @@ type VSwitchInfo struct {
 	Description             string        `json:"description"`
 	VSwitchName             string        `json:"v_switch_name"`
 	IsDefault               bool          `json:"is_default"` // 是否为默认交换机，只能在创建的时候插入该字段
-	ClientToken             string        `json:"client_token"`
 	IPv6CidrBlock           string        `json:"ipv6_cidr_block"` // 交换机的IPv6网段
 	UpdatedAt               time.Time     `json:"updated_at"`
 	CreatedAt               time.Time     `json:"created_at"`
@@ -170,7 +169,6 @@ type EIPInfo struct {
 	Bandwidth          string       `json:"bandwidth"`            // 带宽值，如果加入带宽包，则为被分配的带宽大小
 	PricingCycle       string       `json:"pricing_cycle"`
 	Period             string       `json:"period"`
-	AutoPay            string       `json:"auto_pay"`
 
 	// 带宽包信息，目前只有共享带宽
 	BandwidthPackageBandwidth string        `json:"bandwidth_package_bandwidth"` // 带宽包大小
