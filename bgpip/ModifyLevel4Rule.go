@@ -9,11 +9,11 @@ import (
 
 // ModifyLevel4RuleParams BGP高防四层规则修改参数
 type ModifyLevel4RuleParams struct {
-	RegionID    string         `json:"region_id"`   // 地域 id
-	ResourceID  string         `json:"resource_id"` // 高防实例 id
-	RuleID      string         `json:"rule_id"`     // 四层规则 id
-	Protocol    Level4Protocol `json:"protocol"`
-	RuleName    string         `json:"rule_name"`
+	RegionID    string         `json:"region_id"`    // 地域 id
+	ResourceID  string         `json:"resource_id"`  // 高防实例 id
+	RuleID      string         `json:"rule_id"`      // 四层规则 id
+	Protocol    Level4Protocol `json:"protocol"`     // 四层协议，取值：TCP, UDP
+	RuleName    string         `json:"rule_name"`    // 规则名称
 	VirtualPort uint16         `json:"virtual_port"` // 转发端口
 	SourcePort  uint16         `json:"source_port"`  // 源站端口
 	SourceType  SourceType     `json:"source_type"`  // 回源方式，取值[1(域名回源)，2(IP回源)]

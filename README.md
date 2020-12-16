@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-  s := stack.New(logger.New(), "https://api-qvm.qiniu.com", auth.auth.NewCredential("xxx", "xxx"))
+  s := stack.New(logger.New(), "https://api-qvm.qiniu.com", auth.NewCredential("xxx", "xxx"))
 
   resp, _ := s.ECS().ListInstances(&ecs.ListInstancesParams{...})
 
