@@ -505,7 +505,7 @@ type ReferencingSecurityGroup struct {
 // ReferencingSecurityGroupType 正在授权给这个安全组的其他安全组信息
 type ReferencingSecurityGroupType struct {
 	SecurityGroupID string `json:"security_group_id"` // 安全组ID
-	AliUID          int    `json:"ali_uid"`           // 这个安全组所属用户ID
+	ProviderUID     int    `json:"ali_uid"`           // 这个安全组所属用户ID
 }
 
 // PermissionType 安全组权限规则
