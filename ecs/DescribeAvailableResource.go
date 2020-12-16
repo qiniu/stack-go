@@ -66,7 +66,7 @@ type DescribeAvailableResourceResponse struct {
 
 // DescribeAvailableResource 查询可用资源列表
 func (s *ECS) DescribeAvailableResource(p *DescribeAvailableResourceParams) (resp *DescribeAvailableResourceResponse, err error) {
-	req := client.NewRequest(http.MethodPost, "/v1/vm/resourceAvailable").WithJSONBody(p).WithRegionID(&p.RegionID)
+	req := client.NewRequest(http.MethodPost, "/v1/vm/resource_available").WithJSONBody(p).WithRegionID(&p.RegionID)
 	err = s.client.Call(req, &resp)
 	return
 }

@@ -20,7 +20,7 @@ type DeleteVSwitchResponse struct {
 
 // DeleteVSwitch 虚拟交换机删除
 func (s *VPC) DeleteVSwitch(p *DeleteVSwitchParams) (resp *DeleteVSwitchResponse, err error) {
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/vm/vswitch/%s", p.VSwitchID)).WithRegionID(&p.RegionID)
+	req := client.NewRequest(http.MethodDelete, fmt.Sprintf("/v1/vm/switch/%s", p.VSwitchID)).WithRegionID(&p.RegionID)
 	err = s.client.Call(req, &resp)
 	return
 }

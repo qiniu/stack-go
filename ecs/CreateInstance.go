@@ -106,7 +106,7 @@ type CreateInstanceResponse struct {
 	RequestID string `json:"request_id"`
 	Data      *struct {
 		InstanceID *string `json:"instance_id"` // 按量创建返回 ID
-		OrderHash  *string `json:"order_hash"`  // 预付费创建返回订单号
+		OrderHash  *string `json:"order"`       // 预付费创建返回订单号
 	} `json:"data"`
 }
 

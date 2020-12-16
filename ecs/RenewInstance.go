@@ -22,7 +22,7 @@ type RenewInstanceParams struct {
 type RenewInstanceResponse struct {
 	RequestID string `json:"request_id"`
 	Data      struct {
-		OrderHash string  `json:"order_hash"`
+		OrderHash string  `json:"order"`
 		CFee      float64 `json:"c_fee"`
 	} `json:"data"`
 }
