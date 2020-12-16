@@ -19,6 +19,7 @@ type CreateLevel4RuleParams struct {
 	KeepTime    uint32         `json:"keep_time"`    // 会话保持时间，单位秒
 	KeepEnable  SwitchStatus   `json:"keep_enable"`  // 会话保持开关，取值[0(会话保持关闭)，1(会话保持开启)]
 	SourceList  []L4RuleSource `json:"source_list"`  // 回源列表
+	LbType      int            `json:"lb_type"`      // 负载均衡方式，取值: 1(加权轮询)
 }
 
 // Level4Protocol 四层协议
