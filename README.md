@@ -17,7 +17,7 @@ go get github.com/qiniu/stack-go
 import (
   "github.com/qiniu/stack-go"
   "github.com/qiniu/stack-go/components/auth"
-	"github.com/qiniu/stack-go/components/log"
+  "github.com/qiniu/stack-go/components/log"
 )
 
 func main() {
