@@ -12,7 +12,7 @@ import (
 )
 
 // SDK 版本
-const version = "0.0.1"
+const version = "0.0.2"
 
 // Stack 七牛云主机服务 SDK
 type Stack struct {
