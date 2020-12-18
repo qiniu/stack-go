@@ -29,7 +29,7 @@ type CreateImageParams struct {
 	// 默认值：空
 	Description *string `json:"description"`
 
-	// 保证请求幂等性， 客户端生成的一个唯一值 https://help.aliyun.com/document_detail/25693.html
+	// 保证请求幂等性， 客户端生成的一个唯一值
 	ClientToken *string `json:"client_token"`
 
 	// QVM 业务相关，供应商实现时忽略
