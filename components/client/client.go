@@ -50,10 +50,14 @@ func New(log log.Logger, endpoint string, credential *auth.Credential) *Client {
 // 数据以 json 格式发送和接收
 func (c *Client) Call(r *Request, ret interface{}) (err error) {
 
-	start := time.Now()
+	var (
+		start = time.Now()
+		l     = c.log
+	)
 
 	req, err := http.NewRequest(r.Method, c.endpoint+r.URL, bytes.NewReader(r.Body))
 	if err != nil {
+		l.Errorf("[%s] [STACK_GO] failed to new http request %s\n", start.Format(defaultTimestampFormat), err.Error())
 		return err
 	}
 
@@ -65,21 +69,35 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 
 	req.URL.RawQuery = r.Queries.Encode()
 
+	l.Infof("[%s] [STACK_GO] [START] %s %s\n",
+		start.Format(defaultTimestampFormat),
+		r.Method,
+		req.URL.String(),
+	)
+
 	// 读取结果
 	resp, err := c.tr.RoundTrip(req)
 	if err != nil {
+		l.Errorf("[%s] [STACK_GO] failed to make http request %s\n", time.Now().Format(defaultTimestampFormat), err.Error())
 		return err
 	}
 
 	defer func() {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
-		_ = resp.Body.Close()
+		_, err2 := io.Copy(ioutil.Discard, resp.Body)
+		if err2 != nil {
+			l.Warnf("[%s] [STACK_GO] failed to readout response %s\n", time.Now().Format(defaultTimestampFormat), err.Error())
+		}
+		err2 = resp.Body.Close()
+		if err2 != nil {
+			l.Warnf("[%s] [STACK_GO] failed to close response body %s\n", time.Now().Format(defaultTimestampFormat), err.Error())
+		}
 
 		end := time.Now()
-		c.log.Debugf("[%v] [STACK_GO] %13v\t%s\n",
+		l.Infof("[%s] [STACK_GO] [END] [%8v] %s %s\n",
 			end.Format(defaultTimestampFormat),
 			end.Sub(start),
-			resp.Request.URL.String(),
+			r.Method,
+			req.URL.String(),
 		)
 	}()
 
@@ -87,20 +105,21 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 		if ret != nil && resp.ContentLength != 0 {
 			err = json.NewDecoder(resp.Body).Decode(ret)
 			if err != nil {
+				l.Errorf("[%s] [STACK_GO] failed to decode response %s, request_id: %s\n", time.Now().Format(defaultTimestampFormat), err.Error(), resp.Header.Get(requestIDKey))
 				return err
 			}
 		}
 		return nil
 	}
 
-	return responseError(resp)
+	return responseError(l, resp)
 }
 
-func responseError(resp *http.Response) (err error) {
+func responseError(l log.Logger, resp *http.Response) (err error) {
 	err = &Error{
 		Code:      resp.StatusCode,
 		Name:      resp.Status,
-		Message:   "UNKNOWN",
+		Message:   "",
 		RequestID: resp.Header.Get(requestIDKey),
 	}
 
@@ -114,11 +133,13 @@ func responseError(resp *http.Response) (err error) {
 		if ct := resp.Header.Get("Content-Type"); strings.TrimSpace(strings.SplitN(ct, ";", 2)[0]) == "application/json" {
 			bts, err2 := ioutil.ReadAll(resp.Body)
 			if err2 != nil {
+				l.Errorf("[%s] [STACK_GO] failed to read error response %s, request_id: %s\n", time.Now().Format(defaultTimestampFormat), err.Error(), resp.Header.Get(requestIDKey))
 				return err
 			}
 
 			err2 = json.Unmarshal(bts, decodeErr)
 			if err2 != nil {
+				l.Errorf("[%s] [STACK_GO] failed to unmarshal error response %s, request_id: %s, raw data: %s\n", time.Now().Format(defaultTimestampFormat), err.Error(), resp.Header.Get(requestIDKey), string(bts))
 				return err
 			}
 

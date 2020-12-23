@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const qvmRegionIDHeaderKey = "x-qiniu-regionid"
+const qvmRegionIDHeaderKey = "X-Qiniu-Regionid"
 
 // Request API 请求对象
 type Request struct {

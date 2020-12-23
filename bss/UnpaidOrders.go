@@ -9,12 +9,13 @@ import (
 
 // UnpaidOrdersParams 未支付订单列表参数
 type UnpaidOrdersParams struct {
-	ResourceType *params.ResourceType `json:"resource_type"`
+	ResourceType params.ResourceType `json:"resource_type"`
 }
 
 // UnpaidOrdersResponse 未支付订单列表返回数据
 type UnpaidOrdersResponse struct {
-	RequestID string `json:"request_id"`
+	RequestID string      `json:"request_id"`
+	Data      []OrderInfo `json:"data"`
 }
 
 // UnpaidOrders 未支付订单列表

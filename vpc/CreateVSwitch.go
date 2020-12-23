@@ -18,7 +18,7 @@ type CreateVSwitchResponse struct {
 
 // CreateVSwitch 虚拟交换机创建
 func (s *VPC) CreateVSwitch(p *CreateVSwitchParams) (resp *CreateVSwitchResponse, err error) {
-	req := client.NewRequest(http.MethodPost, "/v1/vm/vswitch").WithRegionID(&p.RegionID).WithJSONBody(p)
+	req := client.NewRequest(http.MethodPost, "/v1/vm/switch").WithRegionID(&p.RegionID).WithJSONBody(p)
 	err = s.client.Call(req, &resp)
 	return
 }

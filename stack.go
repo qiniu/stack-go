@@ -1,6 +1,7 @@
 package stack
 
 import (
+	"github.com/qiniu/stack-go/bgpip"
 	"github.com/qiniu/stack-go/components/auth"
 	"github.com/qiniu/stack-go/components/client"
 	"github.com/qiniu/stack-go/components/log"
@@ -11,7 +12,7 @@ import (
 )
 
 // SDK 版本
-const version = "0.0.1"
+const version = "0.0.2"
 
 // Stack 七牛云主机服务 SDK
 type Stack struct {
@@ -47,4 +48,9 @@ func (s *Stack) VPC() *vpc.VPC {
 // BSS 获取 BSS 管理对象
 func (s *Stack) BSS() *bss.BSS {
 	return bss.NewBSS(s.client)
+}
+
+// BGPIP 获取 BGPIP 管理对象
+func (s *Stack) BGPIP() *bgpip.BGPIP {
+	return bgpip.NewBGPIP(s.client)
 }

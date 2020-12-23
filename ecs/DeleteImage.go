@@ -9,12 +9,6 @@ import (
 
 // DeleteImageParams 镜像删除参数
 type DeleteImageParams struct {
-	ImageID  string `json:"image_id"`
-	RegionID string `json:"region_id"`
-}
-
-// DeleteImageResponse 镜像删除返回数据
-type DeleteImageResponse struct {
 	// 自定义镜像所在的地域 ID。您可以调用 DescribeRegions 查看最新的七牛云地域列表。
 	RegionID string `json:"region_id"`
 
@@ -29,6 +23,11 @@ type DeleteImageResponse struct {
 
 	// 是否删除相关快照，默认不删除
 	DeleteRelatedSnapshot bool `json:"delete_related_snapshot"`
+}
+
+// DeleteImageResponse 镜像删除返回数据
+type DeleteImageResponse struct {
+	RequestID string `json:"request_id"`
 }
 
 // DeleteImage 镜像删除

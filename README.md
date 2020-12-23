@@ -15,12 +15,13 @@ go get github.com/qiniu/stack-go
 
 ```golang
 import (
-  ...
   "github.com/qiniu/stack-go"
+  "github.com/qiniu/stack-go/components/auth"
+  "github.com/qiniu/stack-go/components/log"
 )
 
 func main() {
-  s := stack.New(logger.New(), "https://api-qvm.qiniu.com", auth.auth.NewCredential("xxx", "xxx"))
+  s := stack.New(log.NewSimpleLog(), "https://api-qvm.qiniu.com", auth.NewCredential("xxx", "xxx"))
 
   resp, _ := s.ECS().ListInstances(&ecs.ListInstancesParams{...})
 
