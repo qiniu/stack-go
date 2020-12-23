@@ -17,12 +17,12 @@ type CreateDiskParams struct {
 	// - 您不能同时指定ZoneId和InstanceId。
 	ZoneID string `json:"zone_id"`
 
-	// 容量大小，以GiB为单位。指定该参数后，其取值必须≥指定快照ID的容量大小。取值范围：
+	// 容量大小，以 GiB 为单位。指定该参数后，其取值必须≥指定快照ID的容量大小。取值范围：
 	// - cloud：5~2000
 	// - cloud_efficiency：20~32768
 	// - cloud_ssd：20~32768
 	// - cloud_essd：20~32768
-	Size int64 `json:"size"` // GB
+	Size int64 `json:"size"`
 
 	// 云盘名称。长度为2~128个英文或中文字符。必须以大小字母或中文开头，不能以 http:// 和 https:// 开头。可以包含数字、半角冒号（:）、下划线（_）或者连字符（-）。
 	//
@@ -64,6 +64,7 @@ type CreateDiskParams struct {
 	// 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。
 	ClientToken *string `json:"client_token"`
 
+	// 计费参数（必须）
 	*params.CostParams
 }
 
