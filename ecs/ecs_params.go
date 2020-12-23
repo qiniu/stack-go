@@ -104,14 +104,12 @@ type InstanceStatus string
 
 // 主机状态
 const (
-	NormalInstanceStatus    InstanceStatus = "Normal"
-	CreatingInstanceStatus  InstanceStatus = "Creating" // 创建中
-	ChangingInstanceStatus  InstanceStatus = "Changing" // 变配中
-	RunningInstanceStatus   InstanceStatus = "Running"  // 运行中
-	StartingInstanceStatus  InstanceStatus = "Starting" // 开机中
-	StoppingInstanceStatus  InstanceStatus = "Stopping" // 关机中
-	StoppedInstanceStatus   InstanceStatus = "Stopped"  // 已关机
-	InactiveInstanceStatus  InstanceStatus = "Inactive"
+	CreatingInstanceStatus  InstanceStatus = "Creating"  // 创建中
+	ChangingInstanceStatus  InstanceStatus = "Changing"  // 变配中
+	RunningInstanceStatus   InstanceStatus = "Running"   // 运行中
+	StartingInstanceStatus  InstanceStatus = "Starting"  // 开机中
+	StoppingInstanceStatus  InstanceStatus = "Stopping"  // 关机中
+	StoppedInstanceStatus   InstanceStatus = "Stopped"   // 已关机
 	RebootingInstanceStatus InstanceStatus = "Rebooting" // 重启中
 	PendingInstanceStatus   InstanceStatus = "Pending"   // 挂起中
 	DeletedInstanceStatus   InstanceStatus = "Deleted"   // 已删除
