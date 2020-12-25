@@ -60,7 +60,7 @@ type ImageInfo struct {
 	// - `marketplace` ：镜像市场提供的镜像。您查询到的云市场镜像可以直接使用，无需提前订阅。您需要自行留意云市场镜像的收费详情。
 	ImageOwnerAlias string `json:"image_owner_alias"`
 
-	Progress string `json:"progress"` //
+	Progress string `json:"progress"` // 镜像完成的进度，单位为百分比。
 
 	// 镜像是否已经运行在ECS实例中。取值范围：
 	//
@@ -450,13 +450,12 @@ const (
 
 // Keypair 钥匙对
 type Keypair struct {
-	ID                 string    `json:"id"`
-	UID                uint32    `json:"-"`
-	KeyPairName        string    `json:"key_pair_name"`
-	KeyPairFingerPrint string    `json:"key_pair_finger_print"`
-	PrivateKeyBody     string    `json:"private_key_body"`
-	PublicKeyBody      string    `json:"public_key_body"`
-	CreatedAt          time.Time `json:"created_at"`
+	ID                 string    `json:"id"`                    // 钥匙对
+	KeyPairName        string    `json:"key_pair_name"`         // 密钥对的名称
+	KeyPairFingerPrint string    `json:"key_pair_finger_print"` // 密钥对的指纹
+	PrivateKeyBody     string    `json:"private_key_body"`      // 密钥对内容
+	PublicKeyBody      string    `json:"public_key_body"`       // 公钥内容
+	CreatedAt          time.Time `json:"created_at"`            // 创建时间
 }
 
 // ImageOwnerAlias 镜像来源
@@ -486,20 +485,25 @@ type Image struct {
 
 // SecurityGroup 安全组
 type SecurityGroup struct {
-	ID                        string                   `json:"_id"`
-	UID                       uint32                   `json:"uid"`
-	RegionID                  string                   `json:"region_id"`
-	SecurityGroupName         string                   `json:"security_group_name"`
-	Description               string                   `json:"description"`
-	VpcID                     string                   `json:"vpc_id"`
-	VpcName                   string                   `json:"vpc_name"`
-	ClientToken               string                   `json:"client_token"`
-	SecurityGroupID           string                   `json:"security_group_id"`
-	IsDefault                 bool                     `json:"is_default"` // 是否为默认安全组，只在新建的时候插入该字段
-	InnerAccessPolicy         InnerAccessPolicy        `json:"inner_access_policy"`
-	ReferencingSecurityGroups ReferencingSecurityGroup `json:"referencing_security_groups"`
-	UpdatedAt                 time.Time                `json:"updated_at"`
-	CreatedAt                 time.Time                `json:"created_at"`
+	RegionID          string `json:"region_id"`           // 地域 ID
+	SecurityGroupID   string `json:"security_group_id"`   // 安全组 ID
+	SecurityGroupName string `json:"security_group_name"` // 安全组名称
+	Description       string `json:"description"`         // 安全组描述信息
+	VpcID             string `json:"vpc_id"`              // VPC ID
+	VpcName           string `json:"vpc_name"`            // VPC 名称
+	ClientToken       string `json:"client_token"`        // 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。
+	IsDefault         bool   `json:"is_default"`          // 是否为默认安全组，只在新建的时候插入该字段
+
+	// 安全组内的ECS实例之间的内网连通策略。
+	//
+	// 取值范围（取值不区分大小写）：
+	// - `Accept`：互通
+	// - `Drop`：隔离
+	//
+	InnerAccessPolicy InnerAccessPolicy `json:"inner_access_policy"`
+
+	CreatedAt time.Time `json:"created_at"` // 创建时间
+	UpdatedAt time.Time `json:"updated_at"` // 更新时间
 }
 
 // NicType 网络类型
@@ -575,26 +579,26 @@ type ReferencingSecurityGroupType struct {
 
 // PermissionType 安全组权限规则
 type PermissionType struct {
-	SecurityGroupRuleID     string                `json:"security_group_rule_id"`
-	IPProtocol              IPProtocol            `json:"ip_protocol"`
-	PortRange               string                `json:"port_range"`
-	SourceCidrIP            string                `json:"source_cidr_ip"`
-	SourceGroupID           string                `json:"source_group_id"`
-	SourceGroupName         string                `json:"source_group_name"`
-	SourceGroupOwnerAccount string                `json:"source_group_owner_account"`
-	DestCidrIP              string                `json:"dest_cidr_ip"`
-	DestGroupID             string                `json:"dest_group_id"`
-	DestGroupName           string                `json:"dest_group_name"`
-	DestGroupOwnerAccount   string                `json:"dest_group_owner_account"`
-	Policy                  PermissionPolicy      `json:"policy"`
-	NicType                 NicType               `json:"nic_type"`
-	Priority                SecurityGroupPriority `json:"priority"`
-	Direction               Direction             `json:"direction"`
-	Description             string                `json:"description"`
-	CreateTime              string                `json:"create_time"`
-	IPv6SourceCidrIP        string                `json:"ipv6_source_cidr_ip"`
-	IPv6DestCidrIP          string                `json:"ipv6_dest_cidr_ip"`
-	SourcePortRange         string                `json:"source_port_range"`
+	SecurityGroupRuleID     string                `json:"security_group_rule_id"`     // 安全组权限规则 ID
+	IPProtocol              IPProtocol            `json:"ip_protocol"`                // IP 协议, 传输层协议。不区分大小写。取值范围：`icmp`, `gre`, `tcp`, `udp`, `all`
+	PortRange               string                `json:"port_range"`                 // 端口范围
+	SourceCidrIP            string                `json:"source_cidr_ip"`             // 源IP地址段，用于入方向授权
+	SourceGroupID           string                `json:"source_group_id"`            // 源安全组，用于入方向授权
+	SourceGroupName         string                `json:"source_group_name"`          // 源端安全组名称
+	SourceGroupOwnerAccount string                `json:"source_group_owner_account"` // 源安全组所属账户 ID
+	DestCidrIP              string                `json:"dest_cidr_ip"`               // 目标IP地址段，用于出方向授权
+	DestGroupID             string                `json:"dest_group_id"`              // 目标安全组，用于出方向授权
+	DestGroupName           string                `json:"dest_group_name"`            // 目的端安全组名称
+	DestGroupOwnerAccount   string                `json:"dest_group_owner_account"`   // 目标安全组所属账户ID
+	Policy                  PermissionPolicy      `json:"policy"`                     // 授权策略: `accept`, `drop`
+	NicType                 NicType               `json:"nic_type"`                   // 网络类型: `internet`, `intranet`
+	Priority                SecurityGroupPriority `json:"priority"`                   // 规则优先级
+	Direction               Direction             `json:"direction"`                  // 授权方向: `ingress`, `egress`, `all`
+	Description             string                `json:"description"`                // 安全组描述信息
+	CreateTime              string                `json:"create_time"`                // 创建时间
+	IPv6SourceCidrIP        string                `json:"ipv6_source_cidr_ip"`        // 源 IPv6 地址段
+	IPv6DestCidrIP          string                `json:"ipv6_dest_cidr_ip"`          // 目的 IPv6 地址段
+	SourcePortRange         string                `json:"source_port_range"`          // 源端端口范围
 }
 
 // AuthType 源类型

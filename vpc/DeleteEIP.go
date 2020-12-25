@@ -9,13 +9,13 @@ import (
 
 // DeleteEIPParams 弹性公网IP删除参数
 type DeleteEIPParams struct {
-	RegionID     string `json:"region_id"`
-	AllocationID string `json:"allocation_id"`
+	RegionID     string `json:"region_id"`     // EIP 地域 ID
+	AllocationID string `json:"allocation_id"` // 弹性公网 IP 的 ID
 }
 
 // DeleteEIPResponse 弹性公网IP删除返回数据
 type DeleteEIPResponse struct {
-	RequestID string `json:"request_id"`
+	RequestID string `json:"request_id"` // 请求 ID
 }
 
 // DeleteEIP 弹性公网IP删除

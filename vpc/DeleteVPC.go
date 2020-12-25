@@ -9,13 +9,13 @@ import (
 
 // DeleteVPCParams 专有网络删除参数
 type DeleteVPCParams struct {
-	RegionID string `json:"region_id"`
-	VPCID    string `json:"vpc_id"`
+	RegionID string `json:"region_id"` // 地域 ID
+	VPCID    string `json:"vpc_id"`    // VPC ID
 }
 
 // DeleteVPCResponse 专有网络删除返回数据
 type DeleteVPCResponse struct {
-	RequestID string `json:"request_id"`
+	RequestID string `json:"request_id"` // 请求 ID
 }
 
 // DeleteVPC 专有网络删除

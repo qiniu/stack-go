@@ -53,6 +53,8 @@ type DescribeImagesResponse struct {
 }
 
 // DescribeImages 镜像列表
+//
+// @GSD:URI GET /v1/vm/image
 func (s *ECS) DescribeImages(p *DescribeImagesParams) (resp *DescribeImagesResponse, err error) {
 	req := client.NewRequest(http.MethodGet, "/v1/vm/image").WithRegionID(p.RegionID).WithQueries(p)
 	err = s.client.Call(req, &resp)

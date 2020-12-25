@@ -9,10 +9,10 @@ import (
 
 // DeleteIngressRuleParams 安全组入网规则删除参数
 type DeleteIngressRuleParams struct {
-	SecurityGroupID string `json:"security_group_id"`
-	RegionID        string `json:"region_id"`
+	SecurityGroupID string `json:"security_group_id"` // 安全组ID。您可以调用 DescribeSecurityGroups 查看您可用的安全组。
+	RegionID        string `json:"region_id"`         // 安全组所属地域ID。您可以调用 DescribeRegions 查看最新的七牛云地域列表。
 
-	SecurityGroupRuleID string `json:"security_group_rule_id"`
+	SecurityGroupRuleID string `json:"security_group_rule_id"` // 安全组入网规则 ID
 
 	// 传输层协议。参数值大小写敏感。取值范围：
 	// - icmp
@@ -20,7 +20,7 @@ type DeleteIngressRuleParams struct {
 	// - tcp
 	// - udp
 	// - all：支持所有协议
-	IPProtocol IPProtocol `json:"ip_protocol"` //enum tcp | udp | icmp | gre | all
+	IPProtocol IPProtocol `json:"ip_protocol"`
 
 	// 目的端安全组开放的传输层协议相关的端口范围。取值范围：
 	// - TCP/UDP协议：取值范围为1~65535。使用斜线（/）隔开起始端口和终止端口。例如：1/200
@@ -54,31 +54,31 @@ type DeleteIngressRuleParams struct {
 	SourcePortRange *string `json:"source_port_range"`
 
 	// 源端IP地址范围。支持CIDR格式和IPv4格式的IP地址范围。默认值：0.0.0.0/0
-	SourceCidrIP *string `json:"source_cidr_ip"` // IPv4 only, default 0.0.0.0/0
+	SourceCidrIP *string `json:"source_cidr_ip"`
 
 	// 目的端IP地址范围。支持CIDR格式和IPv4格式的IP地址范围。默认值：0.0.0.0/0
-	DestCidrIP *string `json:"dest_cidr_ip"` // IPv4 only
+	DestCidrIP *string `json:"dest_cidr_ip"`
 
 	// 访问权限。取值范围：
 	// - accept：接受访问
 	// - drop：拒绝访问，不发回拒绝信息
 	//
 	// 默认值：accept
-	Policy *PermissionPolicy `json:"policy"` // enum of accept (default) | drop
+	Policy *PermissionPolicy `json:"policy"`
 
 	// 经典网络类型安全组规则的网卡类型。取值范围：
-	// - internet：公网网卡
-	// - intranet：内网网卡
+	// - `internet`：公网网卡
+	// - `intranet`：内网网卡
 	//
 	// 默认值：internet
 	//
 	// 在以下情况中，参数NicType取值只能为intranet：
 	// - 专有网络VPC类型安全组规则无需设置网卡类型，默认为intranet，只能为intranet。
 	// - 设置安全组之间互相访问时，即指定了DestGroupId且没有指定DestCidrIp，只能为intranet。
-	NicType *NicType `json:"nic_type"` // enum of internet | intranet (default)
+	NicType *NicType `json:"nic_type"`
 
 	// 安全组规则优先级。取值范围：1~100 默认值：1
-	Priority *SecurityGroupPriority `json:"priority,omitempty,"` // 1 - 100, default 1 //enum
+	Priority *SecurityGroupPriority `json:"priority,omitempty,"`
 
 	// 源端IPv6 CIDR地址段。支持CIDR格式和IPv6格式的IP地址范围。 默认值：无
 	//
