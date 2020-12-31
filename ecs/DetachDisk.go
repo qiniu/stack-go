@@ -9,9 +9,9 @@ import (
 
 // DetachDiskParams 磁盘卸载参数
 type DetachDiskParams struct {
-	RegionID   string `json:"region_id"`
-	DiskID     string `json:"disk_id"`
-	InstanceID string `json:"instance_id"`
+	RegionID   string `json:"region_id"`   // 镜像所在的地域 ID。 您可以调用 DescribeRegions 查看最新的七牛云地域列表。
+	DiskID     string `json:"disk_id"`     // 磁盘 ID
+	InstanceID string `json:"instance_id"` // 目标ECS实例的ID
 }
 
 // DetachDiskResponse 磁盘卸载返回数据

@@ -16,11 +16,11 @@ type AssociateEIPParams struct {
 	AllocationID string `json:"allocation_id"`
 
 	// 要绑定EIP的实例的类型，取值：
-	// - Nat：NAT网关。
-	// - SlbInstance：负载均衡SLB。
-	// - EcsInstance：云服务器ECS。
-	// - NetworkInterface：辅助弹性网卡。
-	// - HaVip：高可用虚拟IP。
+	// - `Nat`：NAT网关。
+	// - `SlbInstance`：负载均衡SLB。
+	// - `EcsInstance`：云服务器ECS。
+	// - `NetworkInterface`：辅助弹性网卡。
+	// - `HaVip`：高可用虚拟IP。
 	InstanceType *InstanceType `json:"instance_type"`
 
 	// 要绑定EIP的实例ID。
@@ -31,7 +31,7 @@ type AssociateEIPParams struct {
 
 // AssociateEIPResponse 弹性公网IP绑定返回数据
 type AssociateEIPResponse struct {
-	RequestID string `json:"request_id"`
+	RequestID string `json:"request_id"` // 请求 ID
 }
 
 // AssociateEIP 弹性公网IP绑定

@@ -9,14 +9,14 @@ import (
 
 // DescribeVPCParams 专有网络详情参数
 type DescribeVPCParams struct {
-	VPCID    string `json:"vpc_id"`
-	RegionID string `json:"region_id"`
+	VPCID    string `json:"vpc_id"`    // VPC ID
+	RegionID string `json:"region_id"` // 地域 ID
 }
 
 // DescribeVPCResponse 专有网络详情返回数据
 type DescribeVPCResponse struct {
-	RequestID string  `json:"request_id"`
-	Data      VPCInfo `json:"data"`
+	RequestID string  `json:"request_id"` // 请求 ID
+	Data      VPCInfo `json:"data"`       // VPC 专有网络信息详情
 }
 
 // DescribeVPC 专有网络详情

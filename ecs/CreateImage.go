@@ -13,12 +13,18 @@ type CreateImageParams struct {
 	RegionID string `json:"region_id"`
 
 	// 根据指定的快照创建自定义镜像
+	//
 	SnapshotID *string `json:"snapshot_id"`
 
 	// 实例 ID
+	//
+	// InstanceID 与 SnapshotID 必须传入一个
 	InstanceID *string `json:"instance_id"`
 
-	// 镜像名称。长度为2~128个英文或中文字符。必须以大小字母或中文开头，不能以 `http://` 和 `https://` 开头。可以包含数字、半角冒号（:）、下划线（_）或者连字符（-）。
+	// 镜像名称。
+	//
+	// 长度为2~128个英文或中文字符。必须以大小字母或中文开头，不能以 `http://` 和 `https://` 开头。可以包含数字、半角冒号（:）、下划线（_）或者连字符（-）。
+	//
 	// 默认值：空
 	ImageName *string `json:"image_name"`
 
@@ -29,10 +35,10 @@ type CreateImageParams struct {
 	// 默认值：空
 	Description *string `json:"description"`
 
-	// 保证请求幂等性， 客户端生成的一个唯一值 https://help.aliyun.com/document_detail/25693.html
+	// 保证请求幂等性， 客户端生成的一个唯一值
 	ClientToken *string `json:"client_token"`
 
-	// QVM 业务相关，供应商实现时忽略
+	// 计费参数（必须）
 	*params.CostParams
 }
 

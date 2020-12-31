@@ -9,8 +9,8 @@ import (
 
 // DescribeDiskParams 磁盘详情参数
 type DescribeDiskParams struct {
-	RegionID string `json:"region_id"`
-	DiskID   string `json:"disk_id"`
+	RegionID string `json:"region_id"` // 镜像所在的地域 ID。 您可以调用 DescribeRegions 查看最新的七牛云地域列表。
+	DiskID   string `json:"disk_id"`   // 磁盘 ID
 }
 
 // DescribeDiskResponse 磁盘详情返回数据

@@ -15,17 +15,27 @@ type DescribeSecurityGroupParams struct {
 
 // DescribeSecurityGroupResponse 安全组详情返回数据
 type DescribeSecurityGroupResponse struct {
-	RequestID string `json:"request_id"`
-	Data      struct {
-		SecurityGroupID   string            `json:"security_group_id"`
-		SecurityGroupName string            `json:"security_group_name"`
-		RegionID          string            `json:"region_id"`
-		Description       string            `json:"description"`
-		InnerAccessPolicy InnerAccessPolicy `json:"inner_access_policy"` //enum  Accept | Drop
-		Permissions       struct {
+	RequestID string `json:"request_id"` // 请求 ID
+
+	Data struct {
+		SecurityGroupID   string `json:"security_group_id"`   // 安全组 ID
+		SecurityGroupName string `json:"security_group_name"` // 安全组名称
+		RegionID          string `json:"region_id"`           // 地域 ID
+		Description       string `json:"description"`         // 安全组描述信息
+
+		// 安全组内的ECS实例之间的内网连通策略。
+		//
+		// 取值范围（取值不区分大小写）：
+		// - `Accept`：互通
+		// - `Drop`：隔离
+		InnerAccessPolicy InnerAccessPolicy `json:"inner_access_policy"`
+
+		// 安全组权限规则
+		Permissions struct {
 			Permission []PermissionType `json:"permission"`
 		} `json:"permissions"`
-		VPCID string `json:"vpc_id"`
+
+		VPCID string `json:"vpc_id"` // VPC ID
 	} `json:"data"`
 }
 

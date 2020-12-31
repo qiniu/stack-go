@@ -9,11 +9,11 @@ import (
 
 // CreateIngressRuleParams 安全组入网规则创建参数
 type CreateIngressRuleParams struct {
-	SecurityGroupID string   `json:"security_group_id"`
-	RegionID        string   `json:"region_id"`
-	AuthType        AuthType `json:"auth_type"`
-	AuthList        []string `json:"auth_list"`       // 授权列表
-	PortRangeList   []string `json:"port_range_list"` // 端口范围列表
+	SecurityGroupID string   `json:"security_group_id"` // 安全组ID。您可以调用 DescribeSecurityGroups 查看您可用的安全组。
+	RegionID        string   `json:"region_id"`         // 安全组所属地域ID。您可以调用 DescribeRegions 查看最新的七牛云地域列表。
+	AuthType        AuthType `json:"auth_type"`         // IP 段和安全组 IP 的源类型: `ip_cidr`, `security_group_id`
+	AuthList        []string `json:"auth_list"`         // 授权列表
+	PortRangeList   []string `json:"port_range_list"`   // 端口范围列表
 
 	// 传输层协议。取值大小写敏感。取值范围：
 	// - tcp
@@ -21,6 +21,7 @@ type CreateIngressRuleParams struct {
 	// - icmp
 	// - gre
 	// - all：支持所有协议
+	//
 	// @GSD:NOTE 说明 此处icmp协议仅支持IPv4地址。
 	IPProtocol IPProtocol `json:"ip_protocol"`
 

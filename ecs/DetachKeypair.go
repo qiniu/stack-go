@@ -9,11 +9,11 @@ import (
 
 // DetachKeypairParams 密钥对解绑参数
 type DetachKeypairParams struct {
-	Name      string `json:"name"`
+	Name      string `json:"name"` // 密钥对名称
 	Instances []struct {
-		InstanceID string `json:"instance_id"`
-		RegionID   string `json:"region_id"`
-	} `json:"instances"`
+		InstanceID string `json:"instance_id"` // 实例 ID
+		RegionID   string `json:"region_id"`   // 区域 ID
+	} `json:"instances"` // 实例
 }
 
 // DetachKeypairResponse 密钥对解绑返回数据
