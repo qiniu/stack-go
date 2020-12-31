@@ -9,8 +9,8 @@ import (
 
 // DescribeImageParams 镜像详情参数
 type DescribeImageParams struct {
-	ImageID  string `json:"image_id"`
-	RegionID string `json:"region_id"`
+	ImageID  string `json:"image_id"`  // 镜像 ID
+	RegionID string `json:"region_id"` // 镜像所在的地域 ID。 您可以调用 DescribeRegions 查看最新的七牛云地域列表。
 }
 
 // DescribeImageResponse 镜像详情返回数据

@@ -9,11 +9,11 @@ import (
 
 // CreateEgressRuleParams 安全组出网规则创建参数
 type CreateEgressRuleParams struct {
-	SecurityGroupID string   `json:"security_group_id"`
-	RegionID        string   `json:"region_id"`
-	AuthType        AuthType `json:"auth_type"`
-	AuthList        []string `json:"auth_list"`       // 授权列表
-	PortRangeList   []string `json:"port_range_list"` // 端口范围列表
+	SecurityGroupID string   `json:"security_group_id"` // 安全组ID。您可以调用 DescribeSecurityGroups 查看您可用的安全组。
+	RegionID        string   `json:"region_id"`         // 安全组所属地域ID。您可以调用 DescribeRegions 查看最新的七牛云地域列表。
+	AuthType        AuthType `json:"auth_type"`         // IP 段和安全组 IP 的源类型: `ip_cidr`, `security_group_id`
+	AuthList        []string `json:"auth_list"`         // 授权列表
+	PortRangeList   []string `json:"port_range_list"`   // 端口范围列表
 
 	// 传输层协议。取值大小写敏感。取值范围：
 	// - icmp
@@ -21,7 +21,7 @@ type CreateEgressRuleParams struct {
 	// - tcp
 	// - udp
 	// - all：支持所有协议
-	IPProtocol IPProtocol `json:"ip_protocol"` //enum tcp | udp | icmp | gre | all
+	IPProtocol IPProtocol `json:"ip_protocol"`
 
 	// 目的端安全组开放的传输层协议相关的端口范围。取值范围：
 	// - TCP/UDP协议：取值范围为1~65535。使用斜线（/）隔开起始端口和终止端口。例如：1/200
@@ -47,10 +47,14 @@ type CreateEgressRuleParams struct {
 	DestGroupOwnerID *string `json:"dest_group_owner_id"`
 
 	// 目的端IP地址范围。支持CIDR格式和IPv4格式的IP地址范围。默认值：无
-	DestCidrIP *string `json:"dest_cidr_ip"` //IPv4 only
+	DestCidrIP *string `json:"dest_cidr_ip"`
 
-	// 	源端IP地址范围。支持CIDR格式和IPv4格式的IP地址范围。默认值：无
-	SourceCidrIP *string `json:"source_cidr_ip"` // IPv4 only, default 0.0.0.0/0
+	// 	源端IP地址范围。
+	//
+	// 支持CIDR格式和IPv4格式的IP地址范围。
+	//
+	// 默认值：`0.0.0.0/0`
+	SourceCidrIP *string `json:"source_cidr_ip"`
 
 	// 源端安全组开放的传输层协议相关的端口范围。取值范围：
 	// - TCP/UDP协议：1~65535。使用斜线（/）隔开起始端口和终止端口。例如：1/200

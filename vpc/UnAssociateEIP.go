@@ -26,9 +26,11 @@ type UnAssociateEIPParams struct {
 	// 要解绑EIP的云产品实例的ID。
 	InstanceID string `json:"instance_id"`
 
-	// 当EIP绑定了NAT网关，且NAT网关添加了DNAT或SNAT条目时，是否强制解绑EIP，取值：
-	// - false（默认值）：不强制解绑EIP。
-	// - true：强制解绑EIP。
+	// 当EIP绑定了NAT网关，且NAT网关添加了DNAT或SNAT条目时，是否强制解绑EIP
+	//
+	// 取值：
+	// - `false`：不强制解绑EIP（默认值）。
+	// - `true`：强制解绑EIP。
 	Force *bool `json:"force,omitempty"`
 }
 

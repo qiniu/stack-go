@@ -9,12 +9,12 @@ import (
 
 // AttachKeypairParams 密钥对绑定参数
 type AttachKeypairParams struct {
-	Name      string `json:"name"`
+	Name      string `json:"name"` // 密钥对名称
 	Instances []struct {
-		InstanceID string `json:"instance_id"`
-		RegionID   string `json:"region_id"`
+		InstanceID string `json:"instance_id"` // 实例 ID
+		RegionID   string `json:"region_id"`   // 区域 ID
 	} `json:"instances"`
-	Password *string `json:"password,omitempty"` // 资源池2主机运行状态下绑定密钥需要输入密码
+	Password *string `json:"password,omitempty"` // 资源池 2 主机运行状态下绑定密钥需要输入密码
 }
 
 // AttachKeypairResponse 密钥对绑定返回数据

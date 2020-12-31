@@ -8,7 +8,7 @@ import (
 
 // ImportKeypairParams 密钥对导入参数
 type ImportKeypairParams struct {
-	KeypairName   string `json:"key_pair_name"`
+	KeypairName   string `json:"key_pair_name"`   // 密钥对名称
 	PublicKeyBody string `json:"public_key_body"` // 为空时代表创建，否则是导入
 }
 
