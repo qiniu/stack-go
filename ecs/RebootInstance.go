@@ -25,7 +25,7 @@ type RebootInstanceResponse struct {
 
 // RebootInstance 主机重启
 func (s *ECS) RebootInstance(p *RebootInstanceParams) (resp *RebootInstanceResponse, err error) {
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/v1/vm/instance/%s/restart", p.InstanceID)).WithRegionID(&p.RegionID).WithJSONBody(p)
+	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/v1/vm/instance/%s/reboot", p.InstanceID)).WithRegionID(&p.RegionID).WithJSONBody(p)
 	err = s.client.Call(req, &resp)
 	return
 }
