@@ -21,7 +21,7 @@ import (
 )
 
 func main() {
-  s := stack.New(log.NewSimpleLog(), "https://api-qvm.qiniu.com", auth.NewCredential("xxx", "xxx"))
+  s := stack.New(log.NewSimpleLog(), "https://api-qvm.qiniu.com", auth.NewCredential("<Your AccessKey>", "<Your SecretKey>"))
 
   resp, _ := s.ECS().ListInstances(&ecs.ListInstancesParams{...})
 
