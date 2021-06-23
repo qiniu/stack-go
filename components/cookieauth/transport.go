@@ -22,7 +22,7 @@ type Transport struct {
 	mutex     sync.Mutex
 }
 
-// NewTransport ...
+// NewTransport 构造认证使用的 Transport
 func NewTransport(conf *Config, trs ...http.RoundTripper) *Transport {
 	tr := http.DefaultTransport
 	if len(trs) > 0 {
