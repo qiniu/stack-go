@@ -46,6 +46,15 @@ func New(log log.Logger, endpoint string, credential *auth.Credential) *Client {
 	}
 }
 
+// NewWithTransport new client with tranport
+func NewWithTransport(log log.Logger, endpoint string, tr http.RoundTripper) *Client {
+	return &Client{
+		endpoint: endpoint,
+		log:      log,
+		tr:       tr,
+	}
+}
+
 // Call 请求
 // 数据以 json 格式发送和接收
 func (c *Client) Call(r *Request, ret interface{}) (err error) {
