@@ -62,7 +62,8 @@ func (tr *Transport) expired() bool {
 		return true
 	}
 
-	return tr.cookie.Expires.After(time.Now())
+	// 提前 10 分钟刷新 cookie
+	return tr.cookie.Expires.After(time.Now().Add(-10 * time.Minute))
 }
 
 func (tr *Transport) updateCookie() (err error) {
