@@ -7,7 +7,10 @@ import (
 	"strings"
 )
 
-const qvmRegionIDHeaderKey = "X-Qiniu-Regionid"
+const (
+	qvmRegionIDHeaderKey  = "X-Qiniu-Regionid"
+	qvmRIOZoneIDHeaderKey = "x-rio-zone-id"
+)
 
 // Request API 请求对象
 type Request struct {
@@ -43,6 +46,16 @@ func (r *Request) WithRegionID(regionID *string) *Request {
 func (r *Request) WithRegionIDs(regionIDs ...string) *Request {
 	rids := strings.Join(regionIDs, ",")
 	r.Headers[qvmRegionIDHeaderKey] = rids
+	return r
+}
+
+// WithZoneID 设置 ZoneID 参数
+func (r *Request) WithZoneID(zoneID *string) *Request {
+	if zoneID == nil {
+		return r
+	}
+
+	r.Headers[qvmRIOZoneIDHeaderKey] = *zoneID
 	return r
 }
 
