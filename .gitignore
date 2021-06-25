@@ -4,3 +4,4 @@ coverage.html
 *.test
 *.pprof
 gen.js
+*.test.json

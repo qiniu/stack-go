@@ -21,7 +21,7 @@ type DeleteDiskResp struct {
 
 // DeleteDisk 删除磁盘
 func (d *Disk) DeleteDisk(args *DeleteDiskArgs) (resp *DeleteDiskResp, err error) {
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf("/api/proxy/rio/v1/storage/disk/%s", args.DiskID)).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodDelete, fmt.Sprintf("/api/rio/v1/storage/disk/%s", args.DiskID)).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

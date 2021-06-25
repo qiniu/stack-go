@@ -1,7 +1,7 @@
 package rio
 
 import (
-	"github.com/qiniu/stack-go/components/cookieauth"
+	"github.com/qiniu/stack-go/components/auth"
 	"github.com/qiniu/stack-go/components/log"
 	"github.com/qiniu/stack-go/rio/storage"
 
@@ -18,10 +18,10 @@ type Stack struct {
 }
 
 // New 构造 SDK 实例
-func New(log log.Logger, cfg *cookieauth.Config) *Stack {
+func New(log log.Logger, endpoint string, credential *auth.Credential) *Stack {
 	return &Stack{
 		log:    log,
-		client: client.NewWithTransport(log, cfg.Endpoint, cookieauth.NewTransport(cfg)),
+		client: client.New(log, endpoint, credential),
 	}
 }
 

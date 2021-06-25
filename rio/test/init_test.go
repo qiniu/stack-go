@@ -1,14 +1,13 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
 	"testing"
 
-	"github.com/spf13/viper"
-
-	"github.com/qiniu/stack-go/components/cookieauth"
+	"github.com/qiniu/stack-go/components/auth"
 	"github.com/qiniu/stack-go/components/log"
 	"github.com/qiniu/stack-go/rio"
 )
@@ -31,19 +30,17 @@ func TestMain(m *testing.M) {
 	}
 
 	l = log.NewSimpleLog()
-	testConfigPath = strings.Split(srcPath, "rio")[0] + "rio/config.test.yaml"
-	cfg := setup(testConfigPath)
+	testConfigPath = strings.Split(srcPath, "rio")[0] + "rio/config.test.json"
+	endpoint, credential := setup(testConfigPath)
 
-	testStack = rio.New(log.NewSimpleLog(), cfg)
+	testStack = rio.New(log.NewSimpleLog(), endpoint, credential)
 
 	code := m.Run()
 
 	os.Exit(code)
 }
 
-func setup(filePath string) *cookieauth.Config {
-	viper.SetConfigType("yaml")
-
+func setup(filePath string) (string, *auth.Credential) {
 	f, err := os.Open(filePath)
 	if err != nil {
 		panic(fmt.Sprintf("无法读取配置文件 %v: %v", filePath, err))
@@ -51,14 +48,15 @@ func setup(filePath string) *cookieauth.Config {
 
 	defer f.Close()
 
-	if err = viper.ReadConfig(f); err != nil {
-		panic(fmt.Sprintf("读取配置文件错误 %v: %v", filePath, err))
-	}
+	var (
+		conf struct {
+			Endpoint  string `json:"endpoint"`
+			AccessKey string `json:"access_key"`
+			SecretKey string `json:"secret_key"`
+		}
+	)
 
-	var cfg *cookieauth.Config
-	if err = viper.Unmarshal(&cfg); err != nil {
-		panic(fmt.Sprintf("解析配置文件失败 %v: %v", filePath, err))
-	}
+	err = json.NewDecoder(f).Decode(&conf)
 
-	return cfg
+	return conf.Endpoint, auth.NewCredential(conf.AccessKey, conf.SecretKey)
 }
