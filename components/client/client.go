@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
@@ -124,11 +125,10 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 	return responseError(l, resp)
 }
 
-func responseError(l log.Logger, resp *http.Response) (err error) {
-	err = &Error{
+func responseError(l log.Logger, resp *http.Response) error {
+	err := &Error{
 		Code:      resp.StatusCode,
 		Name:      resp.Status,
-		Message:   "",
 		RequestID: resp.Header.Get(requestIDKey),
 	}
 
@@ -136,7 +136,10 @@ func responseError(l log.Logger, resp *http.Response) (err error) {
 
 		decodeErr := &struct {
 			RequestID string `json:"request_id"`
-			Error     Error  `json:"error"`
+			Error     *Error `json:"error"`
+
+			Code    string   `json:"Code"`
+			Message []string `json:"message"`
 		}{}
 
 		if ct := resp.Header.Get("Content-Type"); strings.TrimSpace(strings.SplitN(ct, ";", 2)[0]) == "application/json" {
@@ -152,11 +155,21 @@ func responseError(l log.Logger, resp *http.Response) (err error) {
 				return err
 			}
 
+			if decodeErr.Error != nil {
 			return &Error{
 				Code:      decodeErr.Error.Code,
 				Name:      decodeErr.Error.Name,
 				Message:   decodeErr.Error.Message,
 				RequestID: decodeErr.RequestID,
+			}
+		}
+
+			if decodeErr.Code != "" {
+				err.Name = decodeErr.Code
+			}
+
+			if len(decodeErr.Message) != 0 {
+				err.Message += strings.Join(decodeErr.Message, " ")
 			}
 		}
 	}
