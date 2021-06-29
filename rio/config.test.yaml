@@ -1,0 +1,4 @@
+# 配置文件模板
+Username: "qvm@qiniu.com"
+Password: "aslanteam"
+Endpoint: "http://qvm-az-rio-qvm-az-env-az-dev.qa.qiniu.io"
