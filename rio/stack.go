@@ -34,3 +34,8 @@ func (*Stack) Version() string {
 func (s *Stack) Disk() *storage.Disk {
 	return storage.NewDisk(s.client)
 }
+
+// Snapshot
+func (s *Stack) Snapshot() *storage.Snapshot {
+	return storage.NewSnapshot(s.client)
+}

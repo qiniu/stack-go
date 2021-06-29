@@ -2,12 +2,15 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"strings"
 	"time"
+
+	bt "bytes"
 
 	"github.com/qiniu/stack-go/components/bytes"
 
@@ -90,6 +93,10 @@ func (c *Client) Call(r *Request, ret interface{}) (err error) {
 		l.Errorf("[%s] [STACK_GO] failed to make http request %s\n", time.Now().Format(defaultTimestampFormat), err.Error())
 		return err
 	}
+
+	bts, _ := io.ReadAll(resp.Body)
+	fmt.Printf("resp_body: %v\n", string(bts))
+	resp.Body = io.NopCloser(bt.NewBuffer(bts))
 
 	defer func() {
 		_, err2 := io.Copy(ioutil.Discard, resp.Body)
