@@ -19,9 +19,9 @@ var (
 	testStack  *rio.Stack
 	testZoneID = "nova"
 
-	testDiskID = "a3954481-6f55-4928-a4b3-077ec56d0211"
-
-	l log.Logger
+	testDiskID   = "a3954481-6f55-4928-a4b3-077ec56d0211"
+	testServerID = "6bcfcb3b-25fa-4b6e-aac4-cd02f68ba65d"
+	l            log.Logger
 )
 
 func TestMain(m *testing.M) {

@@ -36,20 +36,20 @@ func Test_DiskCRUD(t *testing.T) {
 	assert.Equal(t, describeResp.Data.DiskID, testDiskID)
 
 	// Delete
-	deleteResp, err := testStack.Disk().DeleteDisk(&storage.DeleteDiskArgs{
-		ZoneID: testZoneID,
-		DiskID: testDiskID,
-	})
+	// deleteResp, err := testStack.Disk().DeleteDisk(&storage.DeleteDiskArgs{
+	// 	ZoneID: testZoneID,
+	// 	DiskID: testDiskID,
+	// })
 
-	assert.Nil(t, err)
-	assert.NotNil(t, deleteResp)
+	// assert.Nil(t, err)
+	// assert.NotNil(t, deleteResp)
 
 	// Verify Delete
-	describeResp, err = testStack.Disk().DescribeDisk(&storage.DescribeDiskArgs{
-		ZoneID: testZoneID,
-		DiskID: testDiskID,
-	})
+	// describeResp, err = testStack.Disk().DescribeDisk(&storage.DescribeDiskArgs{
+	// 	ZoneID: testZoneID,
+	// 	DiskID: testDiskID,
+	// })
 
-	assert.Nil(t, err)
-	assert.NotNil(t, describeResp)
+	// assert.Nil(t, err)
+	// assert.NotNil(t, describeResp)
 }
