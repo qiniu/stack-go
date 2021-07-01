@@ -22,7 +22,7 @@ type DescribeDiskResp struct {
 
 // DescribeDisk 查询磁盘详情
 func (d *Disk) DescribeDisk(args *DescribeDiskArgs) (resp *DescribeDiskResp, err error) {
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/api/proxy/rio/v1/storage/disk/%s", args.DiskID)).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/api/rio/v1/storage/disk/%s", args.DiskID)).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }
