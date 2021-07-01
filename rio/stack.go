@@ -3,6 +3,7 @@ package rio
 import (
 	"github.com/qiniu/stack-go/components/cookieauth"
 	"github.com/qiniu/stack-go/components/log"
+	"github.com/qiniu/stack-go/rio/network"
 	"github.com/qiniu/stack-go/rio/storage"
 
 	"github.com/qiniu/stack-go/components/client"
@@ -33,4 +34,19 @@ func (*Stack) Version() string {
 // Disk 获取 Disk 管理对象
 func (s *Stack) Disk() *storage.Disk {
 	return storage.NewDisk(s.client)
+}
+
+// EIP 获取 EIP管理对象
+func (s *Stack) EIP() *network.EIP {
+	return network.NewEIP(s.client)
+}
+
+// VPC 获取VPC管理对象
+func (s *Stack) VPC() *network.VPC {
+	return network.NewVPC(s.client)
+}
+
+// VSwitch ..
+func (s *Stack) VSwitch() *network.VSwitch {
+	return network.NewVSwitch(s.client)
 }
