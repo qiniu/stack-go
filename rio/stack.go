@@ -35,7 +35,7 @@ func (s *Stack) Disk() *storage.Disk {
 	return storage.NewDisk(s.client)
 }
 
-// Snapshot
+// Snapshot 获取 Snapshot 管理对象
 func (s *Stack) Snapshot() *storage.Snapshot {
 	return storage.NewSnapshot(s.client)
 }

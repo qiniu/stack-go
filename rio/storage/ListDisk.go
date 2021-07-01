@@ -10,9 +10,6 @@ import (
 
 //ListDiskArgs 磁盘列表参数
 type ListDiskArgs struct {
-	// Marker string `pos:"query:marker"`
-	// Limit  int    `pos:"query:limit"` TODO 暂不支持分页
-
 	ZoneID   string                 `json:"zone_id"`
 	DiskID   *string                `json:"disk_id"`
 	DiskName *string                `json:"disk_name"`

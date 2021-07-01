@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/qiniu/stack-go/components/client"
+	"github.com/qiniu/stack-go/rio/common"
 )
 
 //DetachDiskArgs 解绑磁盘参数
@@ -16,7 +17,7 @@ type DetachDiskArgs struct {
 
 //DetachDiskResp 解绑磁盘返回
 type DetachDiskResp struct {
-	// common.Response
+	common.Response
 }
 
 //DetachDisk 解绑磁盘

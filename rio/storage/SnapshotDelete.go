@@ -12,8 +12,6 @@ import (
 type SnapshotDeleteArgs struct {
 	ZoneID     string `json:"zone_id"`
 	SnapshotID string `json:"snapshot_id"`
-	// 是否强制删除有磁盘关联的快照。说明 删除后该磁盘无法重新初始化。
-	Force *bool `json:"force,omitempty"` // TODO 暂不支持
 }
 
 //SnapshotDeleteResp 删除快照返回

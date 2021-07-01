@@ -17,10 +17,9 @@ type SnapshotInfo struct {
 
 //SnapshotDiskInfo .
 type SnapshotDiskInfo struct {
-	DiskID   string `json:"disk_id"`
-	DiskName string `json:"disk_name"`
-	ZoneID   string `json:"zone_id"`
-	// Category common.DiskCategory `json:"category"`
+	DiskID   string          `json:"disk_id"`
+	DiskName string          `json:"disk_name"`
+	ZoneID   string          `json:"zone_id"`
 	DiskType common.DiskType `json:"disk_type"`
 	Size     int64           `json:"size"`
 }
