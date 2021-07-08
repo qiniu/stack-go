@@ -2,7 +2,6 @@ package client
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
@@ -156,13 +155,13 @@ func responseError(l log.Logger, resp *http.Response) error {
 			}
 
 			if decodeErr.Error != nil {
-			return &Error{
-				Code:      decodeErr.Error.Code,
-				Name:      decodeErr.Error.Name,
-				Message:   decodeErr.Error.Message,
-				RequestID: decodeErr.RequestID,
+				return &Error{
+					Code:      decodeErr.Error.Code,
+					Name:      decodeErr.Error.Name,
+					Message:   decodeErr.Error.Message,
+					RequestID: decodeErr.RequestID,
+				}
 			}
-		}
 
 			if decodeErr.Code != "" {
 				err.Name = decodeErr.Code
