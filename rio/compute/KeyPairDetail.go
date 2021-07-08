@@ -22,8 +22,8 @@ type KeyPairDetailResp struct {
 
 // KeyPairDetail 密钥对详情
 func (d *KeyPair) KeyPairDetail(args *KeyPairDetailArgs) (resp *KeyPairDetailResp, err error) {
-	str := "/api/rio/v1/compute/keypair"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s", args.KeyPairName)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/keypair/%s", ComputURLPrefix, args.KeyPairName)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

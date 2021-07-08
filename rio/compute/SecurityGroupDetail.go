@@ -23,8 +23,8 @@ type SecurityGroupDetailResp struct {
 
 // SecurityGroupDetail 安全组详情
 func (d *SecurityGroup) SecurityGroupDetail(args *SecurityGroupDetailArgs) (resp *SecurityGroupDetailResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s/detail", args.SecurityGroupID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group/%s/detail", ComputURLPrefix, args.SecurityGroupID)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

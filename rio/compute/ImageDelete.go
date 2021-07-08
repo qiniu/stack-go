@@ -23,8 +23,8 @@ type ImageDeleteResp struct {
 
 // ImageDelete 删除镜像
 func (d *Image) ImageDelete(args *ImageDeleteArgs) (resp *ImageDeleteResp, err error) {
-	str := "/api/rio/v1/compute/image"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s", args.ImageID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/image/%s", ComputURLPrefix, args.ImageID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

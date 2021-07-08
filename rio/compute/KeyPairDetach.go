@@ -22,8 +22,8 @@ type KeyPairDetachResp struct {
 
 // KeyPairDetach ..
 func (d *KeyPair) KeyPairDetach(args *KeyPairDetachArgs) (resp *KeyPairDetachResp, err error) {
-	str := "/api/rio/v1/compute/keypair"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s/detach", args.KeyPairName)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/keypair/%s/detach", ComputURLPrefix, args.KeyPairName)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

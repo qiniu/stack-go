@@ -25,8 +25,8 @@ type SecurityGroupRuleListResp struct {
 
 // SecurityGroupRuleList .
 func (d *SecurityGroupRule) SecurityGroupRuleList(args *SecurityGroupRuleListArgs) (resp *SecurityGroupRuleListResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s/rules", args.SecurityGroupID)).WithQueries(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group/%s/rules", ComputURLPrefix, args.SecurityGroupID)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

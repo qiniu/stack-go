@@ -27,8 +27,8 @@ type ImageCreateResp struct {
 
 // ImageCreate 创建快照
 func (d *Image) ImageCreate(args *ImageCreateArgs) (resp *ImageCreateResp, err error) {
-	str := "/api/rio/v1"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/compute/image")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/image", ComputURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

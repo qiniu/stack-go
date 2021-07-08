@@ -22,8 +22,8 @@ type ServerDeleteResp struct {
 
 // ServerDelete 主机删除
 func (d *Server) ServerDelete(args *ServerDeleteArgs) (resp *SecurityGroupDeleteResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

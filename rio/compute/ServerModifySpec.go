@@ -23,8 +23,8 @@ type ServerModifySpecResp struct {
 
 // ServerModifySpec ..
 func (d *Server) ServerModifySpec(args *ServerModifySpecArgs) (resp *ServerModifySpecResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodPatch, fmt.Sprintf(str+"/%s/spec/", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s/spec", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodPatch, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

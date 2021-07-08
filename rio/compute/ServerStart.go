@@ -21,8 +21,8 @@ type ServerStartResp struct {
 
 // ServerStart 开启主机
 func (d *Server) ServerStart(args *ServerStartArgs) (resp *ServerStartResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s/start", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s/start", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

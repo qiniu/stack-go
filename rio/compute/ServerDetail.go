@@ -22,8 +22,8 @@ type ServerDetailResp struct {
 
 // ServerDetail 主机具体参数
 func (d *Server) ServerDetail(args *ServerDetailArgs) (resp *ServerDetailResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

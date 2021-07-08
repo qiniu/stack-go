@@ -22,8 +22,8 @@ type ServerModifyVNCPwdResp struct {
 
 // ServerModifyVNCPwd ..
 func (d *Server) ServerModifyVNCPwd(args *ServerModifyVNCPwdArgs) (resp *ServerModifyVNCPwdResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"/%s/vnc/password", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s/vnc/password", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

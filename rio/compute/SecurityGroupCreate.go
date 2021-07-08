@@ -25,8 +25,8 @@ type SecurityGroupCreateResp struct {
 
 // SecurityGroupCreate 创建安全组
 func (d *SecurityGroup) SecurityGroupCreate(args *SecurityGroupCreateArgs) (resp *SecurityGroupCreateResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group", ComputURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

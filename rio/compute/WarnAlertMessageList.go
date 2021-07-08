@@ -28,8 +28,8 @@ type WarnDescribesAlertMessageResp struct {
 
 // WarnDescribesAlertMessage 告警修改
 func (d *Warn) WarnDescribesAlertMessage(args *WarnDescribesAlertMessageArgs) (resp *WarnDescribesAlertMessageResp, err error) {
-	str := "/api/rio/v1/compute/warn"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/alert")).WithQueries(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/warn/alert", ComputURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

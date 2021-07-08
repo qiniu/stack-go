@@ -34,8 +34,8 @@ type ServerCreateResp struct {
 
 // ServerCreate 主机创建
 func (d *Server) ServerCreate(args *ServerCreateArgs) (resp *ServerCreateResp, err error) {
-	str := "/api/rio/v1"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/compute/server")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server", ComputURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

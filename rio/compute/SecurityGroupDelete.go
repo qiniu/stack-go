@@ -22,8 +22,8 @@ type SecurityGroupDeleteResp struct {
 
 // SecurityGroupDelete 删除安全组
 func (d *SecurityGroup) SecurityGroupDelete(args *SecurityGroupDeleteArgs) (resp *SecurityGroupDeleteResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s", args.SecurityGroupID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group/%s", ComputURLPrefix, args.SecurityGroupID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

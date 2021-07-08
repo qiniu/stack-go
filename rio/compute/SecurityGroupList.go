@@ -25,8 +25,8 @@ type SecurityGroupListResp struct {
 
 // SecurityGroupList 安全组列表
 func (d *SecurityGroup) SecurityGroupList(args *SecurityGroupListArgs) (resp *SecurityGroupListResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str)).WithQueries(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group", ComputURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

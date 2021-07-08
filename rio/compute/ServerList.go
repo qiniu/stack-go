@@ -34,8 +34,8 @@ type ServerListResp struct {
 
 // ServerList 主机列
 func (d *Server) ServerList(args *ServerListArgs) (resp *ServerDetailResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server", ComputURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

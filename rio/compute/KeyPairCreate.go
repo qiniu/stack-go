@@ -26,8 +26,8 @@ type KeyPairCreateResp struct {
 
 // KeyPairCreate 密钥对创建
 func (d *KeyPair) KeyPairCreate(args *KeyPairCreateArgs) (resp *KeyPairCreateResp, err error) {
-	str := "/api/rio/v1"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/compute/keypair")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/keypair", ComputURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

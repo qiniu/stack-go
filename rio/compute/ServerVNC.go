@@ -22,8 +22,8 @@ type ServerVNCResp struct {
 
 // ServerVNC ..
 func (d *Server) ServerVNC(args *ServerVNCArgs) (resp *ServerVNCResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s/vnc", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s/vnc", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

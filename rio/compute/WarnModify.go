@@ -47,8 +47,8 @@ type WarnModifyResp struct {
 
 // WarnModify 告警修改
 func (d *Warn) WarnModify(args *WarnModifyArgs) (resp *WarnModifyResp, err error) {
-	str := "/api/rio/v1/compute/warn"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"%s", args.WarnID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/warn/%s", ComputURLPrefix, *args.WarnID)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

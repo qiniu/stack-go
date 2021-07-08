@@ -23,8 +23,8 @@ type WarnAlertConfirmResp struct {
 
 // WarnAlertConfirm 告警修改
 func (d *Warn) WarnAlertConfirm(args *WarnAlertConfirmArgs) (resp *WarnAlertConfirmResp, err error) {
-	str := "/api/rio/v1/compute/warn"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"/alert")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/warn/alert", ComputURLPrefix)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

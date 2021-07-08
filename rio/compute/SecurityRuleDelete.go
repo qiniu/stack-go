@@ -23,8 +23,8 @@ type SecurityGroupRuleDeleteResp struct {
 
 // SecurityGroupRuleDelete ..
 func (d *SecurityGroupRule) SecurityGroupRuleDelete(args *SecurityGroupRuleDeleteArgs) (resp *SecurityGroupRuleDeleteResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s/rule/%s", args.SecurityGroupID, args.SecurityGroupRuleID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group/rule/%s", ComputURLPrefix, args.SecurityGroupRuleID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

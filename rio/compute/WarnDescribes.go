@@ -24,8 +24,8 @@ type WarnListResp struct {
 
 // WarnList 告警列表
 func (d *Warn) WarnList(args *WarnListArgs) (resp *WarnListResp, err error) {
-	str := "/api/rio/v1/compute/warn"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str)).WithQueries(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/warn", ComputURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

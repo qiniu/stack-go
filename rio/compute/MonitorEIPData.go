@@ -24,8 +24,8 @@ type MonitorEipDataResp struct {
 
 // MonitorEipData 监控数据
 func (d *Monitor) MonitorEipData(args *MonitorEipDataArgs) (resp *MonitorEipDataResp, err error) {
-	str := "/api/rio/v1/compute/monitor"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/eip/%s", args.EipID)).WithQueries(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/monitor/eip/%s", ComputURLPrefix, args.EipID)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

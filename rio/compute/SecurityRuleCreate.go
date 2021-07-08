@@ -31,8 +31,8 @@ type SecurityGroupRuleCreateResp struct {
 
 // SecurityGroupRuleCreate ..
 func (d *SecurityGroupRule) SecurityGroupRuleCreate(args *SecurityGroupRuleCreateArgs) (resp *SecurityGroupRuleCreateResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s/rule", args.SecurityGroupID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group/rule", ComputURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

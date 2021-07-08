@@ -22,8 +22,8 @@ type ServerJoinSecurityGroupResp struct {
 
 // ServerJoinSecurityGroup ..
 func (d *Server) ServerJoinSecurityGroup(args *ServerJoinSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
-	str := "/api/rio/v1/compute/server"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s/", args.ServerID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

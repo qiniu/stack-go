@@ -24,8 +24,8 @@ type SecurityGroupModifyResp struct {
 
 // SecurityGroupModify 安全组修改
 func (d *SecurityGroup) SecurityGroupModify(args *SecurityGroupModifyArgs) (resp *SecurityGroupModifyResp, err error) {
-	str := "/api/rio/v1/compute/security_group"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"/%s", args.SecurityGroupID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/security_group/%s", ComputURLPrefix, args.SecurityGroupID)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

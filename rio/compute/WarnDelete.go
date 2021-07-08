@@ -21,8 +21,8 @@ type WarnDeleteResp struct {
 
 // WarnDelete 告警删除
 func (d *Warn) WarnDelete(args *WarnDeleteArgs) (resp *WarnDeleteResp, err error) {
-	str := "/api/rio/v1/compute/warn"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"%s", args.WarnID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/warn/%s", ComputURLPrefix, args.WarnID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

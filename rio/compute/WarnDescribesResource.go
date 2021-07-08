@@ -21,8 +21,8 @@ type WarnInstanceResp struct {
 
 // WarnInstance .
 func (d *Warn) WarnInstance(args *WarnInstanceListArgs) (resp *WarnInstanceResp, err error) {
-	str := "/api/rio/v1/compute/warn"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/instances")).WithQueries(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/warn/instances", ComputURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }
