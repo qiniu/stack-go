@@ -3,6 +3,7 @@ package rio
 import (
 	"github.com/qiniu/stack-go/components/auth"
 	"github.com/qiniu/stack-go/components/log"
+	"github.com/qiniu/stack-go/rio/compute"
 	"github.com/qiniu/stack-go/rio/storage"
 
 	"github.com/qiniu/stack-go/components/client"
@@ -33,4 +34,39 @@ func (*Stack) Version() string {
 // Disk 获取 Disk 管理对象
 func (s *Stack) Disk() *storage.Disk {
 	return storage.NewDisk(s.client)
+}
+
+// Image 获取 Image管理对象
+func (s *Stack) Image() *compute.Image {
+	return compute.NewImage(s.client)
+}
+
+// KeyPair 密钥对
+func (s *Stack) KeyPair() *compute.KeyPair {
+	return compute.NewKeyPair(s.client)
+}
+
+// Monitor ..
+func (s *Stack) Monitor() *compute.Monitor {
+	return compute.NewMonitor(s.client)
+}
+
+// SecurityGroup ..
+func (s *Stack) SecurityGroup() *compute.SecurityGroup {
+	return compute.NewSecurityGroup(s.client)
+}
+
+// SecurityGroupRule ..
+func (s *Stack) SecurityGroupRule() *compute.SecurityGroupRule {
+	return compute.NewSecurityGroupRule(s.client)
+}
+
+// Server ..
+func (s *Stack) Server() *compute.Server {
+	return compute.NewServer(s.client)
+}
+
+// Warn ..
+func (s *Stack) Warn() *compute.Warn {
+	return compute.NewWarn(s.client)
 }
