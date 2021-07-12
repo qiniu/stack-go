@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// SecurityGroupRuleCreateArgs ..
+// SecurityGroupRuleCreateArgs 参数
 type SecurityGroupRuleCreateArgs struct {
 	ZoneID string `json:"zone_id"`
 
@@ -23,13 +23,13 @@ type SecurityGroupRuleCreateArgs struct {
 	Description           *string                      `json:"description"`
 }
 
-// SecurityGroupRuleCreateResp ..
+// SecurityGroupRuleCreateResp 返回
 type SecurityGroupRuleCreateResp struct {
 	common.Response
 	Data []*SecurityGroupRule `json:"data"`
 }
 
-// SecurityGroupRuleCreate ..
+// SecurityGroupRuleCreate 安全组规则创建
 func (d *SecurityGroupRule) SecurityGroupRuleCreate(args *SecurityGroupRuleCreateArgs) (resp *SecurityGroupRuleCreateResp, err error) {
 	url := fmt.Sprintf("%s/security_group/rule", ComputURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

@@ -10,11 +10,7 @@ import (
 
 // KeyPairListArgs 查询密钥对列表参数
 type KeyPairListArgs struct {
-	// 暂不支持分页
-	// Marker string `pos:"query:marker"`
-	// Limit  int    `pos:"query:limit"`
-
-	ZoneID      string `json:"header:x-rio-zone-id"`
+	ZoneID      string `json:"zone_id"`
 	KeyPairName string `json:"query:keypair_name"`
 }
 

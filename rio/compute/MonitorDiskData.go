@@ -22,7 +22,7 @@ type MonitorDiskDataResp struct {
 	common.Response
 }
 
-// MonitorDiskData ..
+// MonitorDiskData 监控磁盘参数
 func (d *Monitor) MonitorDiskData(args *MonitorDiskDataArgs) (resp *MonitorDiskDataResp, err error) {
 	url := fmt.Sprintf("%s/monitor/disk/%s", ComputURLPrefix, args.DiskID)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)

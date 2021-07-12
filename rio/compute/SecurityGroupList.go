@@ -10,8 +10,6 @@ import (
 
 // SecurityGroupListArgs 安全组列表参数
 type SecurityGroupListArgs struct {
-	// Marker string `pos:"query:marker"`
-	// Limit  int    `pos:"query:limit"` 暂不支持分页
 	ZoneID string `json:"zone_id"`
 
 	SecurityGroupIDs []string `json:"security_group_ids"`

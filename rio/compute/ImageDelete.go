@@ -10,8 +10,8 @@ import (
 
 // ImageDeleteArgs 删除镜像参数
 type ImageDeleteArgs struct {
-	ZoneID                string `json:"header:x-rio-zone-id"`
-	ImageID               string `json:"path:id"`
+	ZoneID                string `json:"zone_id"`
+	ImageID               string `json:"image_id"`
 	Force                 *bool  `json:"force,omitempty"`
 	DeleteRelatedSnapshot *bool  `json:"delete_related_snapshot,omitempty"`
 }
