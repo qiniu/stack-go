@@ -5,7 +5,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// NetworkProtocol .
+// NetworkProtocol 网络原型
 type NetworkProtocol string
 
 // Direction .

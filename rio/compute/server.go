@@ -5,7 +5,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// Server ..
+// Server 主机
 type Server struct {
 	client *client.Client
 }

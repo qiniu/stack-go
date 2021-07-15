@@ -32,7 +32,7 @@ type ServerListResp struct {
 	Data []*ServerInfo `json:"data"`
 }
 
-// ServerList 主机列
+// ServerList 主机列表
 func (d *Server) ServerList(args *ServerListArgs) (resp *ServerDetailResp, err error) {
 	url := fmt.Sprintf("%s/server", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)

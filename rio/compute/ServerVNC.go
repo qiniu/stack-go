@@ -20,7 +20,7 @@ type ServerVNCResp struct {
 	URL string `json:"data"`
 }
 
-// ServerVNC ..
+// ServerVNC 主机vnc
 func (d *Server) ServerVNC(args *ServerVNCArgs) (resp *ServerVNCResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/vnc", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

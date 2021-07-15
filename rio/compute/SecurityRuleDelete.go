@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// SecurityGroupRuleDeleteArgs ..
+// SecurityGroupRuleDeleteArgs 安全组规则删除参数
 type SecurityGroupRuleDeleteArgs struct {
 	ZoneID string `json:"zone_id"`
 
@@ -16,12 +16,12 @@ type SecurityGroupRuleDeleteArgs struct {
 	SecurityGroupRuleID string `json:"security_group_rule_id"`
 }
 
-// SecurityGroupRuleDeleteResp ..
+// SecurityGroupRuleDeleteResp 返回
 type SecurityGroupRuleDeleteResp struct {
 	common.Response
 }
 
-// SecurityGroupRuleDelete ..
+// SecurityGroupRuleDelete 安全组规则删除
 func (d *SecurityGroupRule) SecurityGroupRuleDelete(args *SecurityGroupRuleDeleteArgs) (resp *SecurityGroupRuleDeleteResp, err error) {
 	url := fmt.Sprintf("%s/security_group/rule/%s", ComputURLPrefix, args.SecurityGroupRuleID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

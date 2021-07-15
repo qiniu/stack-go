@@ -12,7 +12,7 @@ func NewKeyPair(cli *client.Client) *KeyPair {
 	return &KeyPair{client: cli}
 }
 
-// KeyPairInfo ..
+// KeyPairInfo 密钥对信息
 type KeyPairInfo struct {
 	KeyPairName string `json:"key_pair_name"`
 	FingerPrint string `json:"finger_print"`

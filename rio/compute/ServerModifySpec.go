@@ -21,7 +21,7 @@ type ServerModifySpecResp struct {
 	common.Response
 }
 
-// ServerModifySpec ..
+// ServerModifySpec 主机修改
 func (d *Server) ServerModifySpec(args *ServerModifySpecArgs) (resp *ServerModifySpecResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/spec", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPatch, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

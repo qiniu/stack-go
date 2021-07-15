@@ -23,7 +23,7 @@ type SecurityGroupRuleListResp struct {
 	Data []*SecurityGroupRule `json:"data"`
 }
 
-// SecurityGroupRuleList .
+// SecurityGroupRuleList 安全组规则列表
 func (d *SecurityGroupRule) SecurityGroupRuleList(args *SecurityGroupRuleListArgs) (resp *SecurityGroupRuleListResp, err error) {
 	url := fmt.Sprintf("%s/security_group/%s/rules", ComputURLPrefix, args.SecurityGroupID)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)

@@ -20,7 +20,7 @@ type ServerLeaveSecurityGroupResp struct {
 	common.Response
 }
 
-// ServerLeaveSecurityGroup ..
+// ServerLeaveSecurityGroup 主机分离安全组
 func (d *Server) ServerLeaveSecurityGroup(args *ServerLeaveSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/security_group/leave", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
