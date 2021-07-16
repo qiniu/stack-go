@@ -25,14 +25,13 @@ type WarnModifyArgs struct {
 
 // ModifyRule 规则参数
 type ModifyRule struct {
-	EventType            common.EventType `json:"event_type"`
-	RuleFlag             string           `json:"rule_flag"`
-	TimeInterval         int64            `json:"time_interval"`
-	Statistice           string           `json:"statistice"`
-	ComparisonOperator   string           `json:"comparison_operator"`
-	Threshold            int64            `json:"threshold"`
-	MediumThreshold      int64            `json:"medium_threshold"`
-	SeriousnessThreshold int64            `json:"seriousness_threshold"`
+	RuleFlag             string `json:"rule_flag"`
+	TimeInterval         int64  `json:"time_interval"`
+	Statistice           string `json:"statistice"`
+	ComparisonOperator   string `json:"comparison_operator"`
+	Threshold            int64  `json:"threshold"`
+	MediumThreshold      int64  `json:"medium_threshold"`
+	SeriousnessThreshold int64  `json:"seriousness_threshold"`
 }
 
 // ModifyInstance 实例参数
