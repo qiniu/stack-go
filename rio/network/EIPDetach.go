@@ -22,8 +22,8 @@ type EIPDetachResp struct {
 
 //EIPDetach eip解绑返回
 func (d *EIP) EIPDetach(args *EIPDetachArgs) (resp *EIPDetachResp, err error) {
-	str := "/api/rio/v1/network/eip"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s/detach", args.EIPID)).WithJSONBody(&args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/eip/%s/detach", NetworkURLPrefix, args.EIPID)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

@@ -23,8 +23,8 @@ type EIPModifyResp struct {
 
 //EIPModify EIP修改
 func (d *EIP) EIPModify(args *EIPModifyArgs) (resp *EIPModifyResp, err error) {
-	str := "/api/rio/v1/network/eip"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"/%s", args.EIPID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/eip/%s", NetworkURLPrefix, args.EIPID)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

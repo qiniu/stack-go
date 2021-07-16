@@ -23,8 +23,8 @@ type FindEIPAttachServerRes struct {
 
 //FindEIPAttachServer 查询eip可绑定主机列表
 func (d *EIP) FindEIPAttachServer(args *FindEIPAttachServerArgs) (resp *FindEIPAttachServerRes, err error) {
-	str := "/api/rio/v1/network/eip"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s/attach_servers", args.EIPID)).WithJSONBody(&args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/eip/%s/attach_servers", NetworkURLPrefix, args.EIPID)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

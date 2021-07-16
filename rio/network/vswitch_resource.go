@@ -8,30 +8,30 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VSwitchResourceArgs ..
+// VSwitchResourceArgs 参数
 type VSwitchResourceArgs struct {
-	ZoneID    string  `pos:"header:x-rio-zone-id"`
-	VPCID     *string `pos:"path:id,required"`
-	VSwitchID *string `pos:"path:vswitch_id,required"`
+	ZoneID    string `json:"zone_id"`
+	VPCID     string `json:"path:id,required"`
+	VSwitchID string `json:"path:vswitch_id,required"`
 }
 
-// VSwitchResourceResp ..
+// VSwitchResourceResp 返回
 type VSwitchResourceResp struct {
 	common.Response
 	Data []VSwitchResourceInfo `json:"data"`
 }
 
-//VSwitchResourceInfo  ..
+//VSwitchResourceInfo  信息
 type VSwitchResourceInfo struct {
 	ResourceID   string `json:"resource_id"`
 	ResourceName string `json:"resource_name"`
 	ResourceType string `json:"resource_type"`
 }
 
-//VSwitchResource ..
+//VSwitchResource 交换机
 func (d *VSwitch) VSwitchResource(args *VSwitchResourceArgs) (resp *VSwitchResourceResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str+"/%s/vswitch/%s/resource", args.VPCID, args.VSwitchID)).WithJSONBody(&args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/resource", NetworkURLPrefix, args.VPCID, args.VSwitchID)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

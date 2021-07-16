@@ -16,15 +16,15 @@ type VPCModifyArgs struct {
 	VPCID       string  `json:"vpc_id"`
 }
 
-// VPCModifyResp ...
+// VPCModifyResp 修改返回
 type VPCModifyResp struct {
 	common.Response
 }
 
 //VPCModify 修改
 func (d *VPC) VPCModify(args *VPCModifyArgs) (resp *VPCModifyResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"/%s/modify", args.VPCID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc/%s/modify", NetworkURLPrefix, args.VPCID)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VSwitchModifyArgs ..
+// VSwitchModifyArgs 交换机修改参数
 type VSwitchModifyArgs struct {
 	ZoneID      string  `json:"header:x-rio-zone-id"`
 	VPCID       string  `json:"path:id"`
@@ -17,15 +17,15 @@ type VSwitchModifyArgs struct {
 	Description *string `json:"description"`
 }
 
-// VSwitchModifyResp ..
+// VSwitchModifyResp 交换机修改返回
 type VSwitchModifyResp struct {
 	common.Response
 }
 
-//VSwitchModify ..
+//VSwitchModify 交换机修改
 func (d *VSwitch) VSwitchModify(args *VSwitchModifyArgs) (resp *VPCModifyResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodPut, fmt.Sprintf(str+"/%s/vswitch/%s/modify", args.VPCID, args.VSwitchID)).WithJSONBody(&args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/modify", NetworkURLPrefix, args.VPCID, args.VSwitchID)
+	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

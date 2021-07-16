@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VPCListArgs ...
+// VPCListArgs 列表参数
 type VPCListArgs struct {
 	Marker *string `json:"marker"`
 	Limit  *int    `json:"limit"`
@@ -17,16 +17,16 @@ type VPCListArgs struct {
 	VPCIDs []string `json:"vpc_ids"`
 }
 
-// VPCListResp ..
+// VPCListResp 列表返回
 type VPCListResp struct {
 	common.Response
 	Data []*VPC `json:"data"`
 }
 
-//VPCList ..
+//VPCList vpc列表
 func (d *VPC) VPCList(args *VPCListArgs) (resp *VPCListResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf(str, args.VPCIDs)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc", NetworkURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

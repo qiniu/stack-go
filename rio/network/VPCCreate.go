@@ -17,13 +17,13 @@ type VPCCreateArgs struct {
 	ClientToken *string `json:"client_token"`
 }
 
-// VPCCreateResp ..
+// VPCCreateResp 返回
 type VPCCreateResp struct {
 	common.Response
 	VPCID string `json:"vpc_id"`
 }
 
-// CreateVPCWithVSwitchArgs ..
+// CreateVPCWithVSwitchArgs 绑定交换机参数
 type CreateVPCWithVSwitchArgs struct {
 	ZoneID  string             `json:"zone_id"`
 	VPC     *VPCCreateArgs     `json:"vpc"`
@@ -32,8 +32,8 @@ type CreateVPCWithVSwitchArgs struct {
 
 //VPCCreate VPC创建
 func (d *VPC) VPCCreate(args *CreateVPCWithVSwitchArgs) (resp *VPCCreateResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc", NetworkURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

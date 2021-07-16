@@ -21,9 +21,8 @@ type EIPDeleteResp struct {
 
 //EIPDelete eip删除
 func (d *EIP) EIPDelete(args *EIPDeleteArgs) (resp *EIPDeleteResp, err error) {
-	str := "/api/rio/v1/network/eip"
-
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s", args.EIPID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/eip/%s", NetworkURLPrefix, args.EIPID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

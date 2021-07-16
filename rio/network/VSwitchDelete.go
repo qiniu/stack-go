@@ -15,15 +15,15 @@ type VSwitchDeleteArgs struct {
 	VSwitchID string `json:"vswitch_id"`
 }
 
-// VSwitchDeleteResp ...
+// VSwitchDeleteResp 返回
 type VSwitchDeleteResp struct {
 	common.Response
 }
 
 //VSwitchDelete 删除
 func (d *VSwitch) VSwitchDelete(args *VSwitchDeleteArgs) (resp *VSwitchDeleteResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s/vswitch/%s/delete", args.VPCID, args.VSwitchID)).WithJSONBody(&args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/delete", NetworkURLPrefix, args.VPCID, args.VSwitchID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

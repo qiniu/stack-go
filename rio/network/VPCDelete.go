@@ -8,21 +8,21 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VPCDeleteArgs ..
+// VPCDeleteArgs 删除参数
 type VPCDeleteArgs struct {
 	ZoneID string `json:"zone_id"`
 	VPCID  string `json:"vpc_id"`
 }
 
-// VPCDeleteResp ..
+// VPCDeleteResp 删除返回
 type VPCDeleteResp struct {
 	common.Response
 }
 
 //VPCDelete vpc删除
 func (d *VPC) VPCDelete(args *VPCDeleteArgs) (resp *VPCCreateResp, err error) {
-	str := "/api/rio/v1/network/vpc"
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf(str+"/%s/delete", args.VPCID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/vpc/%s/delete", NetworkURLPrefix, args.VPCID)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }
