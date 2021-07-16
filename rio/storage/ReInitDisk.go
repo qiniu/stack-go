@@ -11,7 +11,7 @@ import (
 //ReInitDiskArgs 初始化磁盘参数
 type ReInitDiskArgs struct {
 	ZoneID string `json:"zone_id"`
-	DiskID string `pos:"disk_id"`
+	DiskID string `json:"disk_id"`
 }
 
 //ReInitDiskResp 初始化磁盘返回
@@ -21,7 +21,8 @@ type ReInitDiskResp struct {
 
 //ReInitDisk 初始化磁盘
 func (d *Disk) ReInitDisk(args *ReInitDiskArgs) (resp *ReInitDiskResp, err error) {
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/api/rio/v1/storage/disk/%s/reinit", args.DiskID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/disk/%s/reinit", StorageURLPrefix, args.DiskID)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

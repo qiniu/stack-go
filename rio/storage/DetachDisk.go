@@ -21,7 +21,8 @@ type DetachDiskResp struct {
 
 //DetachDisk 解绑磁盘
 func (d *Disk) DetachDisk(args *DetachDiskArgs) (resp *DetachDiskResp, err error) {
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/api/rio/v1/storage/disk/%s/detach", args.DiskID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/disk/%s/detach", StorageURLPrefix, args.DiskID)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

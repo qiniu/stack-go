@@ -10,8 +10,8 @@ import (
 
 //ListDiskArgs 磁盘列表参数
 type ListDiskArgs struct {
-	// Marker string `pos:"query:marker"`
-	// Limit  int    `pos:"query:limit"` TODO 暂不支持分页
+	Marker string `json:"query:marker"`
+	Limit  int    `json:"query:limit"`
 
 	ZoneID   string                 `json:"zone_id"`
 	DiskID   *string                `json:"disk_id"`
@@ -29,7 +29,8 @@ type ListDiskResp struct {
 
 //ListDisk 磁盘列表
 func (d *Disk) ListDisk(args *ListDiskArgs) (resp *ListDiskResp, err error) {
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/api/rio/v1/storage/disk")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/disk", StorageURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

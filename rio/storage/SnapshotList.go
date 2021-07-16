@@ -11,8 +11,8 @@ import (
 //SnapshotListArgs 快照列表参数
 type SnapshotListArgs struct {
 	// TODO 暂不支持分页
-	// Marker string `pos:"query:marker"`
-	// Limit  int    `pos:"query:limit"`
+	Marker string `json:"query:marker"`
+	Limit  int    `json:"query:limit"`
 
 	ZoneID         string           `json:"zone_id"`
 	SnapshotID     *string          `json:"snapshot_id"`
@@ -30,7 +30,8 @@ type SnapshotListResp struct {
 
 //SnapshotList 快照列表
 func (d *Snapshot) SnapshotList(args *SnapshotListArgs) (resp *SnapshotListResp, err error) {
-	req := client.NewRequest(http.MethodGet, fmt.Sprintf("/api/rio/v1/storage/snapshot")).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/snapshot", StorageURLPrefix)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

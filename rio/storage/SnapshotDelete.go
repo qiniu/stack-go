@@ -12,8 +12,7 @@ import (
 type SnapshotDeleteArgs struct {
 	ZoneID     string `json:"zone_id"`
 	SnapshotID string `json:"snapshot_id"`
-	// 是否强制删除有磁盘关联的快照。说明 删除后该磁盘无法重新初始化。
-	Force *bool `json:"force,omitempty"` // TODO 暂不支持
+	Force      *bool  `json:"force,omitempty"`
 }
 
 //SnapshotDeleteResp 删除快照返回
@@ -23,7 +22,8 @@ type SnapshotDeleteResp struct {
 
 //SnapshotDelete 删除快照
 func (d *Snapshot) SnapshotDelete(args *SnapshotDeleteArgs) (resp *SnapshotCreateResp, err error) {
-	req := client.NewRequest(http.MethodDelete, fmt.Sprintf("/api/rio/v1/storage/snapshot/%s", args.SnapshotID)).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/snapshot/%s", StorageURLPrefix)
+	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }
