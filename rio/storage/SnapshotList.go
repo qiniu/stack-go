@@ -10,10 +10,6 @@ import (
 
 //SnapshotListArgs 快照列表参数
 type SnapshotListArgs struct {
-	// TODO 暂不支持分页
-	Marker string `json:"query:marker"`
-	Limit  int    `json:"query:limit"`
-
 	ZoneID         string           `json:"zone_id"`
 	SnapshotID     *string          `json:"snapshot_id"`
 	SnapshotName   *string          `json:"snapshot_name"`

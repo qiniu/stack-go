@@ -12,7 +12,6 @@ import (
 type SnapshotDeleteArgs struct {
 	ZoneID     string `json:"zone_id"`
 	SnapshotID string `json:"snapshot_id"`
-	Force      *bool  `json:"force,omitempty"`
 }
 
 //SnapshotDeleteResp 删除快照返回

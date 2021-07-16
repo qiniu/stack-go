@@ -10,9 +10,6 @@ import (
 
 //ListDiskArgs 磁盘列表参数
 type ListDiskArgs struct {
-	Marker string `json:"query:marker"`
-	Limit  int    `json:"query:limit"`
-
 	ZoneID   string                 `json:"zone_id"`
 	DiskID   *string                `json:"disk_id"`
 	DiskName *string                `json:"disk_name"`
