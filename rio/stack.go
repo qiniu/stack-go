@@ -46,27 +46,27 @@ func (s *Stack) KeyPair() *compute.KeyPair {
 	return compute.NewKeyPair(s.client)
 }
 
-// Monitor ..
+// Monitor 监控
 func (s *Stack) Monitor() *compute.Monitor {
 	return compute.NewMonitor(s.client)
 }
 
-// SecurityGroup ..
+// SecurityGroup 安全组
 func (s *Stack) SecurityGroup() *compute.SecurityGroup {
 	return compute.NewSecurityGroup(s.client)
 }
 
-// SecurityGroupRule ..
+// SecurityGroupRule 安全组规则
 func (s *Stack) SecurityGroupRule() *compute.SecurityGroupRule {
 	return compute.NewSecurityGroupRule(s.client)
 }
 
-// Server ..
+// Server 主机
 func (s *Stack) Server() *compute.Server {
 	return compute.NewServer(s.client)
 }
 
-// Warn ..
+// Warn 告警
 func (s *Stack) Warn() *compute.Warn {
 	return compute.NewWarn(s.client)
 }
