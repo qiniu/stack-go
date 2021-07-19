@@ -25,9 +25,9 @@ type ServerModifyAttrResp struct {
 }
 
 // ServerModifyAttr 主机修改
-func (d *Server) ServerModifyAttr(args *ServerModifyAttrArgs) (resp *ServerModifyAttrResp, err error) {
+func (s *Server) ServerModifyAttr(args *ServerModifyAttrArgs) (resp *ServerModifyAttrResp, err error) {
 	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPatch, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

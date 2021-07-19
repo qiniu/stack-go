@@ -20,9 +20,9 @@ type WarnInstanceResp struct {
 }
 
 // WarnInstance 告警实例
-func (d *Warn) WarnInstance(args *WarnInstanceListArgs) (resp *WarnInstanceResp, err error) {
+func (w *Warn) WarnInstance(args *WarnInstanceListArgs) (resp *WarnInstanceResp, err error) {
 	url := fmt.Sprintf("%s/warn/instances", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = w.client.Call(req, &resp)
 	return
 }

@@ -17,15 +17,15 @@ type MonitorEipDataArgs struct {
 	EndTime   int64  `json:"end_time"`
 }
 
-// MonitorEipDataResp 监控数据result
+// MonitorEipDataResp 监控数据返回
 type MonitorEipDataResp struct {
 	common.Response
 }
 
 // MonitorEipData 监控数据
-func (d *Monitor) MonitorEipData(args *MonitorEipDataArgs) (resp *MonitorEipDataResp, err error) {
+func (m *Monitor) MonitorEipData(args *MonitorEipDataArgs) (resp *MonitorEipDataResp, err error) {
 	url := fmt.Sprintf("%s/monitor/eip/%s", ComputURLPrefix, args.EipID)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = m.client.Call(req, &resp)
 	return
 }

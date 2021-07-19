@@ -16,15 +16,15 @@ type ImageDeleteArgs struct {
 	DeleteRelatedSnapshot *bool  `json:"delete_related_snapshot,omitempty"`
 }
 
-// ImageDeleteResp 删除镜像result
+// ImageDeleteResp 删除镜像返回
 type ImageDeleteResp struct {
 	common.Response
 }
 
 // ImageDelete 删除镜像
-func (d *Image) ImageDelete(args *ImageDeleteArgs) (resp *ImageDeleteResp, err error) {
+func (i *Image) ImageDelete(args *ImageDeleteArgs) (resp *ImageDeleteResp, err error) {
 	url := fmt.Sprintf("%s/image/%s", ComputURLPrefix, args.ImageID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = i.client.Call(req, &resp)
 	return
 }

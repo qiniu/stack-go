@@ -24,9 +24,9 @@ type SecurityGroupRuleListResp struct {
 }
 
 // SecurityGroupRuleList 安全组规则列表
-func (d *SecurityGroupRule) SecurityGroupRuleList(args *SecurityGroupRuleListArgs) (resp *SecurityGroupRuleListResp, err error) {
+func (s *SecurityGroupRule) SecurityGroupRuleList(args *SecurityGroupRuleListArgs) (resp *SecurityGroupRuleListResp, err error) {
 	url := fmt.Sprintf("%s/security_group/%s/rules", ComputURLPrefix, args.SecurityGroupID)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

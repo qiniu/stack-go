@@ -21,9 +21,9 @@ type KeyPairDetailResp struct {
 }
 
 // KeyPairDetail 密钥对详情
-func (d *KeyPair) KeyPairDetail(args *KeyPairDetailArgs) (resp *KeyPairDetailResp, err error) {
+func (k *KeyPair) KeyPairDetail(args *KeyPairDetailArgs) (resp *KeyPairDetailResp, err error) {
 	url := fmt.Sprintf("%s/keypair/%s", ComputURLPrefix, args.KeyPairName)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = k.client.Call(req, &resp)
 	return
 }

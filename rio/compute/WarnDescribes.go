@@ -23,9 +23,9 @@ type WarnListResp struct {
 }
 
 // WarnList 告警列表
-func (d *Warn) WarnList(args *WarnListArgs) (resp *WarnListResp, err error) {
+func (w *Warn) WarnList(args *WarnListArgs) (resp *WarnListResp, err error) {
 	url := fmt.Sprintf("%s/warn", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = w.client.Call(req, &resp)
 	return
 }

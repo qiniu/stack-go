@@ -20,9 +20,9 @@ type ServerStartResp struct {
 }
 
 // ServerStart 开启主机
-func (d *Server) ServerStart(args *ServerStartArgs) (resp *ServerStartResp, err error) {
+func (s *Server) ServerStart(args *ServerStartArgs) (resp *ServerStartResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/start", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

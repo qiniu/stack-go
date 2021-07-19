@@ -22,9 +22,9 @@ type SecurityGroupListResp struct {
 }
 
 // SecurityGroupList 安全组列表
-func (d *SecurityGroup) SecurityGroupList(args *SecurityGroupListArgs) (resp *SecurityGroupListResp, err error) {
+func (s *SecurityGroup) SecurityGroupList(args *SecurityGroupListArgs) (resp *SecurityGroupListResp, err error) {
 	url := fmt.Sprintf("%s/security_group", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

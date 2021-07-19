@@ -21,9 +21,9 @@ type ServerJoinSecurityGroupResp struct {
 }
 
 // ServerJoinSecurityGroup 主机组合安全组
-func (d *Server) ServerJoinSecurityGroup(args *ServerJoinSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
+func (s *Server) ServerJoinSecurityGroup(args *ServerJoinSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
 	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

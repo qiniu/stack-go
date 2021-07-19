@@ -21,9 +21,9 @@ type ServerDeleteResp struct {
 }
 
 // ServerDelete 主机删除
-func (d *Server) ServerDelete(args *ServerDeleteArgs) (resp *SecurityGroupDeleteResp, err error) {
+func (s *Server) ServerDelete(args *ServerDeleteArgs) (resp *SecurityGroupDeleteResp, err error) {
 	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

@@ -22,9 +22,9 @@ type ServerModifySpecResp struct {
 }
 
 // ServerModifySpec 主机修改
-func (d *Server) ServerModifySpec(args *ServerModifySpecArgs) (resp *ServerModifySpecResp, err error) {
+func (s *Server) ServerModifySpec(args *ServerModifySpecArgs) (resp *ServerModifySpecResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/spec", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPatch, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

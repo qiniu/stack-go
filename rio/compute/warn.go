@@ -10,10 +10,41 @@ type Warn struct {
 	client *client.Client
 }
 
+// WarnStatus 规则组状态
+type WarnStatus string
+
+// 规则组状态 Enum
+const (
+	WarnStatusOK               WarnStatus = "OK"                // 正常
+	WarnStatusInsufficientData WarnStatus = "INSUFFICIENT_DATA" // 数据不足
+	WarnStatusALARM            WarnStatus = "ALARM"             // 报警中
+)
+
 // NewWarn 获得实例
 func NewWarn(cli *client.Client) *Warn {
 	return &Warn{client: cli}
 }
+
+// InstanceType 告警资源类型
+type InstanceType string
+
+// 告警资源类型 Enum
+const (
+	WarnInstanceCloudHost InstanceType = "cloud" // 云主机
+)
+
+// WarnAlertLevel 告警管理告警级别枚举
+type WarnAlertLevel string
+
+// 告警管理告警级别枚举
+// LOST|CRITICAL|WARNING|OK_RECOVERY|OK
+const (
+	WarnAlertLevelLOST       WarnAlertLevel = "LOST"        // 紧急告警
+	WarnAlertLevelCRITICAL   WarnAlertLevel = "CRITICAL"    // 严重告警
+	WarnAlertLevelWARNING    WarnAlertLevel = "WARNING"     // 中度告警
+	WarnAlertLevelOKRECOVERY WarnAlertLevel = "OK_RECOVERY" // 告警恢复
+	WarnAlertLevelOK         WarnAlertLevel = "OK"          // 正常
+)
 
 // AlertMessageDetail 告警信息详情
 type AlertMessageDetail struct {

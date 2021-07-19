@@ -33,9 +33,9 @@ type ServerCreateResp struct {
 }
 
 // ServerCreate 主机创建
-func (d *Server) ServerCreate(args *ServerCreateArgs) (resp *ServerCreateResp, err error) {
+func (s *Server) ServerCreate(args *ServerCreateArgs) (resp *ServerCreateResp, err error) {
 	url := fmt.Sprintf("%s/server", ComputURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

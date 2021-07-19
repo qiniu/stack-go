@@ -21,9 +21,9 @@ type ServerLeaveSecurityGroupResp struct {
 }
 
 // ServerLeaveSecurityGroup 主机分离安全组
-func (d *Server) ServerLeaveSecurityGroup(args *ServerLeaveSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
+func (s *Server) ServerLeaveSecurityGroup(args *ServerLeaveSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/security_group/leave", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

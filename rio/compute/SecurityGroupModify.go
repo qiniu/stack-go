@@ -23,9 +23,9 @@ type SecurityGroupModifyResp struct {
 }
 
 // SecurityGroupModify 安全组修改
-func (d *SecurityGroup) SecurityGroupModify(args *SecurityGroupModifyArgs) (resp *SecurityGroupModifyResp, err error) {
+func (s *SecurityGroup) SecurityGroupModify(args *SecurityGroupModifyArgs) (resp *SecurityGroupModifyResp, err error) {
 	url := fmt.Sprintf("%s/security_group/%s", ComputURLPrefix, args.SecurityGroupID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

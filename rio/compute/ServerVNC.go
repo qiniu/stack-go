@@ -21,9 +21,9 @@ type ServerVNCResp struct {
 }
 
 // ServerVNC 主机vnc
-func (d *Server) ServerVNC(args *ServerVNCArgs) (resp *ServerVNCResp, err error) {
+func (s *Server) ServerVNC(args *ServerVNCArgs) (resp *ServerVNCResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/vnc", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

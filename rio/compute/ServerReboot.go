@@ -20,10 +20,10 @@ type ServerRebootResp struct {
 	common.Response
 }
 
-// ServerReboot ..
-func (d *Server) ServerReboot(args *ServerRebootArgs) (resp *ServerRebootResp, err error) {
+// ServerReboot 主机重启
+func (s *Server) ServerReboot(args *ServerRebootArgs) (resp *ServerRebootResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/reboot", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

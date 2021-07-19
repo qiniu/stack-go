@@ -11,7 +11,7 @@ import (
 // WarnModifyArgs 告警修改参数
 type WarnModifyArgs struct {
 	ZoneID    string            `json:"zone_id"`
-	WarnID    *string           `json:"id"`
+	WarnID    string            `json:"id"`
 	WarnName  string            `json:"name"`
 	AlertUser string            `json:"alert_user"`
 	IsPhone   string            `json:"is_phone"`
@@ -45,9 +45,9 @@ type WarnModifyResp struct {
 }
 
 // WarnModify 告警修改
-func (d *Warn) WarnModify(args *WarnModifyArgs) (resp *WarnModifyResp, err error) {
-	url := fmt.Sprintf("%s/warn/%s", ComputURLPrefix, *args.WarnID)
+func (w *Warn) WarnModify(args *WarnModifyArgs) (resp *WarnModifyResp, err error) {
+	url := fmt.Sprintf("%s/warn/%s", ComputURLPrefix, args.WarnID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = w.client.Call(req, &resp)
 	return
 }

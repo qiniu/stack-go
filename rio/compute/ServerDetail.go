@@ -21,9 +21,9 @@ type ServerDetailResp struct {
 }
 
 // ServerDetail 主机具体参数
-func (d *Server) ServerDetail(args *ServerDetailArgs) (resp *ServerDetailResp, err error) {
+func (s *Server) ServerDetail(args *ServerDetailArgs) (resp *ServerDetailResp, err error) {
 	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

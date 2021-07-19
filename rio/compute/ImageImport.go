@@ -18,15 +18,15 @@ type ImageImportArgs struct {
 	DestinationDescription *string `json:"destination_description,omitempty"`
 }
 
-// ImageImportResp 自定义导入镜像result
+// ImageImportResp 自定义导入镜像返回
 type ImageImportResp struct {
 	common.Response
 }
 
 // ImageImport 镜像导入
-func (d *Image) ImageImport(args *ImageImportArgs) (resp *ImageImportResp, err error) {
+func (i *Image) ImageImport(args *ImageImportArgs) (resp *ImageImportResp, err error) {
 	str := "/api/rio/v1/compute/image"
 	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s", args.ImgaeID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = i.client.Call(req, &resp)
 	return
 }

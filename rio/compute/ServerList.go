@@ -33,9 +33,9 @@ type ServerListResp struct {
 }
 
 // ServerList 主机列表
-func (d *Server) ServerList(args *ServerListArgs) (resp *ServerDetailResp, err error) {
+func (s *Server) ServerList(args *ServerListArgs) (resp *ServerDetailResp, err error) {
 	url := fmt.Sprintf("%s/server", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

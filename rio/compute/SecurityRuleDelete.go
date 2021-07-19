@@ -22,9 +22,9 @@ type SecurityGroupRuleDeleteResp struct {
 }
 
 // SecurityGroupRuleDelete 安全组规则删除
-func (d *SecurityGroupRule) SecurityGroupRuleDelete(args *SecurityGroupRuleDeleteArgs) (resp *SecurityGroupRuleDeleteResp, err error) {
+func (s *SecurityGroupRule) SecurityGroupRuleDelete(args *SecurityGroupRuleDeleteArgs) (resp *SecurityGroupRuleDeleteResp, err error) {
 	url := fmt.Sprintf("%s/security_group/rule/%s", ComputURLPrefix, args.SecurityGroupRuleID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

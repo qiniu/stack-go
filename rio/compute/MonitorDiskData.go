@@ -17,15 +17,15 @@ type MonitorDiskDataArgs struct {
 	EndTime   int64  `json:"end_time"`
 }
 
-// MonitorDiskDataResp 监控数据result
+// MonitorDiskDataResp 监控数据返回
 type MonitorDiskDataResp struct {
 	common.Response
 }
 
 // MonitorDiskData 监控磁盘参数
-func (d *Monitor) MonitorDiskData(args *MonitorDiskDataArgs) (resp *MonitorDiskDataResp, err error) {
+func (m *Monitor) MonitorDiskData(args *MonitorDiskDataArgs) (resp *MonitorDiskDataResp, err error) {
 	url := fmt.Sprintf("%s/monitor/disk/%s", ComputURLPrefix, args.DiskID)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = m.client.Call(req, &resp)
 	return
 }

@@ -11,9 +11,9 @@ import (
 // WarnAlertConfirmArgs 处理参数
 type WarnAlertConfirmArgs struct {
 	ZoneID    string    `json:"zone_id"`
-	AlertList []*string `json:"alert_list" json:"alert_list"`
-	ISDelete  bool      `json:"is_delete"  json:"is_delete"`
-	Confirm   *string   `json:"confirm"    json:"confirm"`
+	AlertList []*string `json:"alert_list"`
+	ISDelete  bool      `json:"is_delete"`
+	Confirm   *string   `json:"confirm"`
 }
 
 // WarnAlertConfirmResp 处理参数
@@ -22,9 +22,9 @@ type WarnAlertConfirmResp struct {
 }
 
 // WarnAlertConfirm 告警修改
-func (d *Warn) WarnAlertConfirm(args *WarnAlertConfirmArgs) (resp *WarnAlertConfirmResp, err error) {
+func (w *Warn) WarnAlertConfirm(args *WarnAlertConfirmArgs) (resp *WarnAlertConfirmResp, err error) {
 	url := fmt.Sprintf("%s/warn/alert", ComputURLPrefix)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = w.client.Call(req, &resp)
 	return
 }

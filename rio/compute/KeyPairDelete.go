@@ -8,8 +8,6 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//const urlPrefix = "/api/rio/v1/compute"
-
 // KeyPairDeleteArgs  删除密钥对参数
 type KeyPairDeleteArgs struct {
 	ZoneID      string `json:"zone_id"`
@@ -22,9 +20,9 @@ type KeyPairDeleteResp struct {
 }
 
 //KeyPairDelete 删除密钥对
-func (d *KeyPair) KeyPairDelete(args *KeyPairDeleteArgs) (resp *KeyPairDeleteResp, err error) {
+func (k *KeyPair) KeyPairDelete(args *KeyPairDeleteArgs) (resp *KeyPairDeleteResp, err error) {
 	url := fmt.Sprintf("%s/keypair/%s", ComputURLPrefix, args.KeyPairName)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = k.client.Call(req, &resp)
 	return
 }

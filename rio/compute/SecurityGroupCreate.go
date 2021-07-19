@@ -24,9 +24,9 @@ type SecurityGroupCreateResp struct {
 }
 
 // SecurityGroupCreate 创建安全组
-func (d *SecurityGroup) SecurityGroupCreate(args *SecurityGroupCreateArgs) (resp *SecurityGroupCreateResp, err error) {
+func (s *SecurityGroup) SecurityGroupCreate(args *SecurityGroupCreateArgs) (resp *SecurityGroupCreateResp, err error) {
 	url := fmt.Sprintf("%s/security_group", ComputURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

@@ -21,9 +21,9 @@ type ServerModifyVNCPwdResp struct {
 }
 
 // ServerModifyVNCPwd 主机修改vpn密码
-func (d *Server) ServerModifyVNCPwd(args *ServerModifyVNCPwdArgs) (resp *ServerModifyVNCPwdResp, err error) {
+func (s *Server) ServerModifyVNCPwd(args *ServerModifyVNCPwdArgs) (resp *ServerModifyVNCPwdResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/vnc/password", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

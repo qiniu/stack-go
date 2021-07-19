@@ -21,9 +21,9 @@ type SecurityGroupDeleteResp struct {
 }
 
 // SecurityGroupDelete 删除安全组
-func (d *SecurityGroup) SecurityGroupDelete(args *SecurityGroupDeleteArgs) (resp *SecurityGroupDeleteResp, err error) {
+func (s *SecurityGroup) SecurityGroupDelete(args *SecurityGroupDeleteArgs) (resp *SecurityGroupDeleteResp, err error) {
 	url := fmt.Sprintf("%s/security_group/%s", ComputURLPrefix, args.SecurityGroupID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

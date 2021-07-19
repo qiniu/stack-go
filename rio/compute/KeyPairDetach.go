@@ -21,9 +21,9 @@ type KeyPairDetachResp struct {
 }
 
 // KeyPairDetach 密钥对解绑
-func (d *KeyPair) KeyPairDetach(args *KeyPairDetachArgs) (resp *KeyPairDetachResp, err error) {
+func (k *KeyPair) KeyPairDetach(args *KeyPairDetachArgs) (resp *KeyPairDetachResp, err error) {
 	url := fmt.Sprintf("%s/keypair/%s/detach", ComputURLPrefix, args.KeyPairName)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = k.client.Call(req, &resp)
 	return
 }

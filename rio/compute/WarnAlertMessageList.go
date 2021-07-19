@@ -27,9 +27,9 @@ type WarnDescribesAlertMessageResp struct {
 }
 
 // WarnDescribesAlertMessage 告警修改
-func (d *Warn) WarnDescribesAlertMessage(args *WarnDescribesAlertMessageArgs) (resp *WarnDescribesAlertMessageResp, err error) {
+func (w *Warn) WarnDescribesAlertMessage(args *WarnDescribesAlertMessageArgs) (resp *WarnDescribesAlertMessageResp, err error) {
 	url := fmt.Sprintf("%s/warn/alert", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = w.client.Call(req, &resp)
 	return
 }

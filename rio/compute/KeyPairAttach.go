@@ -21,9 +21,9 @@ type KeyPairAttachResp struct {
 }
 
 // KeyPairAttach 密钥对绑定
-func (d *KeyPair) KeyPairAttach(args *KeyPairAttachArgs) (resp *KeyPairAttachResp, err error) {
+func (k *KeyPair) KeyPairAttach(args *KeyPairAttachArgs) (resp *KeyPairAttachResp, err error) {
 	url := fmt.Sprintf("%s/keypair/%s/attach", ComputURLPrefix, args.KeyPairName)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = k.client.Call(req, &resp)
 	return
 }

@@ -22,9 +22,9 @@ type MonitorServerDataResp struct {
 }
 
 // MonitorServerData 主机监控
-func (d *Monitor) MonitorServerData(args *MonitorServerDataArgs) (resp *MonitorServerDataResp, err error) {
+func (m *Monitor) MonitorServerData(args *MonitorServerDataArgs) (resp *MonitorServerDataResp, err error) {
 	url := fmt.Sprintf("%s/monitor/server/%s", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = m.client.Call(req, &resp)
 	return
 }

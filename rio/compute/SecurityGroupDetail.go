@@ -22,9 +22,9 @@ type SecurityGroupDetailResp struct {
 }
 
 // SecurityGroupDetail 安全组详情
-func (d *SecurityGroup) SecurityGroupDetail(args *SecurityGroupDetailArgs) (resp *SecurityGroupDetailResp, err error) {
+func (s *SecurityGroup) SecurityGroupDetail(args *SecurityGroupDetailArgs) (resp *SecurityGroupDetailResp, err error) {
 	url := fmt.Sprintf("%s/security_group/%s/detail", ComputURLPrefix, args.SecurityGroupID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

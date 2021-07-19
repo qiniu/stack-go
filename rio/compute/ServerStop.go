@@ -21,9 +21,9 @@ type ServerStopResp struct {
 }
 
 // ServerStop 关闭主机
-func (d *Server) ServerStop(args *ServerStopArgs) (resp *ServerStopResp, err error) {
+func (s *Server) ServerStop(args *ServerStopArgs) (resp *ServerStopResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/stop", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

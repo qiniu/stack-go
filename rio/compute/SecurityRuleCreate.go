@@ -30,9 +30,9 @@ type SecurityGroupRuleCreateResp struct {
 }
 
 // SecurityGroupRuleCreate 安全组规则创建
-func (d *SecurityGroupRule) SecurityGroupRuleCreate(args *SecurityGroupRuleCreateArgs) (resp *SecurityGroupRuleCreateResp, err error) {
+func (s *SecurityGroupRule) SecurityGroupRuleCreate(args *SecurityGroupRuleCreateArgs) (resp *SecurityGroupRuleCreateResp, err error) {
 	url := fmt.Sprintf("%s/security_group/rule", ComputURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

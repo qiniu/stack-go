@@ -20,9 +20,9 @@ type WarnDeleteResp struct {
 }
 
 // WarnDelete 告警删除
-func (d *Warn) WarnDelete(args *WarnDeleteArgs) (resp *WarnDeleteResp, err error) {
+func (w *Warn) WarnDelete(args *WarnDeleteArgs) (resp *WarnDeleteResp, err error) {
 	url := fmt.Sprintf("%s/warn/%s", ComputURLPrefix, args.WarnID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = w.client.Call(req, &resp)
 	return
 }
