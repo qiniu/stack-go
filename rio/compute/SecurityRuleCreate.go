@@ -18,7 +18,7 @@ type SecurityGroupRuleCreateArgs struct {
 	Type                  common.SecurityRuleGrantType `json:"type"`
 	RemoteSecurityGroupID []*string                    `json:"remote_security_group_id"`
 	CIDR                  []*string                    `json:"cidr"`
-	Protocol              common.NetworkProtocol       `json:"protocol"`
+	Protocol              NetworkProtocol              `json:"protocol"`
 	PortRange             []*string                    `json:"port_range"`
 	Description           *string                      `json:"description"`
 }

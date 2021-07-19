@@ -25,8 +25,8 @@ type ImageImportResp struct {
 
 // ImageImport 镜像导入
 func (i *Image) ImageImport(args *ImageImportArgs) (resp *ImageImportResp, err error) {
-	str := "/api/rio/v1/compute/image"
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf(str+"/%s", args.ImgaeID)).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/image/%s", ComputURLPrefix, args.ImgaeID)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = i.client.Call(req, &resp)
 	return
 }
