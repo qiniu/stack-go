@@ -9,7 +9,7 @@ import (
 
 const (
 	qvmRegionIDHeaderKey  = "X-Qiniu-Regionid"
-	qvmRIOZoneIDHeaderKey = "x-rio-zone-id"
+	qvmRIOZoneIDHeaderKey = "X-RIO-Zone-ID"
 )
 
 // Request API 请求对象
