@@ -27,9 +27,9 @@ type SnapshotCreateResp struct {
 }
 
 //SnapshotCreate 创建快照
-func (d *Snapshot) SnapshotCreate(args *SnapshotCreateArgs) (resp *SnapshotCreateResp, err error) {
+func (s *Snapshot) SnapshotCreate(args *SnapshotCreateArgs) (resp *SnapshotCreateResp, err error) {
 	url := fmt.Sprintf("%s/snapshot", StorageURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

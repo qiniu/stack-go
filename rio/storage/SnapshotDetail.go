@@ -21,10 +21,10 @@ type SnapshotDetailResp struct {
 }
 
 //SnapshotDetail 查询快照详情
-func (d *Snapshot) SnapshotDetail(args *SnapshotDetailArgs) (resp *SnapshotDetailResp, err error) {
+func (s *Snapshot) SnapshotDetail(args *SnapshotDetailArgs) (resp *SnapshotDetailResp, err error) {
 	url := fmt.Sprintf("%s/snapshot/%s", StorageURLPrefix, args.SnapshotID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 
 }

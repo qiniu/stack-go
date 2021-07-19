@@ -22,9 +22,9 @@ type SnapshotModifyResp struct {
 }
 
 //SnapshotModify 修改快照
-func (d *Snapshot) SnapshotModify(args *SnapshotModifyArgs) (resp *SnapshotModifyResp, err error) {
-	url := fmt.Sprintf("%s/snapshot", StorageURLPrefix, args.SnapshotID)
+func (s *Snapshot) SnapshotModify(args *SnapshotModifyArgs) (resp *SnapshotModifyResp, err error) {
+	url := fmt.Sprintf("%s/snapshot", StorageURLPrefix)
 	req := client.NewRequest(http.MethodPatch, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }

@@ -25,9 +25,9 @@ type SnapshotListResp struct {
 }
 
 //SnapshotList 快照列表
-func (d *Snapshot) SnapshotList(args *SnapshotListArgs) (resp *SnapshotListResp, err error) {
+func (s *Snapshot) SnapshotList(args *SnapshotListArgs) (resp *SnapshotListResp, err error) {
 	url := fmt.Sprintf("%s/snapshot", StorageURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = s.client.Call(req, &resp)
 	return
 }
