@@ -20,9 +20,9 @@ type EIPDeleteResp struct {
 }
 
 //EIPDelete eip删除
-func (d *EIP) EIPDelete(args *EIPDeleteArgs) (resp *EIPDeleteResp, err error) {
+func (e *EIP) EIPDelete(args *EIPDeleteArgs) (resp *EIPDeleteResp, err error) {
 	url := fmt.Sprintf("%s/eip/%s", NetworkURLPrefix, args.EIPID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = e.client.Call(req, &resp)
 	return
 }

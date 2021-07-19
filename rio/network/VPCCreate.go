@@ -31,9 +31,9 @@ type CreateVPCWithVSwitchArgs struct {
 }
 
 //VPCCreate VPC创建
-func (d *VPC) VPCCreate(args *CreateVPCWithVSwitchArgs) (resp *VPCCreateResp, err error) {
+func (v *VPC) VPCCreate(args *CreateVPCWithVSwitchArgs) (resp *VPCCreateResp, err error) {
 	url := fmt.Sprintf("%s/vpc", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

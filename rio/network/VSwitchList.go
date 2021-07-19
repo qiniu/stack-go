@@ -25,9 +25,9 @@ type VSwitchListResp struct {
 }
 
 //VSwitchList 交换机列表
-func (d *VSwitch) VSwitchList(args *VSwitchListArgs) (resp *VSwitchListResp, err error) {
+func (v *VSwitch) VSwitchList(args *VSwitchListArgs) (resp *VSwitchListResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch", NetworkURLPrefix, args.VPCID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

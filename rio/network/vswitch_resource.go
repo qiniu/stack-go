@@ -29,9 +29,9 @@ type VSwitchResourceInfo struct {
 }
 
 //VSwitchResource 交换机
-func (d *VSwitch) VSwitchResource(args *VSwitchResourceArgs) (resp *VSwitchResourceResp, err error) {
+func (v *VSwitch) VSwitchResource(args *VSwitchResourceArgs) (resp *VSwitchResourceResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/resource", NetworkURLPrefix, args.VPCID, args.VSwitchID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

@@ -28,9 +28,9 @@ type EIPListResp struct {
 }
 
 //EIPList EIP列表
-func (d *EIP) EIPList(args *EIPListArgs) (resp *EIPListResp, err error) {
+func (e *EIP) EIPList(args *EIPListArgs) (resp *EIPListResp, err error) {
 	url := fmt.Sprintf("%s/eip", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = e.client.Call(req, &resp)
 	return
 }

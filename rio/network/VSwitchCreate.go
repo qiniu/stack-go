@@ -25,9 +25,9 @@ type VSwitchCreatResp struct {
 }
 
 // VSwitchCreate 创建
-func (d *VSwitch) VSwitchCreate(args *VSwitchCreateArgs) (resp *VSwitchCreatResp, err error) {
+func (v *VSwitch) VSwitchCreate(args *VSwitchCreateArgs) (resp *VSwitchCreatResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch", NetworkURLPrefix, args.VPCID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

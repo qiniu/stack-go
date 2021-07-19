@@ -22,9 +22,9 @@ type EIPCreateResp struct {
 }
 
 // EIPCreate 创建eip
-func (d *EIP) EIPCreate(args *EIPCreateArgs) (resp *EIPCreateResp, err error) {
+func (e *EIP) EIPCreate(args *EIPCreateArgs) (resp *EIPCreateResp, err error) {
 	url := fmt.Sprintf("%s/eip", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = e.client.Call(req, &resp)
 	return
 }

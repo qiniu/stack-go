@@ -22,9 +22,9 @@ type EIPAttachResp struct {
 }
 
 //EIPAttach 绑定eip
-func (d *EIP) EIPAttach(args *EIPAttachArgs) (resp *EIPAttachResp, err error) {
+func (e *EIP) EIPAttach(args *EIPAttachArgs) (resp *EIPAttachResp, err error) {
 	url := fmt.Sprintf("%s/eip/%s/attach", NetworkURLPrefix, args.EIPID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = e.client.Call(req, &resp)
 	return
 }

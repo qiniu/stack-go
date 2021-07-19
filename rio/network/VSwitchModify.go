@@ -23,9 +23,9 @@ type VSwitchModifyResp struct {
 }
 
 //VSwitchModify 交换机修改
-func (d *VSwitch) VSwitchModify(args *VSwitchModifyArgs) (resp *VPCModifyResp, err error) {
+func (v *VSwitch) VSwitchModify(args *VSwitchModifyArgs) (resp *VPCModifyResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/modify", NetworkURLPrefix, args.VPCID, args.VSwitchID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

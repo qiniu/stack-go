@@ -24,9 +24,9 @@ type VPCListResp struct {
 }
 
 //VPCList vpc列表
-func (d *VPC) VPCList(args *VPCListArgs) (resp *VPCListResp, err error) {
+func (v *VPC) VPCList(args *VPCListArgs) (resp *VPCListResp, err error) {
 	url := fmt.Sprintf("%s/vpc", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

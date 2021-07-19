@@ -20,9 +20,9 @@ type VPCDeleteResp struct {
 }
 
 //VPCDelete vpc删除
-func (d *VPC) VPCDelete(args *VPCDeleteArgs) (resp *VPCCreateResp, err error) {
+func (v *VPC) VPCDelete(args *VPCDeleteArgs) (resp *VPCCreateResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/delete", NetworkURLPrefix, args.VPCID)
 	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }

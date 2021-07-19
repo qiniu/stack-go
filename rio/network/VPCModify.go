@@ -22,9 +22,9 @@ type VPCModifyResp struct {
 }
 
 //VPCModify 修改
-func (d *VPC) VPCModify(args *VPCModifyArgs) (resp *VPCModifyResp, err error) {
+func (v *VPC) VPCModify(args *VPCModifyArgs) (resp *VPCModifyResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/modify", NetworkURLPrefix, args.VPCID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
-	err = d.client.Call(req, &resp)
+	err = v.client.Call(req, &resp)
 	return
 }
