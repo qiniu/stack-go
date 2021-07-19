@@ -10,20 +10,20 @@ import (
 
 // ServerListArgs 主机列表参数
 type ServerListArgs struct {
-	Marker string `json:"query:marker"`
-	Limit  int    `json:"query:limit"`
+	Marker string `json:"marker"`
+	Limit  int    `json:"limit"`
 
-	ZoneID             string   `json:"header:x-rio-zone-id"`
-	Status             *string  `json:"query:status"`
-	ServerName         *string  `json:"query:server_name"`
-	VPCID              *string  `json:"query:vpc_id"`
-	VSwitchID          *string  `json:"query:v_switch_id"`
-	ImageID            *string  `json:"query:image_id"`
-	FlavorID           *string  `json:"query:flavor_id"`
-	ServerIDs          []string `json:"query:server_ids"`
-	SecurityGroupID    *string  `json:"query:security_group_id"`
-	PrivateIPAddresses []string `json:"query:private_ip_addresses"`
-	PublicIPAddresses  []string `json:"query:public_ip_addresses"`
+	ZoneID             string   `json:"zone_id"`
+	Status             *string  `json:"status"`
+	ServerName         *string  `json:"server_name"`
+	VPCID              *string  `json:"vpc_id"`
+	VSwitchID          *string  `json:"v_switch_id"`
+	ImageID            *string  `json:"image_id"`
+	FlavorID           *string  `json:"flavor_id"`
+	ServerIDs          []string `json:"server_ids"`
+	SecurityGroupID    *string  `json:"security_group_id"`
+	PrivateIPAddresses []string `json:"private_ip_addresses"`
+	PublicIPAddresses  []string `json:"public_ip_addresses"`
 }
 
 // ServerListResp 主机列表返回

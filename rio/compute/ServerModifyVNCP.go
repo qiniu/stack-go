@@ -10,7 +10,7 @@ import (
 
 // ServerModifyVNCPwdArgs 参数
 type ServerModifyVNCPwdArgs struct {
-	ZoneID      string `json:"zone-id"`
+	ZoneID      string `json:"zone_id"`
 	ServerID    string `json:"server_id"`
 	VNCPassword string `json:"vnc_password"`
 }

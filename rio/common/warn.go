@@ -6,6 +6,15 @@ type EventType string
 // WarnAlertLevel 告警等级
 type WarnAlertLevel string
 
+// 告警管理告警级别枚举
+const (
+	WarnAlertLevelLOST       WarnAlertLevel = "LOST"        // 紧急告警
+	WarnAlertLevelCRITICAL   WarnAlertLevel = "CRITICAL"    // 严重告警
+	WarnAlertLevelWARNING    WarnAlertLevel = "WARNING"     // 中度告警
+	WarnAlertLevelOKRECOVERY WarnAlertLevel = "OK_RECOVERY" // 告警恢复
+	WarnAlertLevelOK         WarnAlertLevel = "OK"          // 正常
+)
+
 // AlertMessageDetail 告警信息详情
 type AlertMessageDetail struct {
 	Confirm         string                 `json:"confirm"`             // 确认状态，0：未确认，1：已确认
@@ -36,3 +45,21 @@ type HistoryAlertMessage struct {
 	InsertTime      int64          `json:"insert_time"`         // 告警信息产生时间
 	UpdateTime      int64          `json:"update_time"`         // 更新时间，可根据创建时间计算持续时间
 }
+
+// WarnStatus 规则组状态
+type WarnStatus string
+
+// 规则组状态 Enum
+const (
+	WarnStatusOK               WarnStatus = "OK"                // 正常
+	WarnStatusInsufficientData WarnStatus = "INSUFFICIENT_DATA" // 数据不足
+	WarnStatusALARM            WarnStatus = "ALARM"             // 报警中
+)
+
+// InstanceType 告警资源类型
+type InstanceType string
+
+// 告警资源类型 Enum
+const (
+	WarnInstanceCloudHost InstanceType = "cloud" // 云主机
+)

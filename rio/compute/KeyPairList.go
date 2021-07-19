@@ -11,7 +11,7 @@ import (
 // KeyPairListArgs 查询密钥对列表参数
 type KeyPairListArgs struct {
 	ZoneID      string `json:"zone_id"`
-	KeyPairName string `json:"query:keypair_name"`
+	KeyPairName string `json:"keypair_name"`
 }
 
 // KeyPairListResp 密钥对列表返回

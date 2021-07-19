@@ -10,8 +10,8 @@ import (
 
 // WarnModifyArgs 告警修改参数
 type WarnModifyArgs struct {
-	ZoneID    string            `pos:"header:x-rio-zone-id"`
-	WarnID    *string           `pos:"path:id"`
+	ZoneID    string            `json:"zone_id"`
+	WarnID    *string           `json:"id"`
 	WarnName  string            `json:"name"`
 	AlertUser string            `json:"alert_user"`
 	IsPhone   string            `json:"is_phone"`

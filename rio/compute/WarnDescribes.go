@@ -10,7 +10,7 @@ import (
 
 // WarnListArgs 查询参数
 type WarnListArgs struct {
-	ZoneID   string `json:"zone-id"`
+	ZoneID   string `json:"zone_id"`
 	WarnName string `json:"warn_name"`
 	PageSize int64  `json:"page_size"`
 	PageNum  int64  `json:"page_num"`

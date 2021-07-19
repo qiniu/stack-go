@@ -10,8 +10,8 @@ import (
 
 // WarnDeleteArgs 删除参数
 type WarnDeleteArgs struct {
-	ZoneID string `json:"header:x-rio-zone-id"`
-	WarnID string `json:"path:id"`
+	ZoneID string `json:"zone_id"`
+	WarnID string `json:"id"`
 }
 
 // WarnDeleteResp 删除返回

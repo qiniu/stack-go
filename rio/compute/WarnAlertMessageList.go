@@ -11,13 +11,13 @@ import (
 // WarnDescribesAlertMessageArgs 查询告警信息参数
 type WarnDescribesAlertMessageArgs struct {
 	// 可用区 ID
-	ZoneID         string                  `json:"header:x-rio-zone-id"`
-	InstanceIP     string                  `json:"query:instance_ip"`
-	InstanceName   string                  `json:"query:instance_name"`
-	LevelList      []common.WarnAlertLevel `json:"query:level_list"`
-	ResourceTypeID *string                 `json:"query:resource_type_id"`
-	PageNum        *int64                  `json:"query:page_num"`
-	PageSize       *int64                  `json:"query:page_size"`
+	ZoneID         string                  `json:"zone_id"`
+	InstanceIP     string                  `json:"instance_ip"`
+	InstanceName   string                  `json:"instance_name"`
+	LevelList      []common.WarnAlertLevel `json:"level_list"`
+	ResourceTypeID *string                 `json:"resource_type_id"`
+	PageNum        *int64                  `json:"page_num"`
+	PageSize       *int64                  `json:"page_size"`
 }
 
 // WarnDescribesAlertMessageResp 查询告警信息返回

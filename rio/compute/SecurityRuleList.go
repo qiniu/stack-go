@@ -14,7 +14,7 @@ type SecurityGroupRuleListArgs struct {
 	Limit  int    `json:"limit"`
 	ZoneID string `json:"zone_id"`
 
-	SecurityGroupID string `pos:"path:id"`
+	SecurityGroupID string `json:"id"`
 }
 
 // SecurityGroupRuleListResp 返回
