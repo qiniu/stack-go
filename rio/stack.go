@@ -1,9 +1,9 @@
 package rio
 
 import (
-	"github.com/qiniu/stack-go/components/cookieauth"
+	"github.com/qiniu/stack-go/components/auth"
 	"github.com/qiniu/stack-go/components/log"
-	"github.com/qiniu/stack-go/rio/network"
+	"github.com/qiniu/stack-go/rio/compute"
 	"github.com/qiniu/stack-go/rio/storage"
 
 	"github.com/qiniu/stack-go/components/client"
@@ -19,10 +19,10 @@ type Stack struct {
 }
 
 // New 构造 SDK 实例
-func New(log log.Logger, cfg *cookieauth.Config) *Stack {
+func New(log log.Logger, endpoint string, credential *auth.Credential) *Stack {
 	return &Stack{
 		log:    log,
-		client: client.NewWithTransport(log, cfg.Endpoint, cookieauth.NewTransport(cfg)),
+		client: client.New(log, endpoint, credential),
 	}
 }
 
@@ -36,17 +36,37 @@ func (s *Stack) Disk() *storage.Disk {
 	return storage.NewDisk(s.client)
 }
 
-// EIP 获取 EIP管理对象
-func (s *Stack) EIP() *network.EIP {
-	return network.NewEIP(s.client)
+// Image 获取 Image管理对象
+func (s *Stack) Image() *compute.Image {
+	return compute.NewImage(s.client)
 }
 
-// VPC 获取VPC管理对象
-func (s *Stack) VPC() *network.VPC {
-	return network.NewVPC(s.client)
+// KeyPair 密钥对
+func (s *Stack) KeyPair() *compute.KeyPair {
+	return compute.NewKeyPair(s.client)
 }
 
-// VSwitch ..
-func (s *Stack) VSwitch() *network.VSwitch {
-	return network.NewVSwitch(s.client)
+// Monitor 监控
+func (s *Stack) Monitor() *compute.Monitor {
+	return compute.NewMonitor(s.client)
+}
+
+// SecurityGroup 安全组
+func (s *Stack) SecurityGroup() *compute.SecurityGroup {
+	return compute.NewSecurityGroup(s.client)
+}
+
+// SecurityGroupRule 安全组规则
+func (s *Stack) SecurityGroupRule() *compute.SecurityGroupRule {
+	return compute.NewSecurityGroupRule(s.client)
+}
+
+// Server 主机
+func (s *Stack) Server() *compute.Server {
+	return compute.NewServer(s.client)
+}
+
+// Warn 告警
+func (s *Stack) Warn() *compute.Warn {
+	return compute.NewWarn(s.client)
 }

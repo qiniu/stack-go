@@ -43,7 +43,7 @@ type CreateDiskResp struct {
 
 // CreateDisk 创建磁盘
 func (d *Disk) CreateDisk(args *CreateDiskArgs) (resp *CreateDiskResp, err error) {
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/api/proxy/rio/v1/storage/disk")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/api/rio/v1/storage/disk")).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }
