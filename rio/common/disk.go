@@ -3,6 +3,7 @@ package common
 // DiskCategory 云盘种类
 type DiskCategory string
 
+// DiskCategory 云盘种类常量
 const (
 	AllDiskCategory             DiskCategory = "all"              // 所有云盘以及本地盘
 	CloudDiskCategory           DiskCategory = "cloud"            // 普通云盘
@@ -19,6 +20,7 @@ const (
 // DiskType 磁盘类型
 type DiskType string
 
+// DiskType 云盘类型
 const (
 	AllDiskType    DiskType = "all"
 	SystemDiskType DiskType = "system"
@@ -28,6 +30,7 @@ const (
 // DiskStatusType 磁盘状态类型
 type DiskStatusType string
 
+// DiskStatusType 错案状态类型常量
 const (
 	DiskInUse         DiskStatusType = "In_use"
 	DiskAvailable     DiskStatusType = "Available"
