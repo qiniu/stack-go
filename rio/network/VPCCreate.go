@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//VPCCreateArgs 创建参数
+// VPCCreateArgs 创建参数
 type VPCCreateArgs struct {
 	ZoneID      string  `json:"zone_id"`
 	CIDR        *string `json:"cidr"`
@@ -30,7 +30,7 @@ type CreateVPCWithVSwitchArgs struct {
 	VSwitch *VSwitchCreateArgs `json:"vswitch"`
 }
 
-//VPCCreate VPC创建
+// VPCCreate VPC创建
 func (v *VPC) VPCCreate(args *CreateVPCWithVSwitchArgs) (resp *VPCCreateResp, err error) {
 	url := fmt.Sprintf("%s/vpc", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

@@ -24,7 +24,7 @@ type VSwitchListResp struct {
 	Data []*VSwitch `json:"data"`
 }
 
-//VSwitchList 交换机列表
+// VSwitchList 交换机列表
 func (v *VSwitch) VSwitchList(args *VSwitchListArgs) (resp *VSwitchListResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch", NetworkURLPrefix, args.VPCID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

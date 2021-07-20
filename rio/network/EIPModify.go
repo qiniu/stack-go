@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//EIPModifyArgs EIP修改参数
+// EIPModifyArgs EIP修改参数
 type EIPModifyArgs struct {
 	ZoneID    string `json:"zone_id"`
 	EIPID     string `json:"eip_id"`
@@ -21,7 +21,7 @@ type EIPModifyResp struct {
 	common.Response
 }
 
-//EIPModify EIP修改
+// EIPModify EIP修改
 func (e *EIP) EIPModify(args *EIPModifyArgs) (resp *EIPModifyResp, err error) {
 	url := fmt.Sprintf("%s/eip/%s", NetworkURLPrefix, args.EIPID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

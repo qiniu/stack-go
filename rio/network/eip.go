@@ -2,12 +2,12 @@ package network
 
 import "github.com/qiniu/stack-go/components/client"
 
-//EIP 接口封装
+// EIP 接口封装
 type EIP struct {
 	client *client.Client
 }
 
-//EIPInfo 封装
+// EIPInfo 封装
 type EIPInfo struct {
 	ZoneID     string `json:"zone_id"`
 	ServerID   string `json:"server_id"`
@@ -19,13 +19,14 @@ type EIPInfo struct {
 	CreatedAt  int64  `json:"created_at"`
 }
 
-//NewEIP 获得Eip实例
+// NewEIP 获得Eip实例
 func NewEIP(cli *client.Client) *EIP {
 	return &EIP{client: cli}
 }
 
 // LockReason 锁
-type LockReason string //enum financial | security
+type LockReason string
+
 // LockReason 常量
 const (
 	FinancialLockReason LockReason = "financial"
@@ -33,7 +34,8 @@ const (
 )
 
 // EIPStatus 状态
-type EIPStatus string // enum Associating | Unassociating | InUse | Available
+type EIPStatus string
+
 // EIPStatus 常量
 const (
 	CreatingEIPStatus      EIPStatus = "Creating"
@@ -47,17 +49,8 @@ const (
 type EIPISP string
 
 const (
-	// BGPProEIPISP ALI BGP（多线）精品线路
+	// BGPProEIPISP 精品线路
 	BGPProEIPISP EIPISP = "BGP_PRO"
-	// BGPEIPISP ALI BGP（多线）线路
+	// BGPEIPISP (多线）线路
 	BGPEIPISP EIPISP = "BGP"
-
-	// HWTelcomEIPISP HW 电信
-	HWTelcomEIPISP EIPISP = "5_telcom"
-	// HWUnionEIPISP HW 联通
-	HWUnionEIPISP EIPISP = "5_union"
-	// HWBGPEIPISP HW 全动态BGP
-	HWBGPEIPISP EIPISP = "5_bgp"
-	// HWSBGPEIPISP HW 静态BGP
-	HWSBGPEIPISP EIPISP = "5_sbgp"
 )

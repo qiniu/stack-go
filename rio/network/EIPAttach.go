@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//EIPAttachArgs 绑定eip参数
+// EIPAttachArgs 绑定eip参数
 type EIPAttachArgs struct {
 	ZoneID           string `json:"zone_id"`
 	EIPID            string `json:"eip_id"`
@@ -21,7 +21,7 @@ type EIPAttachResp struct {
 	*common.Response
 }
 
-//EIPAttach 绑定eip
+// EIPAttach 绑定eip
 func (e *EIP) EIPAttach(args *EIPAttachArgs) (resp *EIPAttachResp, err error) {
 	url := fmt.Sprintf("%s/eip/%s/attach", NetworkURLPrefix, args.EIPID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

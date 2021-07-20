@@ -22,7 +22,7 @@ type VSwitchModifyResp struct {
 	common.Response
 }
 
-//VSwitchModify 交换机修改
+// VSwitchModify 交换机修改
 func (v *VSwitch) VSwitchModify(args *VSwitchModifyArgs) (resp *VPCModifyResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/modify", NetworkURLPrefix, args.VPCID, args.VSwitchID)
 	req := client.NewRequest(http.MethodPut, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

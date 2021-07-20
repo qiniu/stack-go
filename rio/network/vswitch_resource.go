@@ -21,14 +21,14 @@ type VSwitchResourceResp struct {
 	Data []VSwitchResourceInfo `json:"data"`
 }
 
-//VSwitchResourceInfo  信息
+// VSwitchResourceInfo  信息
 type VSwitchResourceInfo struct {
 	ResourceID   string `json:"resource_id"`
 	ResourceName string `json:"resource_name"`
 	ResourceType string `json:"resource_type"`
 }
 
-//VSwitchResource 交换机
+// VSwitchResource 交换机
 func (v *VSwitch) VSwitchResource(args *VSwitchResourceArgs) (resp *VSwitchResourceResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/resource", NetworkURLPrefix, args.VPCID, args.VSwitchID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

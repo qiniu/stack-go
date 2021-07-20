@@ -5,7 +5,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//VSwitch 接口封装
+// VSwitch 接口封装
 type VSwitch struct {
 	client           *client.Client
 	ZoneID           string               `json:"zone_id"`
@@ -20,7 +20,7 @@ type VSwitch struct {
 	ResourceCount    int                  `json:"resource_count"`
 }
 
-//NewVSwitch 获得VSwitch实例
+// NewVSwitch 获得VSwitch实例
 func NewVSwitch(cli *client.Client) *VSwitch {
 	return &VSwitch{client: cli}
 }

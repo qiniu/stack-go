@@ -23,7 +23,7 @@ type VPCListResp struct {
 	Data []*VPC `json:"data"`
 }
 
-//VPCList vpc列表
+// VPCList vpc列表
 func (v *VPC) VPCList(args *VPCListArgs) (resp *VPCListResp, err error) {
 	url := fmt.Sprintf("%s/vpc", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

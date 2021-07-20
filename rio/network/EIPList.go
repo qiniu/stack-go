@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//EIPListArgs EIP列表参数
+// EIPListArgs EIP列表参数
 type EIPListArgs struct {
 	Marker string `pos:"query:marker"`
 	Limit  int    `pos:"query:limit"`
@@ -27,7 +27,7 @@ type EIPListResp struct {
 	Data []*EIPInfo `json:"data"`
 }
 
-//EIPList EIP列表
+// EIPList EIP列表
 func (e *EIP) EIPList(args *EIPListArgs) (resp *EIPListResp, err error) {
 	url := fmt.Sprintf("%s/eip", NetworkURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

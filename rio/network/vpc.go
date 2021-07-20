@@ -5,9 +5,13 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//VPC 接口封装
+// VPC 接口封装
 type VPC struct {
-	client      *client.Client
+	client *client.Client
+}
+
+// VPCInfo 封装
+type VPCInfo struct {
 	VPCID       string           `json:"vpc_id"`
 	ZoneID      string           `json:"zone_id"`
 	Status      common.VPCStatus `json:"status"`
@@ -18,7 +22,7 @@ type VPC struct {
 	CreatedAt   int64            `json:"created_at"`
 }
 
-//NewVPC 获得Vpc实例
+// NewVPC 获得Vpc实例
 func NewVPC(cli *client.Client) *VPC {
 	return &VPC{client: cli}
 }
