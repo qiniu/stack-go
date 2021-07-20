@@ -20,6 +20,7 @@ type MonitorEipDataArgs struct {
 // MonitorEipDataResp 监控数据返回
 type MonitorEipDataResp struct {
 	common.Response
+	Data []*EipMonitorDataInfo `json:"data"`
 }
 
 // MonitorEipData 监控数据

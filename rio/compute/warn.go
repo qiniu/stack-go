@@ -76,3 +76,38 @@ type HistoryAlertMessage struct {
 	InsertTime      int64                 `json:"insert_time"`         // 告警信息产生时间
 	UpdateTime      int64                 `json:"update_time"`         // 更新时间，可根据创建时间计算持续时间
 }
+
+// WarnInfo 告警组
+type WarnInfo struct {
+	Name       string            `json:"name"`
+	WarnID     string            `json:"warn_id"`
+	Status     common.WarnStatus `json:"status"`
+	AlertUser  string            `json:"alert_user"`
+	IsPhone    string            `json:"is_phone"`
+	PhoneList  string            `json:"phone_list"`
+	IsEmail    string            `json:"is_email"`
+	EmailList  string            `json:"email_list"`
+	Enable     string            `json:"enable"`
+	DefaltFlag string            `json:"defalt_flag"`
+	Rules      []*EventRule      `json:"rules"`
+	Instances  []*WarnInstance   `json:"instances"`
+}
+
+// EventRule 告警规则
+type EventRule struct {
+	EventType            common.EventType `json:"event_type"`
+	RuleFlag             string           `json:"rule_flag"`
+	MediumThreshold      int64            `json:"medium_threshold"`
+	SeriousnessThreshold int64            `json:"seriousness_threshold"`
+	TimeInterval         int64            `json:"time_interval"`
+	Statistics           string           `json:"statistics"`
+	ComparisonOperator   string           `json:"comparison_operator"`
+	Threshold            int64            `json:"threshold"`
+}
+
+// WarnInstance 告警实例
+type WarnInstance struct {
+	InstanceName string              `json:"instance_name"`
+	InstanceType common.InstanceType `json:"instance_type"`
+	InstanceID   string              `json:"instance_id"`
+}

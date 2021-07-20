@@ -20,6 +20,7 @@ type MonitorDiskDataArgs struct {
 // MonitorDiskDataResp 监控数据返回
 type MonitorDiskDataResp struct {
 	common.Response
+	Data []*DiskMonitorDataInfo `json:"data"`
 }
 
 // MonitorDiskData 监控磁盘参数

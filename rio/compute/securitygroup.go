@@ -20,7 +20,7 @@ const (
 // Direction 方向
 type Direction string
 
-// Direction 常量
+// Direction 常量(方向出/入)
 const (
 	IngressDirection Direction = "ingress"
 	EgressDirection  Direction = "egress"
@@ -45,7 +45,7 @@ type SecurityGroupRule struct {
 	Type                  common.SecurityRuleGrantType `json:"type"`
 	RemoteSecurityGroupID *string                      `json:"remote_security_group_id"`
 	CIDR                  *string                      `json:"cidr"`
-	Protocol              common.NetworkProtocol       `json:"protocol"`
+	Protocol              NetworkProtocol              `json:"protocol"`
 	FromPort              *int                         `json:"from_port"`
 	ToPort                *int                         `json:"to_port"`
 	Description           string                       `json:"description"`

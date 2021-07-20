@@ -17,6 +17,7 @@ type WarnInstanceListArgs struct {
 // WarnInstanceResp 查询返回
 type WarnInstanceResp struct {
 	common.Response
+	Data []*WarnInfo `json:"data"`
 }
 
 // WarnInstance 告警实例

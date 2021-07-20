@@ -1,15 +1,15 @@
 package common
 
-//Response 返回
+// Response 返回
 type Response struct {
 	RequestID string  `json:"request_id"`
 	Marker    *string `json:"marker,omitempty"`
 }
 
-//Direction 方向
+// Direction 方向
 type Direction string
 
-//const
+// 方向常量
 const (
 	IngressDirection Direction = "ingress"
 	EgressDirection  Direction = "egress"

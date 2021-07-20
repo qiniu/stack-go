@@ -10,17 +10,19 @@ import (
 
 // WarnCreateArgs 告警创建参数
 type WarnCreateArgs struct {
-	ZoneID     string `json:"zone_id"`
-	WarnDetail struct {
-		Name      string            `json:"name"`          // 名称
-		AlertUser string            `json:"alert_user"`    // 告警联系人
-		IsPhone   string            `json:"is_phone"`      // 是否启用短信通知，1：启用，0：禁用
-		PhoneList string            `json:"phone_list"`    // 电话号，使用英文","隔开
-		IsEmail   string            `json:"is_Email"`      // 是否启用邮件通知，1：启用，0：禁用
-		EmailList string            `json:"email_list"`    // 邮箱，使用英文","隔开
-		Rules     []*CreateRule     `json:"rules"`         // 告警规则
-		Instances []*CreateInstance `json:"instance_list"` // 告警实例
-	} `json:"warn_detail"`
+	ZoneID string `json:"zone_id"`
+}
+
+// WarnDetail 告警参数
+type WarnDetail struct {
+	Name      string            `json:"name"`          // 名称
+	AlertUser string            `json:"alert_user"`    // 告警联系人
+	IsPhone   string            `json:"is_phone"`      // 是否启用短信通知，1：启用，0：禁用
+	PhoneList string            `json:"phone_list"`    // 电话号，使用英文","隔开
+	IsEmail   string            `json:"is_Email"`      // 是否启用邮件通知，1：启用，0：禁用
+	EmailList string            `json:"email_list"`    // 邮箱，使用英文","隔开
+	Rules     []*CreateRule     `json:"rules"`         // 告警规则
+	Instances []*CreateInstance `json:"instance_list"` // 告警实例
 }
 
 // CreateInstance 告警实例创建参数

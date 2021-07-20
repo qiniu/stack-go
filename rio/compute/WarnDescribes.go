@@ -19,7 +19,8 @@ type WarnListArgs struct {
 // WarnListResp 查询返回
 type WarnListResp struct {
 	common.Response
-	Total int64 // 数据总量
+	Total int64       // 数据总量
+	Data  []*WarnInfo `json:"data"`
 }
 
 // WarnList 告警列表
