@@ -22,7 +22,7 @@ type ReInitDiskResp struct {
 //ReInitDisk 初始化磁盘
 func (d *Disk) ReInitDisk(args *ReInitDiskArgs) (resp *ReInitDiskResp, err error) {
 	url := fmt.Sprintf("%s/disk/%s/reinit", StorageURLPrefix, args.DiskID)
-	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodPost, url).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

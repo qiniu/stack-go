@@ -23,7 +23,7 @@ type DescribeDiskResp struct {
 // DescribeDisk 查询磁盘详情
 func (d *Disk) DescribeDisk(args *DescribeDiskArgs) (resp *DescribeDiskResp, err error) {
 	url := fmt.Sprintf("%s/disk/%s", StorageURLPrefix, args.DiskID)
-	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodGet, url).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

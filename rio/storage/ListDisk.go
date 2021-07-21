@@ -27,7 +27,7 @@ type ListDiskResp struct {
 //ListDisk 磁盘列表
 func (d *Disk) ListDisk(args *ListDiskArgs) (resp *ListDiskResp, err error) {
 	url := fmt.Sprintf("%s/disk", StorageURLPrefix)
-	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

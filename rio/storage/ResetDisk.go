@@ -10,9 +10,8 @@ import (
 
 //ResetDiskArgs 重置磁盘参数
 type ResetDiskArgs struct {
-	ZoneID string `json:"zone_id"`
-	DiskID string `json:"disk_id"`
-	// 需要恢复到某一磁盘阶段的历史快照ID。
+	ZoneID     string `json:"zone_id"`
+	DiskID     string `json:"disk_id"`
 	SnapshotID string `json:"snapshot_id"`
 }
 

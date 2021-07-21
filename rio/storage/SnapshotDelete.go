@@ -22,7 +22,7 @@ type SnapshotDeleteResp struct {
 //SnapshotDelete 删除快照
 func (s *Snapshot) SnapshotDelete(args *SnapshotDeleteArgs) (resp *SnapshotCreateResp, err error) {
 	url := fmt.Sprintf("%s/snapshot/%s", StorageURLPrefix, args.SnapshotID)
-	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodDelete, url).WithZoneID(&args.ZoneID)
 	err = s.client.Call(req, &resp)
 	return
 }

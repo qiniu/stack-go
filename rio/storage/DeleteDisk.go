@@ -22,7 +22,7 @@ type DeleteDiskResp struct {
 // DeleteDisk 删除磁盘
 func (d *Disk) DeleteDisk(args *DeleteDiskArgs) (resp *DeleteDiskResp, err error) {
 	url := fmt.Sprintf("%s/disk/%s", StorageURLPrefix, args.DiskID)
-	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodDelete, url).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }
