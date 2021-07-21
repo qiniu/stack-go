@@ -10,12 +10,12 @@ import (
 
 // VSwitchListArgs 交换机列表参数
 type VSwitchListArgs struct {
-	Marker *string `json:"query:marker"`
-	Limit  *int    `json:"query:limit"`
-	ZoneID string  `json:"header:x-rio-zone-id"`
+	Marker *string `json:"marker"`
+	Limit  *int    `json:"limit"`
+	ZoneID string  `json:"zone_id"`
 
-	VPCID      string   `json:"path:id"`
-	VSwitchIDs []string `json:"query:vswitch_ids"`
+	VPCID      string   `json:"id"`
+	VSwitchIDs []string `json:"vswitch_ids"`
 }
 
 // VSwitchListResp 返回

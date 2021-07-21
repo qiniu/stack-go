@@ -10,9 +10,9 @@ import (
 
 // VSwitchModifyArgs 交换机修改参数
 type VSwitchModifyArgs struct {
-	ZoneID      string  `json:"header:x-rio-zone-id"`
-	VPCID       string  `json:"path:id"`
-	VSwitchID   string  `json:"path:vswitch_id"`
+	ZoneID      string  `json:"zone_id"`
+	VPCID       string  `json:"id"`
+	VSwitchID   string  `json:"vswitch_id"`
 	VSwitchName string  `json:"vswitch_name"`
 	Description *string `json:"description"`
 }

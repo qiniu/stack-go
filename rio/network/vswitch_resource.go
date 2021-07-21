@@ -11,8 +11,8 @@ import (
 // VSwitchResourceArgs 参数
 type VSwitchResourceArgs struct {
 	ZoneID    string `json:"zone_id"`
-	VPCID     string `json:"path:id,required"`
-	VSwitchID string `json:"path:vswitch_id,required"`
+	VPCID     string `json:"id,required"`
+	VSwitchID string `json:"vswitch_id,required"`
 }
 
 // VSwitchResourceResp 返回
