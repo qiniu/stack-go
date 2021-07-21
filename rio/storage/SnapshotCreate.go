@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//SnapshotCreateArgs 创建快照参数
+// SnapshotCreateArgs 创建快照参数
 type SnapshotCreateArgs struct {
 	ZoneID       string  `json:"zone_id"`
 	DiskID       *string `json:"disk_id"`
@@ -17,7 +17,7 @@ type SnapshotCreateArgs struct {
 	ClientToken  *string `json:"client_token,omitempty"`
 }
 
-//SnapshotCreateResp 创建快照返回
+// SnapshotCreateResp 创建快照返回
 type SnapshotCreateResp struct {
 	common.Response
 	Data struct {
@@ -25,7 +25,7 @@ type SnapshotCreateResp struct {
 	} `json:"data"`
 }
 
-//SnapshotCreate 创建快照
+// SnapshotCreate 创建快照
 func (s *Snapshot) SnapshotCreate(args *SnapshotCreateArgs) (resp *SnapshotCreateResp, err error) {
 	url := fmt.Sprintf("%s/snapshot", StorageURLPrefix)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

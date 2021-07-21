@@ -2,7 +2,7 @@ package storage
 
 import "github.com/qiniu/stack-go/rio/common"
 
-//SnapshotInfo 快照信息
+// SnapshotInfo 快照信息
 type SnapshotInfo struct {
 	SnapshotID   string                `json:"snapshot_id"`   // 快照ID
 	SnapshotName string                `json:"snapshot_name"` // 快照显示名称。如果创建时指定了快照显示名称，则返回。
@@ -15,7 +15,7 @@ type SnapshotInfo struct {
 	CreatedAt    int64                 `json:"created_at"` // 创建时间。unix 时间戳 ms
 }
 
-//SnapshotDiskInfo .
+// SnapshotDiskInfo 快照磁盘信息
 type SnapshotDiskInfo struct {
 	DiskID   string          `json:"disk_id"`
 	DiskName string          `json:"disk_name"`
