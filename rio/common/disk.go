@@ -30,7 +30,7 @@ const (
 // DiskStatusType 磁盘状态类型
 type DiskStatusType string
 
-// DiskStatusType 错案状态类型常量
+// const 磁盘状态
 const (
 	DiskInUse         DiskStatusType = "In_use"
 	DiskAvailable     DiskStatusType = "Available"
