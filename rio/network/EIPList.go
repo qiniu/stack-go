@@ -30,7 +30,7 @@ type EIPListResp struct {
 // EIPList EIP列表
 func (e *EIP) EIPList(args *EIPListArgs) (resp *EIPListResp, err error) {
 	url := fmt.Sprintf("%s/eip", NetworkURLPrefix)
-	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
 	err = e.client.Call(req, &resp)
 	return
 }

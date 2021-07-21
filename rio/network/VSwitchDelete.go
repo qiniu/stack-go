@@ -23,7 +23,7 @@ type VSwitchDeleteResp struct {
 // VSwitchDelete 删除
 func (v *VSwitch) VSwitchDelete(args *VSwitchDeleteArgs) (resp *VSwitchDeleteResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch/%s/delete", NetworkURLPrefix, args.VPCID, args.VSwitchID)
-	req := client.NewRequest(http.MethodDelete, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	req := client.NewRequest(http.MethodDelete, url).WithZoneID(&args.ZoneID)
 	err = v.client.Call(req, &resp)
 	return
 }
