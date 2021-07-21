@@ -6,11 +6,11 @@ import (
 	"github.com/qiniu/stack-go/params"
 )
 
-// VPCInfo 专有网络
-type VPCInfo struct {
+// Info 专有网络
+type Info struct {
 	VpcID           string         `json:"vpc_id"`            // VPC ID
 	RegionID        string         `json:"region_id"`         // VPC所在的地域
-	Status          VPCStatus      `json:"status"`            // VPC的状态，取值：Pending：配置中， Available：可用
+	Status          Status         `json:"status"`            // VPC的状态，取值：Pending：配置中， Available：可用
 	VpcName         string         `json:"vpc_name"`          // VPC 的名称
 	VSwitchIDs      VSwitchIdsType `json:"v_switch_ids"`      // VPC 中交换机的列表
 	CidrBlock       string         `json:"cidr_block"`        // VPC 的 IPv4 网段
@@ -26,13 +26,13 @@ type VPCInfo struct {
 	UpdatedAt       time.Time      `json:"updated_at"`        // 更新时间
 }
 
-// VPCStatus VPC状态
-type VPCStatus string
+// Status VPC状态
+type Status string
 
 // VPC 状态
 const (
-	PendingVPCPendingAvailableStatus   VPCStatus = "Pending"
-	AvailableVPCPendingAvailableStatus VPCStatus = "Available"
+	PendingVPCPendingAvailableStatus   Status = "Pending"
+	AvailableVPCPendingAvailableStatus Status = "Available"
 )
 
 // CenStatusType VPC绑定云企业网的状态

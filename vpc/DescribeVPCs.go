@@ -25,11 +25,11 @@ type DescribeVPCsParams struct {
 
 // DescribeVPCsResponse 专有网络列表返回数据
 type DescribeVPCsResponse struct {
-	Page      int       `json:"page"`       // 页码
-	Size      int       `json:"size"`       // 分页大小
-	Total     int       `json:"total"`      // 安全组总量
-	RequestID string    `json:"request_id"` // 请求 ID
-	Data      []VPCInfo `json:"data"`       // VPC 列表
+	Page      int    `json:"page"`       // 页码
+	Size      int    `json:"size"`       // 分页大小
+	Total     int    `json:"total"`      // 安全组总量
+	RequestID string `json:"request_id"` // 请求 ID
+	Data      []Info `json:"data"`       // VPC 列表
 }
 
 // DescribeVPCs 专有网络列表
