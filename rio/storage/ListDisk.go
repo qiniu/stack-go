@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-//ListDiskArgs 磁盘列表参数
+// ListDiskArgs 磁盘列表参数
 type ListDiskArgs struct {
 	ZoneID   string                 `json:"zone_id"`
 	DiskID   *string                `json:"disk_id"`
@@ -18,13 +18,13 @@ type ListDiskArgs struct {
 	Status   *common.DiskStatusType `json:"status"`
 }
 
-//ListDiskResp 磁盘列表返回
+// ListDiskResp 磁盘列表返回
 type ListDiskResp struct {
 	common.Response
 	Data []*DiskInfo `json:"data"`
 }
 
-//ListDisk 磁盘列表
+// ListDisk 磁盘列表
 func (d *Disk) ListDisk(args *ListDiskArgs) (resp *ListDiskResp, err error) {
 	url := fmt.Sprintf("%s/disk", StorageURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)
