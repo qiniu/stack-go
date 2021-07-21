@@ -17,6 +17,8 @@ type EIPISP string
 
 // 类型枚举
 const (
+	// BGPProEIPISP BGP（多线）精品线路
 	BGPProEIPISP EIPISP = "BGP_PRO"
-	BGPEIPISP    EIPISP = "BGP"
+	// BGPEIPISP BGP（多线）线路
+	BGPEIPISP EIPISP = "BGP"
 )
