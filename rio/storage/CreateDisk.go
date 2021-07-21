@@ -10,27 +10,11 @@ import (
 
 // CreateDiskArgs 创建磁盘参数
 type CreateDiskArgs struct {
-	ZoneID string `json:"zone_id"`
-
-	// 容量大小，以GiB为单位。指定该参数后，其取值必须≥指定快照ID的容量大小。取值范围：
-	// - cloud：5~2000
-	// - cloud_efficiency：20~32768
-	// - cloud_ssd：20~32768
-	// - cloud_essd：20~32768
-	Size *int64 `json:"size,omitempty"`
-
-	// 云盘名称。长度为2~128个英文或中文字符。必须以大小字母或中文开头，不能以 http:// 和 https:// 开头。可以包含数字、半角冒号（:）、下划线（_）或者连字符（-）。
-	//
-	// 默认值：空
-	DiskName *string `json:"disk_name,omitempty"`
-
-	// 云盘描述。长度为2~256个英文或中文字符，不能以 http:// 和 https:// 开头。
-	//
-	// 默认值：空
+	ZoneID      string  `json:"zone_id"`
+	Size        *int64  `json:"size,omitempty"`
+	DiskName    *string `json:"disk_name,omitempty"`
 	Description *string `json:"description,omitempty"`
-
-	// 创建云盘使用的快照。指定该参数后，Size会被忽略，实际创建的云盘大小为指定快照的大小。
-	SnapshotID *string `json:"snapshot_id,omitempty"`
+	SnapshotID  *string `json:"snapshot_id,omitempty"`
 }
 
 // CreateDiskResp 创建磁盘返回
@@ -43,7 +27,8 @@ type CreateDiskResp struct {
 
 // CreateDisk 创建磁盘
 func (d *Disk) CreateDisk(args *CreateDiskArgs) (resp *CreateDiskResp, err error) {
-	req := client.NewRequest(http.MethodPost, fmt.Sprintf("/api/rio/v1/storage/disk")).WithJSONBody(args).WithZoneID(&args.ZoneID)
+	url := fmt.Sprintf("%s/disk", StorageURLPrefix)
+	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = d.client.Call(req, &resp)
 	return
 }

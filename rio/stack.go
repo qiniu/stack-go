@@ -69,4 +69,5 @@ func (s *Stack) Server() *compute.Server {
 // Warn 告警
 func (s *Stack) Warn() *compute.Warn {
 	return compute.NewWarn(s.client)
+
 }
