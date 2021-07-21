@@ -10,8 +10,7 @@ import (
 
 //SnapshotCreateArgs 创建快照参数
 type SnapshotCreateArgs struct {
-	ZoneID string `json:"zone_id"`
-
+	ZoneID       string  `json:"zone_id"`
 	DiskID       *string `json:"disk_id"`
 	SnapshotName string  `json:"snapshot_name,omitempty"`
 	Description  *string `json:"description,omitempty"`
