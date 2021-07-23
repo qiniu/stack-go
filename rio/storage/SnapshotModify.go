@@ -11,7 +11,7 @@ import (
 // SnapshotModifyArgs 修改快照参数
 type SnapshotModifyArgs struct {
 	ZoneID       string `json:"zone_id"`
-	SnapshotID   string `json:"snapshot_id:"`
+	SnapshotID   string `json:"snapshot_id"`
 	SnapshotName string `json:"snapshot_name,omitempty"`
 	Description  string `json:"description,omitempty"`
 }
