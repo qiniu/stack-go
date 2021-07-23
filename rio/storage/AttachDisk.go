@@ -16,7 +16,7 @@ type AttachDiskArgs struct {
 	DeleteWithServer *bool  `json:"delete_with_server,omitempty"`
 }
 
-//AttachDiskResp 绑定磁盘返回
+// AttachDiskResp 绑定磁盘返回
 type AttachDiskResp struct {
 	common.Response
 }
