@@ -8,19 +8,19 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// ServerJoinSecurityGroupArgs 参数
+// ServerJoinSecurityGroupArgs 主机加入安全组参数
 type ServerJoinSecurityGroupArgs struct {
 	ZoneID          string `json:"zone_id"`
 	ServerID        string `json:"server_id"`
 	SecurityGroupID string `json:"security_group_id"`
 }
 
-// ServerJoinSecurityGroupResp 返回
+// ServerJoinSecurityGroupResp 主机加入安全组返回
 type ServerJoinSecurityGroupResp struct {
 	common.Response
 }
 
-// ServerJoinSecurityGroup 主机组合安全组
+// ServerJoinSecurityGroup 主机加入安全组
 func (s *Server) ServerJoinSecurityGroup(args *ServerJoinSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
 	url := fmt.Sprintf("%s/server/%s", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

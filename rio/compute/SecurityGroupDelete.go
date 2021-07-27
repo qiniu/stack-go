@@ -10,9 +10,8 @@ import (
 
 // SecurityGroupDeleteArgs 删除安全组参数
 type SecurityGroupDeleteArgs struct {
-	ZoneID string `json:"zone_id"`
-
-	SecurityGroupID string `json:"securitygroup_id"`
+	ZoneID          string `json:"zone_id"`
+	SecurityGroupID string `json:"security_group_id"`
 }
 
 // SecurityGroupDeleteResp 删除安全组返回

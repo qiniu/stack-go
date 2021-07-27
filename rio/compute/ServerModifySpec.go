@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// ServerModifySpecArgs 参数
+// ServerModifySpecArgs 主机变配参数
 type ServerModifySpecArgs struct {
 	ZoneID      string `json:"zone_id"`
 	ServerID    string `json:"server_id"`              // 实例ID。
@@ -16,12 +16,12 @@ type ServerModifySpecArgs struct {
 	ClientToken string `json:"client_token,omitempty"` // 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。
 }
 
-// ServerModifySpecResp 返回
+// ServerModifySpecResp 主机变配返回
 type ServerModifySpecResp struct {
 	common.Response
 }
 
-// ServerModifySpec 主机修改
+// ServerModifySpec 主机变配
 func (s *Server) ServerModifySpec(args *ServerModifySpecArgs) (resp *ServerModifySpecResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/spec", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPatch, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

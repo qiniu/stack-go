@@ -8,16 +8,15 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// SecurityGroupRuleListArgs 参数
+// SecurityGroupRuleListArgs 安全组规则列表参数
 type SecurityGroupRuleListArgs struct {
-	Marker string `json:"marker"`
-	Limit  int    `json:"limit"`
-	ZoneID string `json:"zone_id"`
-
-	SecurityGroupID string `json:"id"`
+	Marker          string `json:"marker"`
+	Limit           int    `json:"limit"`
+	ZoneID          string `json:"zone_id"`
+	SecurityGroupID string `json:"security_group_id"`
 }
 
-// SecurityGroupRuleListResp 返回
+// SecurityGroupRuleListResp 安全组规则列表返回
 type SecurityGroupRuleListResp struct {
 	common.Response
 	Data []*SecurityGroupRule `json:"data"`

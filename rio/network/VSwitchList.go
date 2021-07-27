@@ -21,7 +21,21 @@ type VSwitchListArgs struct {
 // VSwitchListResp 返回
 type VSwitchListResp struct {
 	common.Response
-	Data []*VSwitch `json:"data"`
+	Data []*VSwitchInfo `json:"data"`
+}
+
+// VSwitchInfo 交换机信息
+type VSwitchInfo struct {
+	ZoneID           string               `json:"zone_id"`
+	VSwitchID        string               `json:"vswitch_id"`
+	VPCID            string               `json:"vpc_id"`
+	Status           common.VSwitchStatus `json:"status"`
+	CIDR             string               `json:"cidr"`
+	AvailableIPCount int                  `json:"available_ip_count"`
+	Description      string               `json:"description"`
+	VSwitchName      string               `json:"vswitch_name"`
+	CreatedAt        int64                `json:"created_at"`
+	ResourceCount    int                  `json:"resource_count"` // 交换机下的资源数量
 }
 
 // VSwitchList 交换机列表

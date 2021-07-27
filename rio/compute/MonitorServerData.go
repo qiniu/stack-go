@@ -16,7 +16,7 @@ type MonitorServerDataArgs struct {
 	EndTime   int64  `json:"end_time"`
 }
 
-// MonitorServerDataResp 返回
+// MonitorServerDataResp 主机监控返回
 type MonitorServerDataResp struct {
 	common.Response
 }

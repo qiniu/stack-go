@@ -2,7 +2,7 @@ package storage
 
 import "github.com/qiniu/stack-go/components/client"
 
-// Snapshot 快照类接口封装
+// Snapshot 快照client
 type Snapshot struct {
 	client *client.Client
 }

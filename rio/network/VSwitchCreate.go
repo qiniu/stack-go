@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VSwitchCreateArgs 创建vswitch参数
+// VSwitchCreateArgs 创建交换机参数
 type VSwitchCreateArgs struct {
 	ZoneID      string  `json:"zone_id"`
 	VPCID       string  `json:"vpc_id"`
@@ -18,13 +18,13 @@ type VSwitchCreateArgs struct {
 	ClientToken *string `json:"client_token"`
 }
 
-// VSwitchCreatResp 创建返回
+// VSwitchCreatResp 创建交换机返回
 type VSwitchCreatResp struct {
 	common.Response
 	VSwitchID string `json:"vswitch_id"`
 }
 
-// VSwitchCreate 创建
+// VSwitchCreate 创建交换机
 func (v *VSwitch) VSwitchCreate(args *VSwitchCreateArgs) (resp *VSwitchCreatResp, err error) {
 	url := fmt.Sprintf("%s/vpc/%s/vswitch", NetworkURLPrefix, args.VPCID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

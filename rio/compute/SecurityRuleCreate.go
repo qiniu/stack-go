@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// SecurityGroupRuleCreateArgs 参数
+// SecurityGroupRuleCreateArgs 安全组规则创建参数
 type SecurityGroupRuleCreateArgs struct {
 	ZoneID string `json:"zone_id"`
 
@@ -18,12 +18,12 @@ type SecurityGroupRuleCreateArgs struct {
 	Type                  common.SecurityRuleGrantType `json:"type"`
 	RemoteSecurityGroupID []*string                    `json:"remote_security_group_id"`
 	CIDR                  []*string                    `json:"cidr"`
-	Protocol              NetworkProtocol              `json:"protocol"`
+	Protocol              common.NetworkProtocol       `json:"protocol"`
 	PortRange             []*string                    `json:"port_range"`
 	Description           *string                      `json:"description"`
 }
 
-// SecurityGroupRuleCreateResp 返回
+// SecurityGroupRuleCreateResp 安全组规则创建返回
 type SecurityGroupRuleCreateResp struct {
 	common.Response
 	Data []*SecurityGroupRule `json:"data"`

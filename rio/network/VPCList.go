@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VPCListArgs 列表参数
+// VPCListArgs vpc列表参数
 type VPCListArgs struct {
 	Marker *string `json:"marker"`
 	Limit  *int    `json:"limit"`
@@ -17,10 +17,22 @@ type VPCListArgs struct {
 	VPCIDs []string `json:"vpc_ids"`
 }
 
-// VPCListResp 列表返回
+// VPCListResp vpc列表返回
 type VPCListResp struct {
 	common.Response
-	Data []*VPC `json:"data"`
+	Data []*VPCInfo `json:"data"`
+}
+
+// VPCInfo VPC信息
+type VPCInfo struct {
+	VPCID       string           `json:"vpc_id"`
+	ZoneID      string           `json:"zone_id"`
+	Status      common.VPCStatus `json:"status"`
+	VPCName     string           `json:"vpc_name"`
+	VSwitchIDs  []string         `json:"vswitch_ids"`
+	CIDR        string           `json:"cidr"`
+	Description string           `json:"description"`
+	CreatedAt   int64            `json:"created_at"`
 }
 
 // VPCList vpc列表

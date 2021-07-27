@@ -15,7 +15,7 @@ type KeyPairDetachArgs struct {
 	ServerID    string `json:"server_id"`
 }
 
-// KeyPairDetachResp 返回
+// KeyPairDetachResp 密钥对解绑返回
 type KeyPairDetachResp struct {
 	common.Response
 }
