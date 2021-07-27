@@ -1,14 +1,5 @@
 package common
 
-// SourceDiskType 源磁盘类型
-type SourceDiskType string
-
-// https://help.aliyun.com/document_detail/25526.html
-const (
-	SystemSourceDiskType SourceDiskType = "system"
-	DataSourceDiskType   SourceDiskType = "data"
-)
-
 // UsageType usage类型
 type UsageType string
 

@@ -6,8 +6,8 @@ type EIPStatus string
 //const 状态常量
 const (
 	CreatingEIPStatus      EIPStatus = "Creating"
-	AssociatingEIPStatus   EIPStatus = "Associating"
-	UnassociatingEIPStatus EIPStatus = "Unassociating"
+	AssociatingEIPStatus   EIPStatus = "Associating"   // 绑定中
+	UnassociatingEIPStatus EIPStatus = "Unassociating" // 解绑中
 	InUseEIPStatus         EIPStatus = "InUse"
 	AvailableEIPStatus     EIPStatus = "Available"
 )

@@ -22,7 +22,6 @@ type DiskType string
 
 // DiskType 云盘类型
 const (
-	AllDiskType    DiskType = "all"
 	SystemDiskType DiskType = "system"
 	DataDiskType   DiskType = "data"
 )

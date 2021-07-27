@@ -16,7 +16,7 @@ type EIPCreateArgs struct {
 	ClientToken *string `json:"client_token"`
 }
 
-// EIPCreateResp EIP创建返回
+// EIPCreateResp eip创建返回
 type EIPCreateResp struct {
 	common.Response
 }

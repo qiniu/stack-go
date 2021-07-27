@@ -10,14 +10,13 @@ import (
 
 // SecurityGroupModifyArgs 安全组修改参数
 type SecurityGroupModifyArgs struct {
-	ZoneID string `json:"zone_id"`
-
+	ZoneID            string  `json:"zone_id"`
 	SecurityGroupID   string  `json:"security_group_id"`
 	SecurityGroupName string  `json:"security_group_name"`
 	Description       *string `json:"description"`
 }
 
-// SecurityGroupModifyResp 安全组返回参数
+// SecurityGroupModifyResp 安全组修改返回
 type SecurityGroupModifyResp struct {
 	common.Response
 }

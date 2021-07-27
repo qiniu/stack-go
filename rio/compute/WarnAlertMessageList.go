@@ -26,7 +26,7 @@ type WarnDescribesAlertMessageResp struct {
 	Results []*AlertMessageDetail `json:"results"`
 }
 
-// WarnDescribesAlertMessage 告警修改
+// WarnDescribesAlertMessage 查询告警信息
 func (w *Warn) WarnDescribesAlertMessage(args *WarnDescribesAlertMessageArgs) (resp *WarnDescribesAlertMessageResp, err error) {
 	url := fmt.Sprintf("%s/warn/alert", ComputURLPrefix)
 	req := client.NewRequest(http.MethodGet, url).WithQueries(args).WithZoneID(&args.ZoneID)

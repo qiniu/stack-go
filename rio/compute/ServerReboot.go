@@ -8,14 +8,14 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// ServerRebootArgs 参数
+// ServerRebootArgs 主机重启参数
 type ServerRebootArgs struct {
 	ZoneID    string `json:"zone_id"`
 	ServerID  string `json:"server_id"`
 	ForceStop *bool  `json:"force_stop"`
 }
 
-// ServerRebootResp 返回
+// ServerRebootResp 主机重启返回
 type ServerRebootResp struct {
 	common.Response
 }

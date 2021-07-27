@@ -11,11 +11,10 @@ import (
 // ResizeDiskType 扩容磁盘类型
 type ResizeDiskType string
 
+// 离线和在线扩容
 var (
-	// ResizeDiskTypeOffline 扩容
-	ResizeDiskTypeOffline ResizeDiskType = "offline"
-	// ResizeDiskTypeOnline 扩容
-	ResizeDiskTypeOnline ResizeDiskType = "online"
+	ResizeDiskTypeOffline ResizeDiskType = "offline" // 离线扩容
+	ResizeDiskTypeOnline  ResizeDiskType = "online"  // 在线扩容
 )
 
 // ResizeDiskArgs 扩容磁盘参数

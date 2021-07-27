@@ -14,10 +14,10 @@ type DiskInfo struct {
 	SourceSnapshotID string                `json:"source_snapshot_id"`
 	Server           DiskServerInfo        `json:"server"`
 	ImageID          string                `json:"image_id"`
-	Portable         bool                  `json:"portable"`
-	Bootable         bool                  `json:"bootable"`
+	Portable         bool                  `json:"portable"` // 是否可卸载
+	Bootable         bool                  `json:"bootable"` // 是否可作为启动盘
 	AttachedTime     int64                 `json:"attached_time"`
-	DeleteWithServer bool                  `json:"delete_with_server"`
+	DeleteWithServer bool                  `json:"delete_with_server"` // 是否随主机释放
 	Description      string                `json:"description"`
 	DetachedAt       int64                 `json:"detached_at"`
 	CreatedAt        int64                 `json:"created_at"`

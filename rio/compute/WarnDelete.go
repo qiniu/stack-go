@@ -8,13 +8,13 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// WarnDeleteArgs 删除参数
+// WarnDeleteArgs 告警删除参数
 type WarnDeleteArgs struct {
 	ZoneID string `json:"zone_id"`
 	WarnID string `json:"id"`
 }
 
-// WarnDeleteResp 删除返回
+// WarnDeleteResp 告警删除返回
 type WarnDeleteResp struct {
 	common.Response
 }

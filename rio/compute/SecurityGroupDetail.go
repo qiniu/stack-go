@@ -10,9 +10,8 @@ import (
 
 // SecurityGroupDetailArgs 安全组详情参数
 type SecurityGroupDetailArgs struct {
-	ZoneID string `json:"zone_id"`
-
-	SecurityGroupID string `json:"securitygroup_id"`
+	ZoneID          string `json:"zone_id"`
+	SecurityGroupID string `json:"security_group_id"`
 }
 
 // SecurityGroupDetailResp 安全组详情返回

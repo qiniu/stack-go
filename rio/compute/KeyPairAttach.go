@@ -15,7 +15,7 @@ type KeyPairAttachArgs struct {
 	ServerID    string `json:"server_id"`
 }
 
-// KeyPairAttachResp 密钥对返回
+// KeyPairAttachResp 密钥对绑定返回
 type KeyPairAttachResp struct {
 	common.Response
 }
