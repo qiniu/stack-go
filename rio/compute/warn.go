@@ -107,7 +107,7 @@ type EventRule struct {
 
 // WarnInstance 告警实例
 type WarnInstance struct {
-	InstanceName string              `json:"instance_name"`
-	InstanceType common.InstanceType `json:"instance_type"`
-	InstanceID   string              `json:"instance_id"`
+	InstanceName string                  `json:"instance_name"`
+	InstanceType common.WarnInstanceType `json:"instance_type"`
+	InstanceID   string                  `json:"instance_id"`
 }

@@ -8,19 +8,19 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// ServerLeaveSecurityGroupArgs 参数
+// ServerLeaveSecurityGroupArgs 主机移出安全组参数
 type ServerLeaveSecurityGroupArgs struct {
 	ZoneID          string `json:"zone_id"`
 	ServerID        string `json:"server_id"`
 	SecurityGroupID string `json:"security_group_id"`
 }
 
-// ServerLeaveSecurityGroupResp 返回
+// ServerLeaveSecurityGroupResp 主机移出安全组返回
 type ServerLeaveSecurityGroupResp struct {
 	common.Response
 }
 
-// ServerLeaveSecurityGroup 主机分离安全组
+// ServerLeaveSecurityGroup 主机移出安全组
 func (s *Server) ServerLeaveSecurityGroup(args *ServerLeaveSecurityGroupArgs) (resp *ServerJoinSecurityGroupResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/security_group/leave", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

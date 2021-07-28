@@ -8,7 +8,7 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// WarnListArgs 查询参数
+// WarnListArgs 告警列表参数
 type WarnListArgs struct {
 	ZoneID   string `json:"zone_id"`
 	WarnName string `json:"warn_name"`
@@ -16,7 +16,7 @@ type WarnListArgs struct {
 	PageNum  int64  `json:"page_num"`
 }
 
-// WarnListResp 查询返回
+// WarnListResp 告警列表返回
 type WarnListResp struct {
 	common.Response
 	Total int64       // 数据总量

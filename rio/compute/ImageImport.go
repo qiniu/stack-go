@@ -8,10 +8,10 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// ImageImportArgs 镜像导入参数
+// ImageImportArgs 镜像导入参数, 包含源镜像信息和目的镜像信息
 type ImageImportArgs struct {
-	ZoneID                 string  `json:"zone-id"`
-	ImgaeID                string  `json:"image_id"`
+	ZoneID                 string  `json:"zone_id"`
+	ImageID                string  `json:"image_id"`
 	SourceURL              string  `json:"source_url"`
 	DestinationZoneID      string  `json:"destination_zone_id"`
 	DestinationImageName   *string `json:"destination_image_name,omitempty"`
@@ -25,7 +25,7 @@ type ImageImportResp struct {
 
 // ImageImport 镜像导入
 func (i *Image) ImageImport(args *ImageImportArgs) (resp *ImageImportResp, err error) {
-	url := fmt.Sprintf("%s/image/%s", ComputURLPrefix, args.ImgaeID)
+	url := fmt.Sprintf("%s/image/%s", ComputURLPrefix, args.ImageID)
 	req := client.NewRequest(http.MethodPost, url).WithJSONBody(args).WithZoneID(&args.ZoneID)
 	err = i.client.Call(req, &resp)
 	return

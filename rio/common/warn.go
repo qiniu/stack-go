@@ -56,10 +56,10 @@ const (
 	WarnStatusALARM            WarnStatus = "ALARM"             // 报警中
 )
 
-// InstanceType 告警资源类型
-type InstanceType string
+// WarnInstanceType 告警资源类型
+type WarnInstanceType string
 
 // 告警资源类型 Enum
 const (
-	WarnInstanceCloudHost InstanceType = "cloud" // 云主机
+	WarnInstanceCloudHost WarnInstanceType = "cloud" // 云主机
 )

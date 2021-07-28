@@ -10,13 +10,12 @@ import (
 
 // SecurityGroupRuleDeleteArgs 安全组规则删除参数
 type SecurityGroupRuleDeleteArgs struct {
-	ZoneID string `json:"zone_id"`
-
+	ZoneID              string `json:"zone_id"`
 	SecurityGroupID     string `json:"security_group_id"`
 	SecurityGroupRuleID string `json:"security_group_rule_id"`
 }
 
-// SecurityGroupRuleDeleteResp 返回
+// SecurityGroupRuleDeleteResp  安全组规则删除返回
 type SecurityGroupRuleDeleteResp struct {
 	common.Response
 }

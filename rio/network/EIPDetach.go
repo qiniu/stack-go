@@ -15,7 +15,7 @@ type EIPDetachArgs struct {
 	ServerID string `json:"server_id"`
 }
 
-// EIPDetachResp 解绑IP返回
+// EIPDetachResp 解绑eip返回
 type EIPDetachResp struct {
 	common.Response
 }

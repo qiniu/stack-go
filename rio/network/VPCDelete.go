@@ -8,13 +8,13 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// VPCDeleteArgs 删除参数
+// VPCDeleteArgs vpc删除参数
 type VPCDeleteArgs struct {
 	ZoneID string `json:"zone_id"`
 	VPCID  string `json:"vpc_id"`
 }
 
-// VPCDeleteResp 删除返回
+// VPCDeleteResp vpc删除返回
 type VPCDeleteResp struct {
 	common.Response
 }

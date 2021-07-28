@@ -8,19 +8,19 @@ import (
 	"github.com/qiniu/stack-go/rio/common"
 )
 
-// ServerVNCArgs 参数
+// ServerVNCArgs 主机VNC查询参数
 type ServerVNCArgs struct {
 	ZoneID   string `json:"zone_id"`
 	ServerID string `json:"server_id"`
 }
 
-// ServerVNCResp 返回
+// ServerVNCResp 主机VNC返回
 type ServerVNCResp struct {
 	common.Response
 	URL string `json:"data"`
 }
 
-// ServerVNC 主机vnc
+// ServerVNC 主机VNC
 func (s *Server) ServerVNC(args *ServerVNCArgs) (resp *ServerVNCResp, err error) {
 	url := fmt.Sprintf("%s/server/%s/vnc", ComputURLPrefix, args.ServerID)
 	req := client.NewRequest(http.MethodGet, url).WithJSONBody(args).WithZoneID(&args.ZoneID)

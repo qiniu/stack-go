@@ -19,7 +19,7 @@ type ServerCreateArgs struct {
 	HostName        *string          `json:"host_name,omitempty"`
 	Description     *string          `json:"description,omitempty"`
 	Password        string           `json:"password,omitempty"`
-	UserData        *string          `json:"user_data,omitempty"`
+	UserData        *string          `json:"user_data,omitempty"` // 实例自定义数据
 	KeyPairName     string           `json:"key_pair_name,omitempty"`
 	VPCID           *string          `json:"vpcid,omitempty"`
 	SystemDisk      ServerDiskArgs   `json:"system_disk,omitempty"`
